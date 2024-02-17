@@ -17,7 +17,7 @@ import { KBFakeData } from '@fake-db/knowledge-base.data';
 import { NotificationsFakeData } from '@fake-db/notifications.data';
 import { PricingFakeData } from '@fake-db/pricing.data';
 import { ProfileFakeData } from '@fake-db/profile.data';
-import { SearchFakeData } from '@fake-db/search.data';
+//import { SearchFakeData } from '@fake-db/search.data';
 import { TodoFakeData } from '@fake-db/todo.data';
 import { UsersFakeData } from '@fake-db/users.data';
 
@@ -87,7 +87,7 @@ export class FakeDbService implements InMemoryDbService {
       'calendar-filter': CalendarFakeData.calendar,
 
       // Search
-      'search-data': SearchFakeData.search,
+      //'search-data': SearchFakeData.search,
 
       // Notifications
       'notifications-data': NotificationsFakeData.data,

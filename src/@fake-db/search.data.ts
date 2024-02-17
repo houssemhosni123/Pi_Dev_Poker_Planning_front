@@ -1,4 +1,4 @@
-export class SearchFakeData {
+/*export class SearchFakeData {
   public static search = [
     {
       groupTitle: 'Pages',
@@ -945,4 +945,4 @@ export class SearchFakeData {
       ]
     }
   ];
-}
+}*/

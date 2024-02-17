@@ -222,4 +222,6 @@ export class ChatService {
     this.userProfile = userProfileRef;
     this.onUserProfileChange.next(this.userProfile);
   }
+
+  
 }

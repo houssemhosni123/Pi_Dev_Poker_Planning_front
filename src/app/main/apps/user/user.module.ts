@@ -36,9 +36,7 @@ const routes: Routes = [
     },
     data: { animation: 'UserListComponent' }
   },
-  {
-    path: 'user-view/:id',
-    component: UserViewComponent,
+  {path: 'user-view/:id',component: UserViewComponent,
     resolve: {
       data: UserViewService,
       InvoiceListService
