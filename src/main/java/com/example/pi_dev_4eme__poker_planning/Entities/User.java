@@ -34,6 +34,8 @@ public class User implements UserDetails
     private Role rolee;
     private boolean Status;
     private String Tel;
+    private String tt;
+
 
 
 
