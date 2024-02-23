@@ -9,11 +9,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { FormLayoutComponent } from 'app/main/forms/form-layout/form-layout.component';
 
 const routes: Routes = [
-  {
-    path: 'form-layout',
-    component: FormLayoutComponent,
-    data: { animation: 'layout' }
-  }
+  {path: 'form-layout',component: FormLayoutComponent,data: { animation: 'layout' }}
 ];
 
 @NgModule({

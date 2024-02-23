@@ -1,0 +1,36 @@
+<!-- registration.component.html -->
+
+<form (ngSubmit)="register()">
+    <div>
+      <label for="firstname">Prénom:</label>
+      <input type="text" id="firstname" name="firstname" [(ngModel)]="registerRequest.Nom" required>
+    </div>
+    
+    <div>
+      <label for="lastname">Nom:</label>
+      <input type="text" id="lastname" name="lastname" [(ngModel)]="registerRequest.Prenom" required>
+    </div>
+    
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="registerRequest.email" required>
+    </div>
+    
+    <div>
+      <label for="password">Mot de passe:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="registerRequest.password" required>
+    </div>
+    
+    <div>
+      <label for="role">Rôle:</label>
+      <select id="role" name="role" [(ngModel)]="registerRequest.role" required>
+        <option value="Admin">Admin</option>
+        <option value="ProductOwner">Product Owner</option>
+        <option value="ScrumMaster">Scrum Master</option>
+        <option value="developer">Developer</option>
+      </select>
+    </div>
+  
+    <button type="submit">S'inscrire</button>
+  </form>
+  

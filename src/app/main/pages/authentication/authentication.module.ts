@@ -14,7 +14,7 @@ import { AuthLoginV1Component } from 'app/main/pages/authentication/auth-login-v
 import { AuthLoginV2Component } from 'app/main/pages/authentication/auth-login-v2/auth-login-v2.component';
 
 import { AuthRegisterV1Component } from 'app/main/pages/authentication/auth-register-v1/auth-register-v1.component';
-import { AuthRegisterV2Component } from 'app/main/pages/authentication/auth-register-v2/auth-register-v2.component';
+import { AuthRegisterV2Component } from 'app/Application_Poker_Planning/gestionUser/signup/auth-register-v2/auth-register-v2.component';
 
 import { AuthResetPasswordV1Component } from 'app/main/pages/authentication/auth-reset-password-v1/auth-reset-password-v1.component';
 import { AuthResetPasswordV2Component } from 'app/main/pages/authentication/auth-reset-password-v2/auth-reset-password-v2.component';
