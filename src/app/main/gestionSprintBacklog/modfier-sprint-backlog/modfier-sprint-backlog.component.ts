@@ -1,12 +1,10 @@
-
-
-
-// modifier-sprint-backlog.component.ts
+// modfier-sprint-backlog.component.ts
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SprintBacklogService } from '../../../Services/gestionSprintBacklogServices/SprintBacklogServices';
+import { SprintService } from '../../../Services/gestionSprintServices/SprintService';
 
 @Component({
   selector: 'app-modfier-sprint-backlog',
@@ -17,19 +15,22 @@ export class ModfierSprintBacklogComponent implements OnInit {
   sprintBacklogId: number;
   sprintBacklogForm: FormGroup;
   sprintBacklogUpdatedSuccessfully: boolean = false;
+  sprints: any[];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private sprintBacklogService: SprintBacklogService
-  ) { }
+    private sprintBacklogService: SprintBacklogService,
+    private sprintService: SprintService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.route.params.subscribe(params => {
       this.sprintBacklogId = +params['id'];
       this.loadSprintBacklog();
+      this.loadSprints();
     });
   }
 
@@ -41,14 +42,13 @@ export class ModfierSprintBacklogComponent implements OnInit {
       estTermine: [false, Validators.required],
       dateDebut: [null, Validators.required],
       dateFin: [null, Validators.required],
-      // Ajoutez d'autres champs du formulaire selon votre modèle
+      sprintId: [null, Validators.required],
     });
   }
 
   loadSprintBacklog(): void {
     this.sprintBacklogService.getSprintBacklogById(this.sprintBacklogId).subscribe(
       (sprintBacklog) => {
-        // Remplissez le formulaire avec les valeurs actuelles du Sprint Backlog
         this.sprintBacklogForm.patchValue({
           effortEstimation: sprintBacklog.effortEstimation,
           definitionOfDone: sprintBacklog.definitionOfDone,
@@ -56,7 +56,7 @@ export class ModfierSprintBacklogComponent implements OnInit {
           estTermine: sprintBacklog.estTermine,
           dateDebut: sprintBacklog.dateDebut,
           dateFin: sprintBacklog.dateFin,
-          // Remplissez les autres champs du formulaire
+          sprintId: sprintBacklog.idSprint,
         });
       },
       (error) => {
@@ -65,26 +65,59 @@ export class ModfierSprintBacklogComponent implements OnInit {
     );
   }
 
+  loadSprints(): void {
+    this.sprintService.getAllSprints().subscribe(
+      (data: any[]) => {
+        this.sprints = data;
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des Sprints :', error);
+      }
+    );
+  }
+
   onSubmit(): void {
     if (this.sprintBacklogForm.valid) {
+      // Récupérez l'ID du sprint actuel avant la modification
+      const sprintBacklogBeforeUpdate: any = this.sprintBacklogService.getSprintBacklogById(this.sprintBacklogId);
+
       // Envoyez la mise à jour au service
       this.sprintBacklogService.updateSprintBacklog(this.sprintBacklogId, this.sprintBacklogForm.value).subscribe(
         () => {
           console.log('Sprint Backlog mis à jour avec succès !');
-          // Redirigez vers la liste des Sprint Backlogs après la mise à jour
-          setTimeout(() => {
-          this.sprintBacklogUpdatedSuccessfully = true;
-          this.router.navigate(['/AfficherSprintBacklog']);
-        }, 500);
 
+          // Récupérez l'ID du nouveau sprint après la modification
+          const selectedSprintId: number = this.sprintBacklogForm.get('sprintId').value;
+
+          // Désaffectez le sprintBacklog du sprint actuel
+          this.sprintBacklogService.unassignSprintFromSprintBacklog(this.sprintBacklogId).subscribe(
+            () => {
+              console.log('Sprint Backlog désaffecté avec succès du Sprint actuel.');
+
+              // Affectez le sprintBacklog au nouveau sprint
+              this.sprintBacklogService.assignSprintToSprintBacklog(this.sprintBacklogId, selectedSprintId).subscribe(
+                () => {
+                  console.log('Sprint Backlog affecté avec succès au nouveau Sprint.');
+                  // Redirigez vers la liste des Sprint Backlogs après la mise à jour
+                  setTimeout(() => {
+                    this.sprintBacklogUpdatedSuccessfully = true;
+                    this.router.navigate(['/AfficherSprintBacklog']);
+                  }, 500);
+                },
+                (error) => {
+                  console.error('Erreur lors de l\'affectation du Sprint Backlog au nouveau Sprint :', error);
+                }
+              );
+            },
+            (error) => {
+              console.error('Erreur lors de la désaffectation du Sprint Backlog du Sprint actuel :', error);
+            }
+          );
         },
         (error) => {
           console.error('Erreur lors de la mise à jour du Sprint Backlog :', error);
         }
       );
-    
-     
     }
   }
-  
 }

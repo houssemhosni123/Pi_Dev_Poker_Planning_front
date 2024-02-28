@@ -70,8 +70,19 @@
                     </div>
                   </div>
 
-                  <!-- Ajoutez d'autres champs du formulaire -->
 
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <label for="sprintId" class="col-sm-3 col-form-label font-size-lg">Sprint</label>
+                      <div class="col-sm-9">
+                        <select id="sprintId" formControlName="sprintId" class="form-control form-control-lg">
+                          <option *ngFor="let sprint of sprints" [value]="sprint.idSprint">{{ sprint.nomSprint }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                 
                 </div>
                 <div class="col-sm-9 offset-sm-3 d-flex justify-content-between">
                   <button type="submit" rippleEffect class="btn btn-primary btn-lg mx-1">Enregistrer les modifications</button>

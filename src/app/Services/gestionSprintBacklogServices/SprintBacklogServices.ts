@@ -62,5 +62,4 @@ export class SprintBacklogService  {
     );
   }
   
-  // Ajoutez d'autres méthodes pour les opérations spécifiques à votre application, par exemple, assigner/désassigner un sprint, etc.
 }
