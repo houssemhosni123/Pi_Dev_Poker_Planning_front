@@ -16,6 +16,6 @@ const routes: Routes = [
     declarations: [AfficherSprintComponent],
     imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, FormsModule,CommonModule, CoreCommonModule],
     exports: [AfficherSprintComponent],
-    providers: [] // Add the providers for the AfficherSprintComponent here
+    providers: [] 
 })
 export class AfficherSprintModule {}

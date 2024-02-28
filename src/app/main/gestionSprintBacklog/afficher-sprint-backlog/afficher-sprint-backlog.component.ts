@@ -45,7 +45,6 @@ export class SprintBacklogListComponent implements OnInit {
     this.sprintBacklogService.deleteSprintBacklog(sprintBacklogId).subscribe(
       () => {
         console.log('Sprint Backlog supprimé avec succès !');
-        // Rechargez la liste des Sprint Backlogs après la suppression
         this.loadSprintBacklogs();
       },
       (erreur) => {

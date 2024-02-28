@@ -61,7 +61,6 @@ export class AjoutSprintBacklogComponent implements OnInit {
           this.sprintBacklogService.assignSprintToSprintBacklog(createdSprintBacklog.idSprintBacklog, selectedSprintId).subscribe(
             (result) => {
               console.log('Sprint Backlog affecté au Sprint avec succès :', result);
-              // Effectuez des actions supplémentaires si nécessaire, par exemple, redirigez l'utilisateur
             },
             (error) => {
               console.error('Erreur lors de l\'affectation du Sprint Backlog au Sprint :', error);

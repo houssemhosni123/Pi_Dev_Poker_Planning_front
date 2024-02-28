@@ -1,4 +1,4 @@
-// ajout-sprint.component.ts
+
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -30,7 +30,7 @@ export class AjouterSprintComponent implements OnInit {
  
   
   
-  etatSprint = EtatSprint; // Pour accéder à l'enum dans le template
+  etatSprint = EtatSprint; 
 
   constructor(private fb: FormBuilder, private sprintService: SprintService, private router: Router) {}
 
@@ -46,7 +46,7 @@ export class AjouterSprintComponent implements OnInit {
   onSubmit() {
     if (this.sprintForm.valid) {
       this.sprintService.createSprint(this.sprintForm.value).subscribe(() => {
-        // Action après l'ajout du Sprint (par exemple, redirection ou actualisation de la liste)
+       
       });
       this.sprintAddedSuccessfully = true;
       setTimeout(() => {

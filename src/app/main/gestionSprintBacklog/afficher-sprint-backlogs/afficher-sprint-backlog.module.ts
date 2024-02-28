@@ -15,6 +15,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [AfficherSprintBacklogsComponent],
   imports: [CommonModule,FormsModule,AfficherSprintBacklogsModule,BrowserModule],
-  exports: [AfficherSprintBacklogsComponent], // Ajoutez cette ligne si vous souhaitez exporter le composant
+  exports: [AfficherSprintBacklogsComponent], 
 })
 export class AfficherSprintBacklogsModule {}

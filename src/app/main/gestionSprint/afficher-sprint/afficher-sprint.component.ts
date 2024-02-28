@@ -1,4 +1,3 @@
-// afficher-sprint.component.ts
 import { Component, OnInit } from '@angular/core';
 import { SprintService } from '../../../Services/gestionSprintServices/SprintService';
 import { Sprint } from 'app/main/apps/model/sprint';
@@ -48,7 +47,6 @@ export class AfficherSprintComponent implements OnInit {
     this.sprintService.deleteSprint(sprintId).subscribe(
       () => {
         console.log('Sprint supprimé avec succès !');
-        // Rechargez la liste des sprints après la suppression
         this.chargerSprints();
       },
       (erreur) => {
@@ -57,7 +55,6 @@ export class AfficherSprintComponent implements OnInit {
     );
   }
   showSprintBacklogs(sprintId: number): void {
-    // Redirigez l'utilisateur vers la liste des SprintBacklogs pour le Sprint sélectionné
     this.router.navigate(['AfficherSprintBacklogs', sprintId]);
   }
 }

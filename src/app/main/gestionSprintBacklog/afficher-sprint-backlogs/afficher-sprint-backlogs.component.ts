@@ -54,9 +54,7 @@ export class AfficherSprintBacklogsComponent implements OnInit {
     this.sprintBacklogService.unassignSprintFromSprintBacklog(sprintBacklogId).subscribe(
       (result) => {
         console.log('Sprint Backlog désaffecté avec succès:', result);
-        // Rechargez la liste des Sprint Backlogs après la désaffectation
         this.ngZone.run(() => {
-          // Rechargez la liste des Sprint Backlogs après la désaffectation
           this.loadSprintBacklogs();
           this.cdr.detectChanges();
         });
