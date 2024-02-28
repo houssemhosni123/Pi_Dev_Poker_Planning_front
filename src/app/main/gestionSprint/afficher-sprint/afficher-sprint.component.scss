@@ -1,0 +1,95 @@
+.card-sprint {
+    .sprint-item {
+      margin-bottom: 20px;
+      border: 1px solid #e1e5eb;
+      padding: 15px;
+      border-radius: 8px;
+      transition: box-shadow 0.3s ease;
+  
+      &:hover {
+        box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+      }
+  
+      .media {
+        margin-bottom: 10px;
+  
+        .avatar {
+          background-color: #f4f5f8;
+          margin-right: 15px;
+  
+          i {
+            color: #39485e;
+          }
+        }
+  
+        .media-body {
+          h6 {
+            font-size: 16px;
+            margin-bottom: 5px;
+          }
+  
+          small {
+            color: #6b7c93;
+          }
+        }
+      }
+  
+      button {
+        background-color: #7367f0;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #574feb;
+        }
+      }
+    }
+  }
+  /* CSS */
+.card-sprint {
+    transition: transform 0.3s ease;
+  }
+  
+  .card-sprint:hover {
+    transform: translateY(-15px); /* Ou toute autre valeur de décalage que vous préférez */
+  }
+  
+  /* CSS */
+.sprint-description {
+    color: #333; /* Couleur du texte pour la description */
+  }
+  
+  .sprint-date {
+    color: #555; /* Couleur du texte pour les dates */
+  }
+  
+  .sprint-date-highlight {
+    color: #e44d26; /* Couleur de surbrillance pour les dates */
+  }
+  
+  .sprint-state {
+    color: #007bff; /* Couleur du texte pour l'état du sprint */
+  }
+  /* Ajoutez ces styles CSS pour positionner et styliser le "X" */
+/* Ajoutez ces styles CSS pour positionner et styliser le "X" */
+.delete-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px; /* Taille de la police */
+    font-weight: bold; /* Poids de la police */
+    color: black; /* Couleur initiale */
+    transition: color 0.3s ease; /* Animation de transition de la couleur */
+  }
+  
+  .delete-icon:hover {
+    color: red; /* Couleur au survol */
+  }
+  
+  
+  

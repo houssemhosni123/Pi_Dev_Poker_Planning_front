@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { CommonModule } from '@angular/common';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeDbService } from '@fake-db/fake-db.service';
 
@@ -25,6 +25,9 @@ import { JwtInterceptor, ErrorInterceptor } from 'app/auth/helpers';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
+
+import { AjouterSprintModule } from './main/gestionSprint/ajouter-sprint/ajouter-sprint.module';
+
 
 import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-menu.component';
 import { AnimatedCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component';
@@ -51,10 +54,16 @@ import { ModfierUserstoryComponent } from './main/gestionUserStory/modfier-users
 import { ModfierSprintComponent } from './main/gestionSprint/modfier-sprint/modfier-sprint.component';
 import { AjouterSprintComponent } from './main/gestionSprint/ajouter-sprint/ajouter-sprint.component';
 import { AfficherSprintComponent } from './main/gestionSprint/afficher-sprint/afficher-sprint.component';
-import { AfficherSprintBacklogComponent } from './main/gestionSprintBacklog/afficher-sprint-backlog/afficher-sprint-backlog.component';
-import { AjouterSprintBacklogComponent } from './main/gestionSprintBacklog/ajouter-sprint-backlog/ajouter-sprint-backlog.component';
+import { SprintBacklogListComponent } from './main/gestionSprintBacklog/afficher-sprint-backlog/afficher-sprint-backlog.component';
+import { AjoutSprintBacklogComponent } from './main/gestionSprintBacklog/ajouter-sprint-backlog/ajouter-sprint-backlog.component';
 import { ModfierSprintBacklogComponent } from './main/gestionSprintBacklog/modfier-sprint-backlog/modfier-sprint-backlog.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { AfficherSprintModule } from './main/gestionSprint/afficher-sprint/afficher-sprint.module';
+import { ModfierSprintModule } from './main/gestionSprint/modfier-sprint/modfier-sprint.module';
+import { SprintService } from './Services/gestionSprintServices/SprintService';
+import { SprintBacklogService } from './Services/gestionSprintBacklogServices/SprintBacklogServices';
+import { AfficherSprintBacklogsComponent } from './main/gestionSprintBacklog/afficher-sprint-backlogs/afficher-sprint-backlogs.component';
+//import { HouseModule } from './Modules/house/house.module';
 const appRoutes: Routes = [
   {
     path: 'dashboard',
@@ -135,6 +144,24 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
     canActivate: [AuthGuard]
   },
+
+
+  { path: 'AfficherSprint', component: AfficherSprintComponent },
+
+  { path: 'sprints/:id/update', component: ModfierSprintComponent},
+
+  { path: 'sprintBacklog/:id/update', component: ModfierSprintBacklogComponent },
+
+  { path: 'AfficherSprintBacklog', component: SprintBacklogListComponent },
+  { path: 'ModifierSprintBacklog', component: ModfierSprintBacklogComponent },
+  { path: 'AjouterSprintBacklog', component: AjoutSprintBacklogComponent },
+  { path: 'AfficherSprintBacklogs/:sprintId', component: AfficherSprintBacklogsComponent },
+
+  
+  
+
+
+
   {
     path: 'SprintBacklog',
     loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
@@ -172,6 +199,8 @@ const appRoutes: Routes = [
         BasicCustomContextMenuComponent,
         AnimatedCustomContextMenuComponent,
         SubMenuCustomContextMenuComponent,
+        AfficherSprintBacklogsComponent,
+       
         
         
         
@@ -187,6 +216,13 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        ReactiveFormsModule,
+        AjouterSprintModule,
+        CommonModule,
+        AfficherSprintModule,
+        ModfierSprintModule,
+       
+        
         HttpClientModule,
         HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
             delay: 0,
@@ -209,10 +245,8 @@ const appRoutes: Routes = [
         ContentHeaderModule
     ],
     providers: [
-       // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        // ! IMPORTANT: Provider used to create fake backend, comment while using real API
-        fakeBackendProvider
+      SprintService,
+      SprintBacklogService,
     ],
     bootstrap: [AppComponent]
 })

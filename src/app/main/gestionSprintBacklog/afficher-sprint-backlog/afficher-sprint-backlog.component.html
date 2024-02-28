@@ -1,1 +1,66 @@
-<p>afficher-sprint-backlog works!</p>
+<!-- sprint-backlog-list.component.html -->
+
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <section id="sprint-backlog-list">
+            <div class="row match-height">
+                <div class="col-12 mx-auto">
+                    
+                    <h4 style="color: rgb(110, 48, 218);" class="card-title mb-4">Liste des Sprint Backlogs:</h4>
+
+                    <div class="card-body">
+                        <div *ngIf="sprintBacklogs.length === 0" class="alert alert-info mb-3">
+                            Aucun Sprint Backlog trouvé.
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12" *ngFor="let sprintBacklog of sprintBacklogs">
+                                <div class="card card-sprint-backlog mb-4">
+                                    <div class="card-header">
+                                        <div class="button-container mt-3">
+                                            <button class="btn btn-danger" (click)="supprimerSprintBacklog(sprintBacklog.idSprintBacklog)">X</button>
+                                         </div>                                    </div>
+                                    <div class="card-body">
+                                        <div class="sprint-item">
+                                            <div class="media">
+                                                <div class="avatar bg-light-primary rounded">
+                                                    <div class="avatar-content">
+                                                        <i data-feather="activity" class="avatar-icon font-medium-3"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <p class="sprint-description">{{ sprintBacklog.sprint?.objectifSprint }}</p>
+                                                    <p class="sprint-date">
+                                                        Effort Estimation: {{ sprintBacklog.effortEstimation }}
+                                                    </p>
+                                                    <p class="sprint-date">
+                                                        Définition de Terminé: {{ sprintBacklog.definitionOfDone }}
+                                                    </p>
+                                                    <p class="sprint-date">
+                                                        Priorité: {{ sprintBacklog.priorite }}
+                                                    </p>
+                                                    <p class="sprint-date">
+                                                        Est Terminé: {{ sprintBacklog.estTermine ? 'Oui' : 'Non' }}
+                                                    </p>
+                                                    <p class="sprint-date">
+                                                        Date de Début: {{ sprintBacklog.dateDebut | date }}
+                                                    </p>
+                                                    <p class="sprint-date">
+                                                        Date de Fin: {{ sprintBacklog.dateFin | date }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="button-container mt-3">
+      <button class="btn btn-primary" (click)="ouvrirFormulaireUpdate(sprintBacklog.idSprintBacklog)">Modifier</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

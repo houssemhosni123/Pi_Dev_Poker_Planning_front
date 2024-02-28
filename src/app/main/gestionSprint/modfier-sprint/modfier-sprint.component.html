@@ -1,1 +1,83 @@
-<p>modfier-sprint works!</p>
+<!-- update-sprint.component.html -->
+
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <section id="update-sprint-form" class="custom-form"> <!-- Ajout de la classe custom-form -->
+        <div class="row match-height">
+          <div class="col-12 mx-auto"> <!-- Ajustement de la largeur à 100% -->
+            <h3 class="custom-title">            Formulaire de mise à jour de Sprint:
+            </h3>
+  
+            <div *ngIf="sprintUpdatedSuccessfully" class="alert alert-success mb-3" [class.fade-out]="!showSuccessMessage">
+              Sprint mis à jour avec succès !
+            </div>
+  
+            <div class="card-body">
+              <form class="form form-horizontal" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="nomSprint" class="font-size-lg">Nom du Sprint</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" id="nomSprint" class="form-control form-control-lg" formControlName="nomSprint" placeholder="Nom du Sprint" />
+                      </div>
+                    </div>
+  
+                    <!-- Autres champs du formulaire -->
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="objectifSprint" class="font-size-lg">Objectif du Sprint</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" id="objectifSprint" class="form-control form-control-lg" formControlName="objectifSprint" placeholder="Objectif du Sprint" />
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="dateDebutSprint" class="font-size-lg">Date de début du Sprint</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="date" id="dateDebutSprint" class="form-control form-control-lg" formControlName="dateDebutSprint" />
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="dateFinSprint" class="font-size-lg">Date de fin du Sprint</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="date" id="dateFinSprint" class="form-control form-control-lg" formControlName="dateFinSprint" />
+                      </div>
+                    </div>
+  
+                    <!-- Utilisation d'une liste déroulante pour l'état du Sprint -->
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="etatSprint" class="font-size-lg">État du Sprint</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <select id="etatSprint" class="form-control form-control-lg" formControlName="etatSprint">
+                          <option value="En cours">En cours</option>
+                          <option value="Terminé">Terminé</option>
+                          <option value="À faire">À faire</option>
+                          <!-- Ajoutez d'autres états au besoin -->
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-9 offset-sm-3 d-flex justify-content-between">
+                    <button type="submit" rippleEffect class="btn btn-primary btn-lg mx-1">Mettre à jour le Sprint</button>
+                    <button type="reset" rippleEffect class="btn btn-outline-secondary btn-lg mx-1">Réinitialiser</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  

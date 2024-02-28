@@ -1,0 +1,42 @@
+<!-- afficher-sprint-backlogs.component.html -->
+<div class="container">
+  <h2>Sprint Backlogs du Sprint {{ sprintId }}</h2>
+  <!-- Affichez la liste des Sprint Backlogs ici -->
+  <ul>
+    <li *ngFor="let sprintBacklog of sprintBacklogs">
+      <div class="card card-sprint-backlog mb-4">
+        <div class="card-header">
+          <div class="button-container mt-3">
+            <!-- Ajoutez le bouton Supprimer ici -->
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="sprint-item">
+            <div class="media">
+              <div class="avatar bg-light-primary rounded">
+                <div class="avatar-content">
+                  <!-- Vous pouvez personnaliser cette partie avec des icônes ou du texte -->
+                  <i data-feather="activity" class="avatar-icon font-medium-3"></i>
+                </div>
+              </div>
+              <div class="media-body">
+                <p class="sprint-description">Objectif du Sprint Backlog: {{ sprintBacklog.objectifSprintBacklog }}</p>
+                <p class="sprint-date">Estimation de l'effort: {{ sprintBacklog.effortEstimation }}</p>
+                <p class="sprint-date">Définition de Terminé: {{ sprintBacklog.definitionOfDone }}</p>
+                <p class="sprint-date">Priorité: {{ sprintBacklog.priorite }}</p>
+                <p class="sprint-date">Est Terminé: {{ sprintBacklog.estTermine ? 'Oui' : 'Non' }}</p>
+                <p class="sprint-date">Date de Début: {{ sprintBacklog.dateDebut | date }}</p>
+                <p class="sprint-date">Date de Fin: {{ sprintBacklog.dateFin  | date }}</p>
+
+                <!-- Ajoutez d'autres détails selon votre modèle -->
+              </div>
+            </div>
+            <div class="button-container mt-3">
+              <!-- Ajoutez le bouton Modifier ici -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
