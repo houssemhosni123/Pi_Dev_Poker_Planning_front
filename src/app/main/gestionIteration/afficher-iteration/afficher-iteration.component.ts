@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Iteration } from 'app/Model/iteration';
 import { IterationService } from 'app/Services/gestionIterationServices/IterationServices';
 
@@ -11,12 +12,20 @@ export class AfficherIterationComponent implements OnInit {
 
   iterations: any[] = [];
 
-  constructor(private iterationService: IterationService) {}
+  constructor(private iterationService: IterationService,private router: Router) {}
 
   ngOnInit(): void {
     this.loadIterations();
   }
-  loadIterations(): void {
+  updateIteration(id: number): void {
+    // Utilisez la méthode navigateByUrl pour naviguer vers la route avec l'ID
+  
+    this.router.navigateByUrl(`/Iteration/modifier-iteration/${id}`);
+  }
+  showEstimations(id:number) :void {
+    this.router.navigateByUrl(`/Iteration/ShowEstimations/${id}`);
+  }
+    loadIterations(): void {
     this.iterationService.getIterations().subscribe(
       (data) => {
         this.iterations = data;

@@ -8,11 +8,16 @@ import { Estimation } from 'app/Model/estimation';
 })
 export class EstimationserviceService {
 
-  private apiUrl = 'http://localhost:8089/Estimation/AddEstimation';
+  private apiUrl = 'http://localhost:8089';
 
   constructor(private http: HttpClient) { }
 
   addEstimation(estimation: Estimation): Observable<Estimation> {
-    return this.http.post<Estimation>(`${this.apiUrl}`, estimation);
+    return this.http.post<Estimation>(`${this.apiUrl}/Estimation/AddEstimation`, estimation);
+    
+  }
+  getEstimationsByIdIteration(id: number): Observable<Estimation[]> {
+    const url = `${this.apiUrl}/Estimation/GetEstimations/${id}`;
+    return this.http.get<Estimation[]>(url);
   }
 }

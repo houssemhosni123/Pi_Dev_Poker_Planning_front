@@ -5,6 +5,8 @@ import { AjouterIterationModule } from "./ajouter-iteration/ajouter-iteration.mo
 import { ModifierIterationModule } from "./modfier-iteration/modfier-iteration.module";
 import { FrontIterationComponent } from './FrontIteration/front-iteration/front-iteration.component';
 import { FrontModuleModule } from "./FrontIteration/front-iteration/front-module.module";
+import { EstimationShowComponent } from './estimation-show/estimation-show.component';
+import { EstimationShowModule } from "./estimation-show/estimation-show.module";
 
 
 @NgModule({
@@ -12,12 +14,15 @@ import { FrontModuleModule } from "./FrontIteration/front-iteration/front-module
     
   
    
+  
+    
   ],
     imports: [
         AfficherIterationModule,
         AjouterIterationModule,
         ModifierIterationModule,
-        FrontModuleModule
+        FrontModuleModule,
+        EstimationShowModule
       ]
   })
   export class IterationModule {}

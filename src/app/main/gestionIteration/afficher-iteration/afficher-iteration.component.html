@@ -11,19 +11,21 @@
               <tr>
                 <th>ID</th>
                 <th>Résultat</th>
-                <th>Date d'itération</th>
+                <th>Date Debut</th>
+                <th>Date Fin</th>
                 <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let iteration of iterations">
-                <td>{{ iteration.idIteration }}</td>
+                <td>{{iteration.idIteration}}</td>
                 <td>{{ iteration.resultat }}</td>
-                <td>{{ iteration.date_Iteration | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{ iteration.date_IterationDebut | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{ iteration.date_IterationFin | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                 <td>
                   <!-- Utilisez la classe btn-group pour regrouper les boutons -->
                   <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-primary mr-2" (click)="updateIteration(iteration)">Update</button>
+                    <button class="btn btn-sm btn-outline-primary mr-2" (click)="updateIteration(iteration.idIteration)">Update</button>
                     <button class="btn btn-sm btn-outline-danger mr-2" (click)="deleteIteration(iteration)">Delete</button>
                     <button class="btn btn-sm btn-outline-info" (click)="showEstimations(iteration.idIteration)">Show Estimations</button>
                   </div>

@@ -1,1 +1,32 @@
-<p>modfier-iteration works!</p>
+<div class="card mb-4">
+  <h5 class="card-header">Modifier Iteration</h5>
+  <form [formGroup]="iterationForm" class="card-body" (submit)="updateIteration()">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label" for="resultat">Résultat</label>
+        <select id="resultat" class="form-control" formControlName="resultat">
+          <option value="Encours">Encours</option>
+          <option value="Termine">Termine</option>
+        </select>
+        <div *ngIf="iterationForm.get('resultat').hasError('required')" class="text-danger">Résultat est requis.</div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="date_IterationDebut">Date de début</label>
+        <input type="date" id="date_IterationDebut" class="form-control" formControlName="date_IterationDebut" />
+        <div *ngIf="iterationForm.get('date_IterationDebut').hasError('required')" class="text-danger">Date de début est requise.</div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="date_IterationFin">Date Fin</label>
+        <input type="date" id="date_IterationFin" class="form-control" formControlName="date_IterationFin" />
+        <div *ngIf="iterationForm.get('date_IterationFin').hasError('required')" class="text-danger">Date Fin est requise.</div>
+        <div *ngIf="iterationForm.hasError('date_IterationDebut')" class="text-danger">
+          La date de début doit être antérieure à la date de fin.
+        </div>
+      </div>
+    </div>
+    <hr class="my-4 mx-n4" />
+    <div class="pt-4">
+      <button type="submit" class="btn btn-primary me-sm-3 me-1">Modifier</button>
+    </div>
+  </form>
+</div>

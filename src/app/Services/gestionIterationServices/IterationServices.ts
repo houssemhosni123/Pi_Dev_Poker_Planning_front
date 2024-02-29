@@ -16,4 +16,13 @@ export class IterationService {
     deleteIteration(iterationId: number): Observable<void> {
       return this.http.delete<void>(`${this.apiUrl}/Iteration/DeleteIteration/${iterationId}`);
     }
-}
+    updateIteration( iteration: any,id: number): Observable<any> {
+      const url = `${this.apiUrl}/Iteration/UpdateIteration/${id}`;
+      return this.http.put<any>(url, iteration);
+    }
+    getIterationById(id: number): Observable<Iteration> {
+      const url = `${this.apiUrl}/Iteration/getIteration/${id}`;
+      return this.http.get<Iteration>(url);
+    }
+    
+  }
