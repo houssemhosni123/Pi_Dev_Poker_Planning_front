@@ -1,5 +1,6 @@
 ﻿export enum Role {
   Admin = 'Admin',
-  Client = 'Client',
-  User = 'User'
+  ProductOwner = 'ProductOwner',
+  ScrumMaster = 'ScrumMaster',
+  Developer = 'Developer'
 }

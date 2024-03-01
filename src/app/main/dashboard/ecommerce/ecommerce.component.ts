@@ -37,7 +37,15 @@ export class EcommerceComponent implements OnInit {
   public data: any;
   public currentUser: User;
   public isAdmin: boolean;
-  public isClient: boolean;
+
+
+
+  public isProductOwner: boolean;
+  public isScrumMaster: boolean;
+  public  isdeveloper: boolean;
+ 
+
+
   public statisticsBar;
   public statisticsLine;
   public revenueReportChartoptions;
@@ -77,7 +85,10 @@ export class EcommerceComponent implements OnInit {
   ) {
     this._authenticationService.currentUser.subscribe(x => (this.currentUser = x));
     this.isAdmin = this._authenticationService.isAdmin;
-    this.isClient = this._authenticationService.isClient;
+    this.isProductOwner = this._authenticationService.isProductOwner;
+    this.isScrumMaster = this._authenticationService.isScrumMaster;
+    this.isdeveloper = this._authenticationService.isdeveloper;
+
 
     this._coreTranslationService.translate(english, french, german, portuguese);
     // Statistics Bar Chart
@@ -678,6 +689,9 @@ export class EcommerceComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+   // debugger
+    
+    
     // get the currentUser details from localStorage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -691,6 +705,9 @@ export class EcommerceComponent implements OnInit {
    * After View Init
    */
   ngAfterViewInit() {
+    //debugger
+    this.isProductOwner = this._authenticationService.isProductOwner;
+    this.isAdmin = this._authenticationService.isAdmin;
     // Subscribe to core config changes
     this._coreConfigService.getConfig().subscribe(config => {
       // If Menu Collapsed Changes
@@ -699,7 +716,7 @@ export class EcommerceComponent implements OnInit {
         localStorage.getItem('currentUser')
       ) {
         setTimeout(() => {
-          if (this.currentUser.role == 'Admin') {
+          if (this.currentUser.rolee == 'Admin') {
             // Get Dynamic Width for Charts
             this.isMenuToggled = true;
             this.statisticsBar.chart.width = this.statisticsBarChartRef?.nativeElement.offsetWidth;

@@ -85,8 +85,7 @@ export class AuthLoginV2Component implements OnInit {
 
     // Login
     this.loading = true;
-    this._authenticationService
-      .login(this.f.email.value, this.f.password.value)
+    this._authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {

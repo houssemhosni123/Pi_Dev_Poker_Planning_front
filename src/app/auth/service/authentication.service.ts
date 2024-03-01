@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+
+
   //public
   public currentUser: Observable<User>;
 
@@ -21,7 +23,9 @@ export class AuthenticationService {
    * @param {ToastrService} _toastrService
    */
   constructor(private _http: HttpClient, private _toastrService: ToastrService) {
+    
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -29,19 +33,43 @@ export class AuthenticationService {
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
+  
 
+ 
+get idUser(){
+
+    return this.currentUser && this.currentUserSubject.value.idUser;
+    
+}
   /**
    *  Confirms if user is admin
    */
   get isAdmin() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
-  }
 
+    console.log( this.currentUserSubject.value.rolee);
+    return this.currentUser && this.currentUserSubject.value.rolee=== Role.Admin;
+    
+  }
+  
   /**
-   *  Confirms if user is client
+   *  Confirms if user is ProductOwner
    */
-  get isClient() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Client;
+  get isProductOwner() {
+    
+
+    return this.currentUser && this.currentUserSubject.value.rolee=== Role.ProductOwner;
+  }
+  /**
+   *  Confirms if user is ScrumMaster
+   */
+  get isScrumMaster() {
+    return this.currentUser && this.currentUserSubject.value.rolee=== Role.ScrumMaster;
+  }
+  /**
+   *  Confirms if user developer
+   */
+  get isdeveloper() {
+    return this.currentUser && this.currentUserSubject.value.rolee === Role.Developer;
   }
 
   /**
@@ -53,33 +81,39 @@ export class AuthenticationService {
    */
   login(email: string, password: string) {
     return this._http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
+      .post<any>(`${environment.apiUrl}/authenticate`, { email, password })
       .pipe(
         map(user => {
-          // login successful if there's a jwt token in the response
-          if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
+          if (user) {
 
-            // Display welcome toast!
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            console.log(user);
+  
             setTimeout(() => {
               this._toastrService.success(
-                'You have successfully logged in as an ' +
-                  user.role +
-                  ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.firstName + '!',
+                'You have successfully logged in as an ' + user.rolee + ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
+                '👋 Welcome, ' + user.nom + '!',
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );
             }, 2500);
-
-            // notify
-            this.currentUserSubject.next(user);
+          } else {
+            // If user is null or token is missing, handle the error or unexpected response
+            // You can throw an error, show a notification, or log a message here
+            console.error('Unexpected response from login API:', user);
           }
-
+  
           return user;
+        }),
+        catchError(error => {
+          // Handle HTTP errors here
+          // You can throw an error, show a notification, or log a message here
+          console.error('Login failed:', error);
+          return throwError(error);
         })
       );
   }
+  
 
   /**
    * User logout
