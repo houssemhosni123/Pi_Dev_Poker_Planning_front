@@ -1,6 +1,7 @@
 package com.example.pi_dev_4eme__poker_planning.Services;
 
 
+import com.example.pi_dev_4eme__poker_planning.Api.sendRegistrationEmail;
 import com.example.pi_dev_4eme__poker_planning.Controllers.AuthenticationRequest;
 import com.example.pi_dev_4eme__poker_planning.Controllers.AuthenticationResponse;
 import com.example.pi_dev_4eme__poker_planning.Controllers.RegisterRequest;
@@ -9,36 +10,40 @@ import com.example.pi_dev_4eme__poker_planning.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+    private final sendRegistrationEmail sE;
     private final UserRepository repository;
-    //private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
-                .Nom(request.getFirstname())
-                .Prenom(request.getLastname()).
-                email(request.getEmail())
+                .Nom(request.getNom())
+                .Prenom(request.getPrenom())
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .rolee(request.getRole())
                 .build();
-        var savedUser = repository.save(user);
+
+        repository.save(user);
         var jwtToken = jwtService.generateToken(user);
-        // var refreshToken = jwtService.generateRefreshToken(user);
-        // saveUserToken(savedUser, jwtToken);
+
+        // Sending email to the user
+        sE.RegistrationEmail(request,user.getEmail(), request.getPassword());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    /*public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -48,9 +53,47 @@ public class AuthenticationService {
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
+        System.out.println(user);
+        System.out.println(jwtToken);
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
 
+    }*/
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+
+            // Retrieve user from repository
+            var user = repository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+
+            // Generate JWT token
+            String jwtToken = jwtService.generateToken(user);
+
+            // Create AuthenticationResponse object with user properties
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .idUser(user.getIdUser())
+                    .nom(user.getNom())
+                    .prenom(user.getPrenom())
+                    .image(user.getImage())
+                    .email(user.getEmail())
+                    .password(user.getPassword())
+                    .rolee(user.getRolee())
+                    .status(user.isStatus())
+                    .tel(user.getTel())
+                    .build();
+        } catch (AuthenticationException ex) {
+            // Handle authentication failure
+            throw new UsernameNotFoundException("Incorrect email or password");
+        }
     }
+
 }
