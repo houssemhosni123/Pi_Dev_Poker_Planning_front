@@ -81,6 +81,12 @@ public class UserServices implements IUserServices{
     public int countProductOwners() {
         return userRepositories.countUsersByRole(Role.ProductOwner);
     }
+    public int countActiveUsers() {
+        return userRepositories.countUsersByStatus(StatusUser.active);
+    }
 
+    public int countInactiveUsers() {
+        return userRepositories.countUsersByStatus(StatusUser.inactive);
+    }
 
 }

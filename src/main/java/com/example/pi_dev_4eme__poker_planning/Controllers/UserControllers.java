@@ -56,6 +56,14 @@ public class UserControllers {
     public int countProductOwners() {
         return Uservice.countProductOwners();
     }
+    @GetMapping("/active-users")
+    public int countActiveUsers() {
+        return Uservice.countActiveUsers();
+    }
 
+    @GetMapping("/inactive-users")
+    public int countInactiveUsers() {
+        return Uservice.countInactiveUsers();
+    }
 
 }
