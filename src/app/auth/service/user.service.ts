@@ -47,5 +47,27 @@ export class UserService {
   deactivateUser(userId: number): Observable<void> {
     return this._http.put<void>(`${environment.apiUrl1}/User/DeactivateUser/${userId}`, null);
   }
+
+  getScrumMasterCount(): Observable<number> {
+    return this._http.get<number>(`${environment.apiUrl1}/User/scrum-masters`);
+  }
+
+  getDeveloperCount(): Observable<number> {
+    return this._http.get<number>(`${environment.apiUrl1}/User/developers`);
+  }
+
+  getProductOwnerCount(): Observable<number> {
+    return this._http.get<number>(`${environment.apiUrl1}/User/product-owners`);
+
+  }
+  countActiveUsers(): Observable<number> {
+    return this._http.get<number>(`${environment.apiUrl1}/User/active-users`);
+
+  }
+
+  countInactiveUsers(): Observable<number> {
+    return this._http.get<number>(`${environment.apiUrl1}/User/inactive-users`);
+
+  }
 }
  

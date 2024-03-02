@@ -22,6 +22,7 @@ import {
 
 import { colors } from 'app/colors.const';
 import { CoreConfigService } from '@core/services/config.service';
+import { UserService } from 'app/auth/service';
 
 // interface ChartOptions
 export interface ChartOptions {
@@ -69,6 +70,7 @@ export interface ChartOptions2 {
   encapsulation: ViewEncapsulation.None
 })
 export class ApexComponent implements OnInit {
+  public apexDonutChart: Partial<ChartOptions2>;
   @ViewChild('apexLineAreaChartRef') apexLineAreaChartRef: any;
   @ViewChild('apexColumnChartRef') apexColumnChartRef: any;
   @ViewChild('apexScatterChartRef') apexScatterChartRef: any;
@@ -90,7 +92,7 @@ export class ApexComponent implements OnInit {
   public apexCandlestickChart: Partial<ChartOptions>;
   public apexScatterChart: Partial<ChartOptions>;
   public apexHeatmapChart: Partial<ChartOptions>;
-  public apexDonutChart: Partial<ChartOptions2>;
+ // public apexDonutChart: Partial<ChartOptions2>;
   public apexRadialChart: Partial<ChartOptions2>;
   public apexRadarChart: Partial<ChartOptions>;
   public isMenuToggled = false;
@@ -153,7 +155,7 @@ export class ApexComponent implements OnInit {
    *
    * @param {CoreConfigService} _coreConfigService
    */
-  constructor(private _coreConfigService: CoreConfigService) {
+  constructor(private _userService:UserService,private _coreConfigService: CoreConfigService) {
     // Apex Line chart
     this.apexLineAreaChart = {
       series: [
@@ -728,9 +730,8 @@ export class ApexComponent implements OnInit {
       }
     };
 
-    // Apex Donut Chart
     this.apexDonutChart = {
-      series: [85, 16, 50, 50],
+      series: [],
       chart: {
         height: 350,
         type: 'donut'
@@ -773,7 +774,7 @@ export class ApexComponent implements OnInit {
         show: true,
         position: 'bottom'
       },
-      labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+      labels: ['Scrum Masters', 'Developers', 'Product Owners'],
       responsive: [
         {
           breakpoint: 480,
@@ -788,6 +789,8 @@ export class ApexComponent implements OnInit {
         }
       ]
     };
+  
+  
 
     // Apex Radial Chart
     this.apexRadialChart = {
@@ -890,11 +893,30 @@ export class ApexComponent implements OnInit {
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
+
+  loadStatistics() {
+    // Clear existing series data
+    this.apexDonutChart.series = [];
+  
+    this._userService.getScrumMasterCount().subscribe(count => {
+      this.apexDonutChart.series.push(count);
+    });
+  
+    this._userService.getDeveloperCount().subscribe(count => {
+      this.apexDonutChart.series.push(count);
+    });
+  
+    this._userService.getProductOwnerCount().subscribe(count => {
+      this.apexDonutChart.series.push(count);
+    });
+  
+    // Update labels
+    this.apexDonutChart.labels = ['Scrum Masters', 'Developers', 'Product Owners'];
+  }
   /**
    * On init
    */
   ngOnInit() {
-    // content header
     this.contentHeader = {
       headerTitle: 'Apex Charts',
       actionButton: true,
@@ -918,8 +940,11 @@ export class ApexComponent implements OnInit {
         ]
       }
     };
+  
+    // Load statistics
+    this.loadStatistics();
+  
   }
-
   /**
    * After View Init
    */
