@@ -2,6 +2,7 @@ package com.example.pi_dev_4eme__poker_planning.Controllers;
 
 
 import com.example.pi_dev_4eme__poker_planning.Entities.Role;
+import com.example.pi_dev_4eme__poker_planning.Entities.StatusUser;
 import com.example.pi_dev_4eme__poker_planning.Entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
         private String email;
         private String password;
         private Role rolee;
-        private boolean status;
+        private StatusUser status;
         private String tel;
 
 

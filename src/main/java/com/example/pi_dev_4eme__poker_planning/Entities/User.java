@@ -37,7 +37,8 @@ public class User implements UserDetails ,Serializable
     private String password;
     @Enumerated(EnumType.STRING)
     private Role rolee;
-    private boolean Status;
+    @Enumerated(EnumType.STRING)
+    private StatusUser Status;
     private String Tel;
 
 

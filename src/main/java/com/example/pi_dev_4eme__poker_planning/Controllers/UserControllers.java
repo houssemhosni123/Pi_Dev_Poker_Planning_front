@@ -29,4 +29,14 @@ public class UserControllers {
     public User updateUserById(@PathVariable Long userId, @RequestBody User updatedUser) {
         return Uservice.updateUserById(userId, updatedUser);
     }
+
+    @PutMapping("/ActivateUser/{userId}")
+    public void activateUserById(@PathVariable Long userId) {
+        Uservice.activateUserById(userId);
+    }
+
+    @PutMapping("/DeactivateUser/{userId}")
+    public void deactivateUserById(@PathVariable Long userId) {
+        Uservice.deactivateUserById(userId);
+    }
 }

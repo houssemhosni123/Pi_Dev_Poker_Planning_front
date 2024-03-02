@@ -5,6 +5,7 @@ import com.example.pi_dev_4eme__poker_planning.Api.sendRegistrationEmail;
 import com.example.pi_dev_4eme__poker_planning.Controllers.AuthenticationRequest;
 import com.example.pi_dev_4eme__poker_planning.Controllers.AuthenticationResponse;
 import com.example.pi_dev_4eme__poker_planning.Controllers.RegisterRequest;
+import com.example.pi_dev_4eme__poker_planning.Entities.StatusUser;
 import com.example.pi_dev_4eme__poker_planning.Entities.User;
 import com.example.pi_dev_4eme__poker_planning.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,8 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .rolee(request.getRole())
+                .Status(StatusUser.active) // Set status to active
+
                 .build();
 
         repository.save(user);
@@ -87,8 +90,9 @@ public class AuthenticationService {
                     .email(user.getEmail())
                     .password(user.getPassword())
                     .rolee(user.getRolee())
-                    .status(user.isStatus())
+                    .status(user.getStatus())
                     .tel(user.getTel())
+
                     .build();
         } catch (AuthenticationException ex) {
             // Handle authentication failure

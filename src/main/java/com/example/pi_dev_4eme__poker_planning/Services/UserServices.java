@@ -1,5 +1,6 @@
 package com.example.pi_dev_4eme__poker_planning.Services;
 
+import com.example.pi_dev_4eme__poker_planning.Entities.StatusUser;
 import com.example.pi_dev_4eme__poker_planning.Entities.User;
 import com.example.pi_dev_4eme__poker_planning.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,30 @@ public class UserServices implements IUserServices{
         }
         return null; // Return null if user with given ID is not found
     }
+
+
+
+    @Override
+    public void activateUserById(Long userId) {
+        // Retrieve user by ID
+        Optional<User> userOptional = userRepositories.findById(userId);
+        // If user exists, set the status to active and save
+        userOptional.ifPresent(user -> {
+            user.setStatus(StatusUser.active);
+            userRepositories.save(user);
+        });
+    }
+    @Override
+    public void deactivateUserById(Long userId) {
+        // Retrieve user by ID
+        Optional<User> userOptional = userRepositories.findById(userId);
+        // If user exists, set the status to inactive and save
+        userOptional.ifPresent(user -> {
+            user.setStatus(StatusUser.inactive);
+            userRepositories.save(user);
+        });
+    }
+
 
 
 }
