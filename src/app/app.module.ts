@@ -30,6 +30,7 @@ import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-m
 import { AnimatedCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component';
 import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component';
 import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
+import { Role } from './auth/models';
 
 const appRoutes: Routes = [
   {
@@ -70,7 +71,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionUser/gestionUser.module').then(m => m.UserModule),
     canActivate: [AuthGuard]
   },
-  {
+  /*{
     path: 'Session',
     loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
     canActivate: [AuthGuard]
@@ -116,9 +117,56 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
     canActivate: [AuthGuard]
   },
+  */
   
-  
-  
+  {
+    path: 'Projet',
+    loadChildren: () => import('./main/gestionProjet/Projet.module').then(m => m.ProjetModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+  },
+  {
+    path: 'UserStory',
+    loadChildren: () => import('./main/gestionUserStory/UserStory.module').then(m => m.UserStoryModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+  },
+  {
+    path: 'Sprint',
+    loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+  },
+  {
+    path: 'SprintBacklog',
+    loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+  },
+  {
+    path: 'Session',
+    loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ScrumMaster] } // Only ScrumMaster role allowed
+  },
+  {
+    path: 'Reclamation',
+    loadChildren: () => import('./main/gestionReclamation/Reclamation.module').then(m => m.ReclamationModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ScrumMaster, Role.Developer] } // ScrumMaster and Developer roles allowed
+  },
+  {
+    path: 'Reunion',
+    loadChildren: () => import('./main/gestionReunion/Reunion.module').then(m => m.ReunionModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ScrumMaster, Role.Developer] } // ScrumMaster and Developer roles allowed
+  },
+  {
+    path: 'Iteration',
+    loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Developer] } // Only Developer role allowed
+  },
   
   {
     path: 'tables',
