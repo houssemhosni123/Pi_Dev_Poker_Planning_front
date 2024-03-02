@@ -1,12 +1,15 @@
 package com.example.pi_dev_4eme__poker_planning.Services;
 
+import com.example.pi_dev_4eme__poker_planning.Entities.Role;
 import com.example.pi_dev_4eme__poker_planning.Entities.StatusUser;
 import com.example.pi_dev_4eme__poker_planning.Entities.User;
 import com.example.pi_dev_4eme__poker_planning.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -67,6 +70,17 @@ public class UserServices implements IUserServices{
         });
     }
 
+    public int countScrumMasters() {
+        return userRepositories.countUsersByRole(Role.ScrumMaster);
+    }
+
+    public int countDevelopers() {
+        return userRepositories.countUsersByRole(Role.developer);
+    }
+
+    public int countProductOwners() {
+        return userRepositories.countUsersByRole(Role.ProductOwner);
+    }
 
 
 }
