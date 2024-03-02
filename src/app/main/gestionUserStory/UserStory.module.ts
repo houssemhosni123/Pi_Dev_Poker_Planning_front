@@ -11,8 +11,8 @@ import { AjouterUserstoryModule } from "./ajouter-userstory/ajouter-userstory.mo
     
   ],
     imports: [
-        ModfierUserstoryModule,
         AfficherUserstoryModule,
+        ModfierUserstoryModule,
         AjouterUserstoryModule
         
       ]

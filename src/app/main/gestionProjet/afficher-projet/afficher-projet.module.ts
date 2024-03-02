@@ -14,4 +14,7 @@ const routes: Routes = [
     declarations: [AfficherProjetComponent],
     imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, FormsModule, CoreCommonModule]
   })
-  export class AfficherProjetModule {}
+  export class AfficherProjetModule {
+
+  
+  }
