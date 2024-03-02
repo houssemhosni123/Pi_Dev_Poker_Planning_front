@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
 
   authResponse: AuthenticationResponse = {
     token: '',
-    role: ''
+    rolee: ''
   };
 
   constructor(private authService: Userservice, private http: HttpClient, private router: Router) { }

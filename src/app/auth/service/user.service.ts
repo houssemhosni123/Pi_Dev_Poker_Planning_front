@@ -40,6 +40,12 @@ export class UserService {
     return this._http.post<AuthenticationResponse>
     (`${this.baseUrl1}/register`, registerRequest);
   }
+ activateUser(userId: number): Observable<void> {
+    return this._http.put<void>(`${environment.apiUrl1}/User/ActivateUser/${userId}`, null);
+  }
 
+  deactivateUser(userId: number): Observable<void> {
+    return this._http.put<void>(`${environment.apiUrl1}/User/DeactivateUser/${userId}`, null);
+  }
 }
  

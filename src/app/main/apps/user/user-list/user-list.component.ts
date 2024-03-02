@@ -48,7 +48,6 @@ export class UserListComponent implements OnInit {
 
   public selectStatus: any = [
     { name: 'All', value: '' },
-    { name: 'Pending', value: 'Pending' },
     { name: 'Active', value: 'Active' },
     { name: 'Inactive', value: 'Inactive' }
   ];
@@ -182,6 +181,38 @@ export class UserListComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching users:', error);
+        // Handle error here
+      }
+    );
+  }
+
+
+
+
+
+
+  activateUser(userId: number): void {
+    this._userService.activateUser(userId).subscribe(
+      () => {
+        // Optionally, you can handle success here, such as refreshing the user list
+        this.getUsers();
+      },
+      (error) => {
+        console.error('Error activating user:', error);
+        // Handle error here
+      }
+    );
+  }
+
+  // Deactivate user by ID
+  deactivateUser(userId: number): void {
+    this._userService.deactivateUser(userId).subscribe(
+      () => {
+        // Optionally, you can handle success here, such as refreshing the user list
+        this.getUsers();
+      },
+      (error) => {
+        console.error('Error deactivating user:', error);
         // Handle error here
       }
     );

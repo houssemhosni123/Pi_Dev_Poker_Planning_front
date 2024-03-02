@@ -160,45 +160,56 @@
           </ngx-datatable-column>
           
 
-          <!-- Telephone Column -->
-          <ngx-datatable-column name="Telephone" prop="tel" [width]="100">
-            <ng-template let-row="row">{{ row.tel }}</ng-template>
-          </ngx-datatable-column>
-
+         
           <!-- Status Column -->
-          <ngx-datatable-column name="Status" prop="status" [width]="50">
-            <ng-template let-row="row">
-              <div
-                class="badge badge-pill"
-                [ngClass]="{
-                  'badge-light-success': row.status === 'active',
-                  'badge-light-secondary': row.status === 'inactive',
-                  'badge-light-warning': row.status === 'pending'
-                }"
-              >
-                {{ row.status }}
-              </div>
-            </ng-template>
-          </ngx-datatable-column>
+          <!-- Status Column -->
+          <!-- Status Column -->
+<ngx-datatable-column name="Status" [width]="100" [sortable]="false">
+  <ng-template ngx-datatable-cell-template let-row="row">
+    <div class="badge badge-pill"
+      [ngClass]="{
+        'badge-light-success': row.status === 'active',
+        'text-danger': row.status === 'inactive'
+      }">
+      {{ row.status }}
+    </div>
+  </ng-template>
+</ngx-datatable-column>
 
-          <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
-            <ng-template ngx-datatable-cell-template let-row="row">
-              <div ngbDropdown container="body">
-                <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
-                  <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
-                </button>
-                <div ngbDropdownMenu>
-                  <a routerLink="/apps/user/user-view/{{ row.id }}" ngbDropdownItem
-                    ><span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details</a
-                  ><a routerLink="/apps/user/user-edit/{{ row.id }}" ngbDropdownItem
-                    ><span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit</a
-                  ><a href="javascript:;" ngbDropdownItem
-                    ><span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
-                  >
-                </div>
-              </div>
-            </ng-template>
-          </ngx-datatable-column>
+<!-- Actions Column -->
+<ngx-datatable-column name="Actions" [width]="100" [sortable]="false">
+  <ng-template ngx-datatable-cell-template let-row="row">
+    <div class="d-flex justify-content-center">
+      <!-- Other actions buttons (View, Edit, Delete) -->
+      <div ngbDropdown container="body" class="mx-1">
+        <button ngbDropdownToggle type="button" class="btn btn-sm btn-icon hide-arrow" rippleEffect>
+          <i data-feather="more-vertical"></i>
+        </button>
+        <div ngbDropdownMenu>
+          <!-- View User -->
+          <a routerLink="/apps/user/user-view/{{ row.id }}" ngbDropdownItem>
+            <span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details
+          </a>
+          <!-- Activate User -->
+          <!-- Activate User -->
+<button *ngIf="row.status === 'inactive'" class="dropdown-item" (click)="activateUser(row.idUser)">
+  <i class="feather icon-check-circle"></i> Activate
+</button>
+<!-- Deactivate User -->
+<button *ngIf="row.status === 'active'" class="dropdown-item" (click)="deactivateUser(row.idUser)">
+  <i class="feather icon-x-circle"></i> Deactivate
+</button>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ngx-datatable-column>
+
+          
+
+
+          
         </ngx-datatable>
 </div>
 </section>

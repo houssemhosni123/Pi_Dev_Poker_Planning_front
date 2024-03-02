@@ -23,15 +23,15 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
   registerRequest: RegisterRequest = {
-    Nom: '',
-    Prenom: '',
+    nom: '',
+    prenom: '',
     email: '',
     password: '',
     role: ''
   };
   authResponse: AuthenticationResponse = {
     token: '',
-    role: ''
+    rolee: ''
   };
   message = '';
   /* register(): void {

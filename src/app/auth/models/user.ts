@@ -1,4 +1,5 @@
-﻿import { Role } from "./role";
+﻿import { StatusUser } from "./StatusUser";
+import { Role } from "./role";
 
 export class User {
   idUser: number;
@@ -8,7 +9,7 @@ export class User {
   email: string;
   password: string;
   rolee: Role;
-  Status: boolean;
+  Status: StatusUser;
   Tel: string;
   token?: string;
 
