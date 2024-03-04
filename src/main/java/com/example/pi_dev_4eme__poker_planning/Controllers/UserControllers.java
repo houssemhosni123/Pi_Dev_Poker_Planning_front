@@ -7,8 +7,10 @@ import com.example.pi_dev_4eme__poker_planning.Entities.User;
 import com.example.pi_dev_4eme__poker_planning.Services.TacheServices;
 import com.example.pi_dev_4eme__poker_planning.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,5 +67,9 @@ public class UserControllers {
     public int countInactiveUsers() {
         return Uservice.countInactiveUsers();
     }
-
+    @PatchMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request, Principal connectedUser) {
+        Uservice.changePassword(request, connectedUser);
+        return ResponseEntity.ok().build();
+    }
 }
