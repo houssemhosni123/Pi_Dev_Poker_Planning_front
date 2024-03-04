@@ -78,7 +78,7 @@ export class AuthLoginV2Component implements OnInit {
   onSubmit() {
     this.submitted = true;
   
-    // stop here if form is invalid
+    // Stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
@@ -92,11 +92,16 @@ export class AuthLoginV2Component implements OnInit {
           this._router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = "Email or password is incorrect."; // Set specific error message
+          if (error.message && error.message.includes('Your account is not active')) {
+            this.error = 'Your account is not active. Please contact the administrator.';
+          } else {
+            this.error = 'Email or password is incorrect.';
+          }
           this.loading = false;
         }
       );
   }
+  
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------

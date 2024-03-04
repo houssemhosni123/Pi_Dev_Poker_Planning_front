@@ -18,17 +18,8 @@ import { environment } from 'environments/environment';
   encapsulation: ViewEncapsulation.None
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
-//image CRUD
-
-
-
-
-
-
-
-
-
-
+  changePasswordForm: FormGroup;
+  submitted = false;
 
   public currentUser: User;
   userId: number;
@@ -53,12 +44,39 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
    *
    * @param {AccountSettingsService} _accountSettingsService
    */
-  constructor(private http:HttpClient,private fb: FormBuilder,private _AuthenticationService:AuthenticationService,private _userService:UserService,private _accountSettingsService: AccountSettingsService) {
+  constructor(private formBuilder: FormBuilder,private http:HttpClient,private fb: FormBuilder,private _AuthenticationService:AuthenticationService,private _userService:UserService,private _accountSettingsService: AccountSettingsService) {
+   
+    
     this._unsubscribeAll = new Subject();
     this.initForm();
   }
+  get f() { return this.changePasswordForm.controls; }
+  
 
+  onSubmit() {
+    this.submitted = true;
 
+    // Stop here if form is invalid
+    if (this.changePasswordForm.invalid) {
+      return;
+    }
+
+    // Call change password API
+    this._userService.changePassword(this.changePasswordForm.value)
+      .subscribe(
+        data => {
+          console.log('Password changed successfully', data);
+          // Reset form after successful password change
+          this.changePasswordForm.reset();
+          this.submitted = false;
+          // TODO: Show success message to the user
+        },
+        error => {
+          console.error('Error changing password:', error);
+          // TODO: Handle error, show error message to the user
+        }
+      );
+  }
 // image crud
 
 //Gets called when the user selects an image
@@ -213,7 +231,12 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
+    this.changePasswordForm = this.formBuilder.group({
+      currentPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmationPassword: ['', Validators.required]
+    });
+    
     this.userId = this._AuthenticationService.idUser;// Retrieve userId from localStorage
     if (!this.userId) {
       console.error(this.userId,'User ID not found in localStorage');

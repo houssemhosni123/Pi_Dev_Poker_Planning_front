@@ -85,7 +85,12 @@ get idUser(){
       .pipe(
         map(user => {
           if (user) {
-
+            if (user.status === 'inactive') {
+              // If user status is inactive, handle accordingly
+              console.error('Your account is not active. Please contact the administrator.');
+              throw new Error('Your account is not active. Please contact the administrator.');
+            }
+  
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
             console.log(user);
@@ -113,6 +118,7 @@ get idUser(){
         })
       );
   }
+  
   
 
   /**

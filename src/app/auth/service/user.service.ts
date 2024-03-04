@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'environments/environment';
 import { User } from 'app/auth/models';
 import { Observable } from 'rxjs';
 import { RegisterRequest } from 'app/main/gestionUser/Responses/RegisterRequest';
 import { AuthenticationResponse } from 'app/main/gestionUser/Responses/AuthenticationResponse';
+import { ChangePasswordRequest } from 'app/main/gestionUser/Requests/ChangePasswordRequest';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -69,5 +70,22 @@ export class UserService {
     return this._http.get<number>(`${environment.apiUrl1}/User/inactive-users`);
 
   }
+
+  changePassword(request: ChangePasswordRequest): Observable<any> {
+    // Get user object from local storage
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    // Extract token from user object
+    const token = currentUser.token;
+    
+    // Add JWT token to the request headers
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Make the HTTP request with the JWT token in the headers
+    return this._http.patch<any>(`${environment.apiUrl1}/User/change-password`, request, { headers });
+}
+
 }
  
