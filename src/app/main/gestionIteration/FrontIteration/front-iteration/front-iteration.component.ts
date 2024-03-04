@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Estimation } from 'app/Model/estimation';
+import { Iteration } from 'app/Model/iteration';
+import { IterationService } from 'app/Services/gestionIterationServices/IterationServices';
 import { EstimationserviceService } from 'app/Services/gestionIterationServices/estimationservice.service';
 
 @Component({
@@ -10,8 +12,8 @@ import { EstimationserviceService } from 'app/Services/gestionIterationServices/
 export class FrontIterationComponent implements OnInit {
 
   selectedValue: number | undefined;
-
-  constructor(private estimationService: EstimationserviceService) { }
+  
+  constructor(private estimationService: EstimationserviceService,private iterationService :IterationService ) { }
 
   onSquareClick(value: number): void {
     // Créer une nouvelle estimation avec la valeur sélectionnée
@@ -21,7 +23,7 @@ export class FrontIterationComponent implements OnInit {
     };
 
     // Envoyer la nouvelle estimation au backend
-    this.estimationService.addEstimation(newEstimation).subscribe(
+    this.estimationService.AddEstimationWithIteration(newEstimation).subscribe(
       (response) => {
         console.log('Estimation added successfully:', response);
         // Gérer les réponses ou les mises à jour côté frontend si nécessaire
@@ -31,6 +33,24 @@ export class FrontIterationComponent implements OnInit {
         // Gérer les erreurs côté frontend si nécessaire
       }
     );
+    }
+    lancerIteration() {
+      
+      const nouvelleIteration: Iteration = {
+        idIteration: null,
+        resultat: 'Encours', // Vous devez définir la valeur appropriée ici
+        date_IterationDebut: new Date(),
+        date_IterationFin: null
+      };
+  
+      this.iterationService.addIteration(nouvelleIteration).subscribe(
+        (resultat) => {
+          console.log('Itération ajoutée avec succès', resultat);
+        },
+        (erreur) => {
+          console.error('Erreur lors de l\'ajout de l\'itération', erreur);
+        }
+      );
     }
   ngOnInit(): void {
  

@@ -24,5 +24,8 @@ export class IterationService {
       const url = `${this.apiUrl}/Iteration/getIteration/${id}`;
       return this.http.get<Iteration>(url);
     }
-    
+    addIteration(iteration: Iteration): Observable<Iteration> {
+      return this.http.post<Iteration>(`${this.apiUrl}/Iteration/AddIteration/`, iteration);
+      
+    }
   }

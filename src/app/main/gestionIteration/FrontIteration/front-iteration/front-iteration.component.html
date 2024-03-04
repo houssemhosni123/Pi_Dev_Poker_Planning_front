@@ -1,16 +1,8 @@
 
              
                   <style>
-                    body {
-                        font-family: 'Arial', sans-serif;
-                        background-color: #f4f4f4;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        margin: 0;
-                    }
-            
+                  
+                 
                     #poker-container {
                         text-align: center;
                     }
@@ -40,7 +32,7 @@
                     }
                 </style>
            
-            
+           
            <div id="poker-container">
               <h1>Poker Planning</h1>
               <div id="cards-container">
@@ -54,10 +46,13 @@
                   <div class="card" (click)="onSquareClick(20)">20</div>
                   <div class="card" (click)="onSquareClick(40)">40</div>
                   <div class="card" (click)="onSquareClick(0)">?</div>
+                  
               </div>
-            
+           <br>
+           
+              <div class="btn btn-primary me-sm-3 me-1" (click)="lancerIteration()">Lancer  une Itération</div>
           </div>
-      
+         
             
            
 

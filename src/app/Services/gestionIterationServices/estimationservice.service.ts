@@ -20,4 +20,8 @@ export class EstimationserviceService {
     const url = `${this.apiUrl}/Estimation/GetEstimations/${id}`;
     return this.http.get<Estimation[]>(url);
   }
+  AddEstimationWithIteration(estimation: Estimation): Observable<Estimation> {
+    return this.http.post<Estimation>(`${this.apiUrl}/Estimation/AddEstimationWithIteration/`, estimation);
+    
+  }
 }
