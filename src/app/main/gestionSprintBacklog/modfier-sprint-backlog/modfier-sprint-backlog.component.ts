@@ -36,13 +36,13 @@ export class ModfierSprintBacklogComponent implements OnInit {
 
   initForm(): void {
     this.sprintBacklogForm = this.formBuilder.group({
-      effortEstimation: ['', Validators.required],
-      definitionOfDone: ['', Validators.required],
-      priorite: ['', Validators.required],
-      estTermine: [false, Validators.required],
-      dateDebut: [null, Validators.required],
-      dateFin: [null, Validators.required],
-      sprintId: [null, Validators.required],
+      effortEstimation: [''],
+      definitionOfDone: [''],
+      priorite: [''],
+      estTermine: [false],
+      dateDebut: [null],
+      dateFin: [null],
+      sprintId: [null],
     });
   }
 
@@ -99,8 +99,9 @@ export class ModfierSprintBacklogComponent implements OnInit {
                 () => {
                   console.log('Sprint Backlog affecté avec succès au nouveau Sprint.');
                   // Redirigez vers la liste des Sprint Backlogs après la mise à jour
+                  this.sprintBacklogUpdatedSuccessfully = true;
                   setTimeout(() => {
-                    this.sprintBacklogUpdatedSuccessfully = true;
+                    this.sprintBacklogUpdatedSuccessfully = false;  
                     this.router.navigate(['/AfficherSprintBacklog']);
                   }, 500);
                 },

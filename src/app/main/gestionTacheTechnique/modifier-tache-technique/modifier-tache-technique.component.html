@@ -1,0 +1,37 @@
+<!-- modifier-tache-technique.component.html -->
+
+<div class="container mt-3">
+    <h2>Modifier la Tâche Technique</h2>
+    <div *ngIf="TTUpdatedSuccessfully" class="alert alert-success mb-3" [class.fade-out]="!showSuccessMessage">
+        Tache Technique mis à jour avec succès !
+      </div>
+    
+    <form [formGroup]="tacheTechniqueForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nomTacheTechnique">Nom de la Tâche Technique</label>
+        <input type="text" class="form-control" id="nomTacheTechnique" formControlName="nomTacheTechnique" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="descriptionTacheTechnique">Description de la Tâche Technique</label>
+        <textarea class="form-control" id="descriptionTacheTechnique" formControlName="descriptionTacheTechnique" required></textarea>
+      </div>
+  
+      
+  
+      <div class="form-group">
+        <label for="dateCreation">Date de Création</label>
+        <input type="date" class="form-control" id="dateCreation" formControlName="dateCreation" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="statut_TT">Statut de la Tâche Technique</label>
+        <input type="text" class="form-control" id="statut_TT" formControlName="statut_TT" required>
+      </div>
+  
+      <!-- Ajoutez d'autres champs en fonction de votre modèle -->
+  
+      <button type="submit" class="btn btn-primary">Modifier la Tâche Technique</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,46 @@
+<h2>Liste des Taches Techniques:</h2>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-12" *ngFor="let tacheTechnique of tacheTechniques">
+      <div class="card card-tache mb-4">
+        <div class="card-header">
+          <h4 class="card-title">{{ tacheTechnique.nomTacheTechnique }}</h4>
+          <i data-feather="more-vertical" class="font-medium-3 cursor-pointer d-none"></i>
+        </div>
+        <div class="card-body">
+          <div class="tache-item">
+            <div class="media">
+              <div class="avatar bg-light-primary rounded">
+                <div class="avatar-content">
+                  <i data-feather="activity" class="avatar-icon font-medium-3"></i>
+                </div>
+              </div>
+              <div class="media-body">
+                <p class="tache-description">{{ tacheTechnique.descriptionTacheTechnique }}</p>
+                <p class="tache-date">
+                  Date de Création : <span class="tache-date-highlight">{{ tacheTechnique.dateCreation | date: 'd MMMM yyyy' }}</span>
+                </p>
+                <p class="card-text" *ngIf="tacheTechnique.dateModification">Date de Modification : {{ tacheTechnique.dateModification | date:'d MMMM yyyy' }}</p>
+
+                <p class="tache-status">
+                  Statut : <span class="tache-status-highlight">{{ tacheTechnique.statut_TT }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="button-container mt-3">
+              <button class="btn btn-primary" (click)="ouvrirFormulaireUpdate(tacheTechnique.idTacheTechnique)">Modifier</button>
+              <span class="delete-icon" (click)="deleteTacheTechnique(tacheTechnique.idTacheTechnique)">X</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  
+  

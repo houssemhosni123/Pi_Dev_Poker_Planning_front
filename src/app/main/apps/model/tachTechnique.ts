@@ -1,14 +1,13 @@
 
 
-import { UserStory } from '../model/userStory'; // Assurez-vous d'importer correctement le modèle UserStory
-
+import { UserStory } from '../model/userStory'; 
 export interface TacheTechnique {
   idTacheTechnique: number;
   nomTacheTechnique: string;
   descriptionTacheTechnique: string;
-  userStory: UserStory;
+//userStory: UserStory;
   dateCreation: Date;
-  dateModification: Date;
+  dateModification?: Date;
   statut_TT: StatutTacheTechnique;
 }
 

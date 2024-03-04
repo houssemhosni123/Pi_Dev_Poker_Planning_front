@@ -42,7 +42,7 @@ export class AjoutSprintBacklogComponent implements OnInit {
       effortEstimation: ['', Validators.required],
       definitionOfDone: ['', Validators.required],
       priorite: ['', Validators.required],
-      estTermine: [false],
+     // estTermine: [false],
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required],
       sprintId: ['', Validators.required]

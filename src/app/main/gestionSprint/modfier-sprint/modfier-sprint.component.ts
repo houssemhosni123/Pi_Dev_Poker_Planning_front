@@ -47,11 +47,11 @@ export class ModfierSprintComponent implements OnInit {
 
   initForm() {
     this.updateForm = this.formBuilder.group({
-      nomSprint: ['', Validators.required],
-      objectifSprint: ['', Validators.required],
-      dateDebutSprint: ['', Validators.required],
-      dateFinSprint: ['', Validators.required],
-      etatSprint: ['', Validators.required],
+      nomSprint: [''],
+      objectifSprint: [''],
+      dateDebutSprint: [''],
+      dateFinSprint: [''],
+      etatSprint: [''],
     });
   }
 

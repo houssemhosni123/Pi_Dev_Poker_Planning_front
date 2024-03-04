@@ -1,0 +1,82 @@
+/* Sprint Backlog card */
+.card-sprint-backlog {
+    border: 1px solid #e1e5eb;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-15px);
+    }
+  
+  
+    .card-body {
+      padding: 1rem;
+    }
+  
+    .sprint-item {
+      display: flex;
+      flex-direction: column;
+  
+      .media {
+        margin-bottom: 1rem;
+  
+        .avatar {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background-color: #cfcfcf;
+  
+          i {
+            color: #39485e;
+          }
+        }
+  
+        .media-body {
+          margin-left: 1rem;
+  
+          p {
+            margin: 0;
+            color: #495057;
+          }
+        }
+      }
+  
+      .button-container {
+        margin-top: 1rem;
+  
+        button {
+          background-color: #7367f0;
+          color: #fff;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+  
+          &:hover {
+            background-color: #574feb;
+          }
+        }
+      }
+    }
+  }
+  
+  .delete-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px; /* Taille de la police */
+    font-weight: bold; /* Poids de la police */
+    color: black; /* Couleur initiale */
+    transition: color 0.3s ease; /* Animation de transition de la couleur */
+  }
+  
+  .delete-icon:hover {
+    color: red; /* Couleur au survol */
+  }
+  

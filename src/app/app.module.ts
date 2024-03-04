@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeDbService } from '@fake-db/fake-db.service';
 
+
 import 'hammerjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
@@ -58,11 +59,22 @@ import { SprintBacklogListComponent } from './main/gestionSprintBacklog/afficher
 import { AjoutSprintBacklogComponent } from './main/gestionSprintBacklog/ajouter-sprint-backlog/ajouter-sprint-backlog.component';
 import { ModfierSprintBacklogComponent } from './main/gestionSprintBacklog/modfier-sprint-backlog/modfier-sprint-backlog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
 import { AfficherSprintModule } from './main/gestionSprint/afficher-sprint/afficher-sprint.module';
 import { ModfierSprintModule } from './main/gestionSprint/modfier-sprint/modfier-sprint.module';
 import { SprintService } from './Services/gestionSprintServices/SprintService';
 import { SprintBacklogService } from './Services/gestionSprintBacklogServices/SprintBacklogServices';
 import { AfficherSprintBacklogsComponent } from './main/gestionSprintBacklog/afficher-sprint-backlogs/afficher-sprint-backlogs.component';
+import { TacheTechniqueAddComponent } from './main/gestionTacheTechnique/ajouter-tache-technique/ajouter-tache-technique.component';
+import { ModifierTacheTechniqueComponent } from './main/gestionTacheTechnique/modifier-tache-technique/modifier-tache-technique.component';
+import{TacheTechniqueAddModule} from './main/gestionTacheTechnique/ajouter-tache-technique/tache-technique-add.module'
+import{AfficherTacheTechniqueModule} from './main/gestionTacheTechnique/afficher-tache-technique/afficher-tache-technique.module'
+
+import{ModifierTacheTechniqueModule} from './main/gestionTacheTechnique/modifier-tache-technique/modifier-tache-technique.module'
+
+
+
+
 //import { HouseModule } from './Modules/house/house.module';
 const appRoutes: Routes = [
   {
@@ -157,6 +169,12 @@ const appRoutes: Routes = [
   { path: 'AjouterSprintBacklog', component: AjoutSprintBacklogComponent },
   { path: 'AfficherSprintBacklogs/:sprintId', component: AfficherSprintBacklogsComponent },
 
+  { path: 'AjouterTacheTechnique', component: TacheTechniqueAddComponent },
+
+
+
+
+
   
   
 
@@ -200,6 +218,10 @@ const appRoutes: Routes = [
         AnimatedCustomContextMenuComponent,
         SubMenuCustomContextMenuComponent,
         AfficherSprintBacklogsComponent,
+        
+       
+
+        
        
         
         
@@ -221,6 +243,10 @@ const appRoutes: Routes = [
         CommonModule,
         AfficherSprintModule,
         ModfierSprintModule,
+        TacheTechniqueAddModule,
+        AfficherTacheTechniqueModule,
+        ModifierTacheTechniqueModule,
+        
        
         
         HttpClientModule,
