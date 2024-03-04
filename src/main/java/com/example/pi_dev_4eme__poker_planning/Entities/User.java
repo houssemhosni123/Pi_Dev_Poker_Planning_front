@@ -1,6 +1,11 @@
 package com.example.pi_dev_4eme__poker_planning.Entities;
 
 
+import com.example.pi_dev_4eme__poker_planning.Configurations.GrantedAuthorityDeserializer;
+import com.example.pi_dev_4eme__poker_planning.Configurations.GrantedAuthoritySerializer;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User implements UserDetails
+public class User implements UserDetails ,Serializable
 {
 
 
@@ -32,11 +37,10 @@ public class User implements UserDetails
     private String password;
     @Enumerated(EnumType.STRING)
     private Role rolee;
-    private boolean Status;
+    @Enumerated(EnumType.STRING)
+    private StatusUser Status;
     private String Tel;
     private String tt;
-
-
 
 
 
@@ -57,6 +61,9 @@ public class User implements UserDetails
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Estimation> estimations;
+
+    @JsonSerialize(contentUsing = GrantedAuthoritySerializer.class)
+    @JsonDeserialize(contentUsing = GrantedAuthorityDeserializer.class)
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

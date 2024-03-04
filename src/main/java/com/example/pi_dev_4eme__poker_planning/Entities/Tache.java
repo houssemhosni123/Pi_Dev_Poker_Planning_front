@@ -24,13 +24,13 @@ public class Tache  implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="idProjet",referencedColumnName = "idProjet",
-    insertable = false,updatable = false)
+    insertable = true,updatable = false)
     private Projet projet;
 
 
     @ManyToOne
     @JoinColumn(name="idUser",referencedColumnName = "idUser",
-            insertable = false,updatable = false)
+            insertable = true,updatable = false)
 
     private User user;
 }
