@@ -293,6 +293,7 @@ export class EcommerceComponent implements OnInit {
     //debugger
     this.isProductOwner = this._authenticationService.isProductOwner;
     this.isAdmin = this._authenticationService.isAdmin;
+  
     // Subscribe to core config changes
     this._coreConfigService.getConfig().subscribe(config => {
       // If Menu Collapsed Changes
@@ -310,9 +311,14 @@ export class EcommerceComponent implements OnInit {
             this.revenueReportChartoptions.chart.width = this.revenueReportChartRef?.nativeElement.offsetWidth;
             this.budgetChartoptions.chart.width = this.budgetChartRef?.nativeElement.offsetWidth;
             this.goalChartoptions.chart.width = this.goalChartRef?.nativeElement.offsetWidth;
+          
           }
+
         }, 500);
       }
     });
+  
+    // Load statistics
   }
+  
 }

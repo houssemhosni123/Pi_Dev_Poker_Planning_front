@@ -77,12 +77,12 @@ export class AuthLoginV2Component implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+  
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
-
+  
     // Login
     this.loading = true;
     this._authenticationService.login(this.f.email.value, this.f.password.value)
@@ -92,7 +92,7 @@ export class AuthLoginV2Component implements OnInit {
           this._router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error;
+          this.error = "Email or password is incorrect."; // Set specific error message
           this.loading = false;
         }
       );

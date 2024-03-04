@@ -1,87 +1,47 @@
-<div class="content-wrapper container-xxl p-0">
-  <div class="content-body">
-    <!-- Content-Header Component -->
-    <app-content-header [contentHeader]="contentHeader"></app-content-header>
-
-    <!-- Apexchart Line Chart Component-->
-    
-    <!--/ Apexchart Line Chart Component-->
-
-    <!-- Apex Column Charts -->
-    
-    <!--/ Apex Column Charts -->
-
-    <!-- Apex Scatter Charts -->
-   
-    <!--/ Apex Scatter Charts -->
-
-    <!-- Apex Line Charts -->
-    
-    <!--/ Apex Line Charts -->
-
-    <!-- Apex Bar And Candlestick Charts -->
-    
-    <!--/ Apex Bar And Candlestick Charts -->
-
-    <!-- Apex Heatmap And Radialbar Chart -->
-    <section id="apex-heatmap-and-radialbar-chart">
-      <div class="row">
-        <div class="col-xl-6 col-12">
-        <div class="card">
-          <div class="card-header flex-column align-items-start">
-            <h4 class="card-title mb-75">Expense Ratio</h4>
-            <span class="card-subtitle text-muted">Spending on various categories</span>
-          </div>
-          <div class="card-body">
-            <div id="donut-chart" #apexDonutChartRef>
-              <apx-chart
-                [series]="apexDonutChart.series"
-                [chart]="{
-                  height: apexDonutChart.chart.height,
-                  type: apexDonutChart.chart.type
-                }"
-                [labels]="apexDonutChart.labels"
-                [plotOptions]="apexDonutChart.plotOptions"
-                [responsive]="apexDonutChart.responsive"
-                [colors]="apexDonutChart.colors"
-                [legend]="apexDonutChart.legend"
-              ></apx-chart>
-            </div>
+<section id="apex-heatmap-and-radialbar-chart">
+  <div class="row">
+    <div class="col-xl-6 col-12">
+      <div class="card">
+        <div class="card-header flex-column align-items-start">
+          <h4 class="card-title mb-75">Users Roles</h4>
+        </div>
+        <div class="card-body">
+          <div id="donut-chart" #apexDonutChart>
+            <apx-chart
+              [series]="apexDonutChart.series"
+              [chart]="{
+                height: apexDonutChart.chart.height,
+                type: apexDonutChart.chart.type
+              }"
+              [labels]="apexDonutChart.labels"
+              [plotOptions]="apexDonutChart.plotOptions"
+              [responsive]="apexDonutChart.responsive"
+              [colors]="apexDonutChart.colors"
+              [legend]="apexDonutChart.legend"
+            ></apx-chart>
           </div>
         </div>
       </div>
-        <div class="col-xl-6 col-12">
-          <div class="card">
-            <div
-              class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
-            >
-              <h4 class="card-title mb-sm-0 mb-1">Statistics</h4>
-            </div>
-            <div class="card-body">
-              <div id="radialbar-chart" #apexRadialChartRef>
-                <apx-chart
-                  [series]="apexRadialChart.series"
-                  [chart]="{
-                    height: 400,
-                    width: isMenuToggled === false ? apexRadialChartRef.offsetWidth : apexRadialChart.chart.width,
-                    type: 'radialBar'
-                  }"
-                  [plotOptions]="apexRadialChart.plotOptions"
-                  [labels]="apexRadialChart.labels"
-                  [colors]="apexRadialChart.colors"
-                  [stroke]="apexRadialChart.stroke"
-                  [legend]="apexRadialChart.legend"
-                ></apx-chart>
-              </div>
-            </div>
+    </div>
+    <div class="col-xl-6 col-12">
+      <div class="card">
+        <div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+          <h4 class="card-title mb-sm-0 mb-1">Active vs Inactive Users</h4>
+        </div>
+        <div class="card-body">
+          <div id="radialbar-chart" #apexRadialChartRef>
+            <apx-chart
+              [series]="apexRadialChart1.series"
+              [chart]="apexRadialChart1.chart"
+              [plotOptions]="apexRadialChart1.plotOptions"
+              [labels]="apexRadialChart1.labels"
+              [colors]="apexRadialChart1.colors"
+              [stroke]="apexRadialChart1.stroke"
+              [legend]="apexRadialChart1.legend"
+            ></apx-chart>
           </div>
         </div>
       </div>
-    </section>
-    <!--/ Apex Heatmap And Radialbar Chart -->
-
-    <!-- Apex Radar And Donut Charts -->
-  
-    <!--/ Apex Radar And Donut Charts -->
+    </div>
   </div>
-</div>
+</section>

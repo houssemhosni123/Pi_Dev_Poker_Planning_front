@@ -1,60 +1,176 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
-    <!-- Content-Header Component -->
-
-    <!-- Apexchart Line Chart Component-->
-    
-    <!--/ Apexchart Line Chart Component-->
-
-    <!-- Apex Column Charts -->
-    
-    <!--/ Apex Column Charts -->
-
-    <!-- Apex Scatter Charts -->
-   
-    <!--/ Apex Scatter Charts -->
-
-    <!-- Apex Line Charts -->
-    
-    <!--/ Apex Line Charts -->
-
-    <!-- Apex Bar And Candlestick Charts -->
-    
-    <!--/ Apex Bar And Candlestick Charts -->
-
-    <!-- Apex Heatmap And Radialbar Chart -->
-    <section id="apex-heatmap-and-radialbar-chart">
-      <div class="row">
-        <div class="col-xl-6 col-12">
-        <div class="card">
-          <div class="card-header flex-column align-items-start">
-            <h4 class="card-title mb-75">Users Roles</h4>
-          </div>
+    <div class="row match-height" *ngIf="isAdmin || isProductOwner">
+      <!-- Medal Card -->
+      <div class="col-xl-4 col-md-6 col-12">
+        <div class="card card-congratulation-medal">
           <div class="card-body">
-            <div id="donut-chart" #apexDonutChartRef>
-              <apx-chart
-                [series]="apexDonutChart.series"
-                [chart]="{
-                  height: apexDonutChart.chart.height,
-                  type: apexDonutChart.chart.type
-                }"
-                [labels]="apexDonutChart.labels"
-                [plotOptions]="apexDonutChart.plotOptions"
-                [responsive]="apexDonutChart.responsive"
-                [colors]="apexDonutChart.colors"
-                [legend]="apexDonutChart.legend"
-              ></apx-chart>
+            <h5>{{ 'SAMPLE.CONGRATULATIONS' | translate }} 🎉 {{ currentUser?.firstName }}!</h5>
+            <p class="card-text font-small-3">{{ 'SAMPLE.BADGE' | translate }}</p>
+            <h3 class="mb-75 mt-2 pt-50">
+              <a href="javascript:void(0);">$48.9k</a>
+            </h3>
+            <button type="button" class="btn btn-primary" rippleEffect>View Sales</button>
+            <img src="assets/images/illustration/badge.svg" class="congratulation-medal" alt="Medal Pic" />
+          </div>
+        </div>
+      </div>
+      <!--/ Medal Card -->
+
+      <!-- Statistics Card -->
+      <div class="col-xl-8 col-md-6 col-12">
+        <div class="card card-statistics">
+          <div class="card-header">
+            <h4 class="card-title">Statistics</h4>
+            <div class="d-flex align-items-center">
+              <p class="card-text font-small-2 mr-25 mb-0">Updated 1 month ago</p>
+            </div>
+          </div>
+          <div class="card-body statistics-body">
+            <div class="row">
+              <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+                <div class="media">
+                  <div class="avatar bg-light-primary mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="trending-up" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ data.statistics.analyticsData.sales }}</h4>
+                    <p class="card-text font-small-3 mb-0">Sales</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+                <div class="media">
+                  <div class="avatar bg-light-info mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="user" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ data.statistics.analyticsData.customers }}</h4>
+                    <p class="card-text font-small-3 mb-0">Customers</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 mb-2 mb-sm-0">
+                <div class="media">
+                  <div class="avatar bg-light-danger mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="box" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ data.statistics.analyticsData.products }}</h4>
+                    <p class="card-text font-small-3 mb-0">Products</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <div class="media">
+                  <div class="avatar bg-light-success mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="dollar-sign" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ data.statistics.analyticsData.revenue }}</h4>
+                    <p class="card-text font-small-3 mb-0">Revenue</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-        
-      </div>
-    </section>
-    <!--/ Apex Heatmap And Radialbar Chart -->
+      <!--/ Statistics Card -->
+    </div>
 
-    <!-- Apex Radar And Donut Charts -->
-  
-    <!--/ Apex Radar And Donut Charts -->
+    <div class="row match-height" *ngIf="isAdmin">
+      
+      <div class="content-wrapper container-xxl p-0">
+        <div class="content-body">
+          <!-- Content-Header Component -->
+      
+          <!-- Apexchart Line Chart Component-->
+          
+          <!--/ Apexchart Line Chart Component-->
+      
+          <!-- Apex Column Charts -->
+          
+          <!--/ Apex Column Charts -->
+      
+          <!-- Apex Scatter Charts -->
+         
+          <!--/ Apex Scatter Charts -->
+      
+          <!-- Apex Line Charts -->
+          
+          <!--/ Apex Line Charts -->
+      
+          <!-- Apex Bar And Candlestick Charts -->
+          
+          <!--/ Apex Bar And Candlestick Charts -->
+      
+          <!-- Apex Heatmap And Radialbar Chart -->
+          <section id="apex-heatmap-and-radialbar-chart">
+            <div class="row">
+              <div class="col-xl-6 col-12">
+              <div class="card">
+                <div class="card-header flex-column align-items-start">
+                  <h4 class="card-title mb-75">Users Roles</h4>
+                </div>
+                <div class="card-body">
+                  <div id="donut-chart" #apexDonutChartRef>
+                    <apx-chart
+                      [series]="apexDonutChart.series"
+                      [chart]="{
+                        height: apexDonutChart.chart.height,
+                        type: apexDonutChart.chart.type
+                      }"
+                      [labels]="apexDonutChart.labels"
+                      [plotOptions]="apexDonutChart.plotOptions"
+                      [responsive]="apexDonutChart.responsive"
+                      [colors]="apexDonutChart.colors"
+                      [legend]="apexDonutChart.legend"
+                    ></apx-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+            </div>
+          </section>
+          <!--/ Apex Heatmap And Radialbar Chart -->
+      
+          <!-- Apex Radar And Donut Charts -->
+        
+          <!--/ Apex Radar And Donut Charts -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row match-height" *ngIf="isAdmin">
+      <!-- Company Table -->
+   
+      <!--/ Company Table -->
+
+      <!-- Developer Meetup Card -->
+      
+      <!--/ Developer Meetup Card -->
+
+      <!-- Browser States Card -->
+     
+      <!-- Browser States Card -->
+
+      <!-- Goal Overview Card -->
+      
+      <!--/ Goal Overview Card -->
+
+      <!-- Transactions Card -->
+      
+      <!-- Transactions Card -->
+    </div>
   </div>
 </div>
