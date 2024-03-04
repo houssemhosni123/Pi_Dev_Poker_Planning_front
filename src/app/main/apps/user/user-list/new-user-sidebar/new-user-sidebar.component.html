@@ -2,7 +2,7 @@
   <!-- Modal to add new user starts-->
   <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
     <div class="modal-dialog">
-      <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+      <form class="add-new-user modal-content pt-0" (ngSubmit)="registerUser()" #newUserForm="ngForm">
         <button
           type="button"
           class="close"
@@ -17,35 +17,35 @@
         </div>
         <div class="modal-body flex-grow-1">
           <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+            <label class="form-label" for="basic-icon-default-fullname">Nom</label>
             <input
+
               type="text"
               class="form-control dt-full-name"
               id="basic-icon-default-fullname"
-              placeholder="John Doe"
               name="user-fullname"
-              [(ngModel)]="fullname"
+              [(ngModel)]="registerRequest.nom"
               [class.error]="newUserForm.submitted && FNameRef.invalid"
               #FNameRef="ngModel"
               required
               aria-label="John Doe"
               aria-describedby="basic-icon-default-fullname2"
             />
+
             <span *ngIf="newUserForm.submitted && FNameRef.invalid" class="invalid-form">
               <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
             </span>
           </div>
           <div class="form-group">
-            <label class="form-label" for="basic-icon-default-uname">Username</label>
+            <label class="form-label" for="basic-icon-default-uname">prenom</label>
             <input
               type="text"
               id="basic-icon-default-uname"
               class="form-control dt-uname"
-              placeholder="Web Developer"
               aria-label="jdoe1"
               aria-describedby="basic-icon-default-uname2"
               name="user-name"
-              [(ngModel)]="username"
+              [(ngModel)]="registerRequest.prenom"
               [class.error]="newUserForm.submitted && FUserNameRef.invalid"
               #FUserNameRef="ngModel"
               required
@@ -60,11 +60,10 @@
               type="text"
               id="basic-icon-default-email"
               class="form-control dt-email"
-              placeholder="john.doe@example.com"
               aria-label="john.doe@example.com"
               aria-describedby="basic-icon-default-email2"
               name="user-email"
-              [(ngModel)]="email"
+              [(ngModel)]="registerRequest.email"
               [class.error]="newUserForm.submitted && FEmailRef.invalid"
               #FEmailRef="ngModel"
               required
@@ -75,25 +74,35 @@
             <small class="form-text text-muted"> You can use letters, numbers & periods </small>
           </div>
           <div class="form-group">
-            <label class="form-label" for="user-role">User Role</label>
-            <select id="user-role" class="form-control">
-              <option value="subscriber">Subscriber</option>
-              <option value="editor">Editor</option>
-              <option value="maintainer">Maintainer</option>
-              <option value="author">Author</option>
-              <option value="admin">Admin</option>
-            </select>
+            <label class="form-label" for="basic-icon-default-email">Password</label>
+            <input
+              type="password"
+              id="basic-icon-default-email"
+              class="form-control dt-email"
+              aria-label="john.doe@example.com"
+              aria-describedby="basic-icon-default-email2"
+              name="user-email"
+              [(ngModel)]="registerRequest.password"
+              [class.error]="newUserForm.submitted && FEmailRef.invalid"
+              #FEmailRef="ngModel"
+              required
+            />
           </div>
-          <div class="form-group mb-2">
-            <label class="form-label" for="user-plan">Select Plan</label>
-            <select id="user-plan" class="form-control">
-              <option value="basic">Basic</option>
-              <option value="enterprise">Enterprise</option>
-              <option value="company">Company</option>
-              <option value="team">Team</option>
+          <div class="form-group">
+            <label class="form-label" for="role">Rôle:</label>
+            <select id="role" class="form-control" id="role" name="role" [(ngModel)]="registerRequest.role" required>
+                <option value="" disabled selected>Select a role</option>
+                <option value="Admin">Admin</option>
+                <option value="ProductOwner">Product Owner</option>
+                <option value="ScrumMaster">Scrum Master</option>
+                <option value="developer">Developer</option>
             </select>
-          </div>
-          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Submit</button>
+            <!-- Add a small message indicating that the role is required -->
+            <small *ngIf="!registerRequest.role && newUserForm.submitted" class="text-danger">Role is required</small>
+        </div>
+        
+          
+          <button type="submit" class="btn btn-primary mr-1" rippleEffect>Submit</button>
           <button
             type="reset"
             class="btn btn-outline-secondary"
@@ -106,5 +115,5 @@
       </form>
     </div>
   </div>
-  <!-- Modal to add new user Ends-->
+  
 </div>
