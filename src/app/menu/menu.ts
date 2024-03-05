@@ -9,7 +9,7 @@ export const menu: CoreMenu[] = [
     title: 'Dashboard',
     translate: 'MENU.DASHBOARD.COLLAPSIBLE',
     type: 'collapsible',
-    // role: ['Admin'], //? To hide collapsible based on user role
+    //role: ['Admin'], //? To hide collapsible based on user role
     icon: 'home',
     badge: {
       title: '2',
@@ -1118,7 +1118,7 @@ export const menu: CoreMenu[] = [
     ]
   },
   // Others
-  {
+ /* {
     id: 'others',
     type: 'section',
     title: 'Others',
@@ -1195,5 +1195,5 @@ export const menu: CoreMenu[] = [
         openInNewTab: true
       }
     ]
-  }
+  }*/
 ];
