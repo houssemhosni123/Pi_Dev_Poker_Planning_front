@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Estimation } from 'app/Model/estimation';
 import { Iteration } from 'app/Model/iteration';
 import { IterationService } from 'app/Services/gestionIterationServices/IterationServices';
@@ -13,15 +14,19 @@ export class FrontIterationComponent implements OnInit {
 
   selectedValue: number | undefined;
   
-  constructor(private estimationService: EstimationserviceService,private iterationService :IterationService ) { }
-
+  constructor(private estimationService: EstimationserviceService,private iterationService :IterationService,private router: Router ) { }
+  Showvotes(): void {
+    // Utilisez la méthode navigateByUrl pour naviguer vers la route avec l'ID
+  
+    this.router.navigateByUrl(`/Iteration/ShowVotes`);
+  }
   onSquareClick(value: number): void {
     // Créer une nouvelle estimation avec la valeur sélectionnée
     const newEstimation: Estimation = {
       valeur: value
       // Ajoutez d'autres propriétés d'estimation au besoin
     };
-
+    this.Showvotes();
     // Envoyer la nouvelle estimation au backend
     this.estimationService.AddEstimationWithIteration(newEstimation).subscribe(
       (response) => {

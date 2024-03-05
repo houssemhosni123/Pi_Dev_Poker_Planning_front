@@ -24,4 +24,8 @@ export class EstimationserviceService {
     return this.http.post<Estimation>(`${this.apiUrl}/Estimation/AddEstimationWithIteration/`, estimation);
     
   }
+  ShowEstimationForLastIteration(): Observable<Estimation[]> {
+    const url = `${this.apiUrl}/Estimation/GetEstimationsLastIteration/`;
+    return this.http.get<Estimation[]>(url);
+  }
 }

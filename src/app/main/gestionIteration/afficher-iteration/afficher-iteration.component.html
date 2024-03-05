@@ -1,9 +1,21 @@
 <!-- iteration-list.component.html -->
+<style>.custom-text-size {
+  font-size: 1.2rem; /* Ajustez la taille du texte selon vos besoins */
+}</style>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-2"><span class="text-muted fw-light">PokerPlannig /</span> Liste des itérations</h4>
   
     <div class="app-ecommerce-category">
       <!-- Tableau de la liste des itérations -->
+      <div class="row">
+        <div class="col-12 mb-50">
+          <div class="d-flex justify-content-end align-items-center">
+            <span class="mr-1 custom-text-size">Filter</span>
+            <input type="date" [(ngModel)]="startDateFilter" class="btn btn-outline-secondary mr-1" rippleEffect (input)="filterByStartDate()">
+           
+          </div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-datatable table-responsive">
           <table class="datatables-iteration-list table border-top">

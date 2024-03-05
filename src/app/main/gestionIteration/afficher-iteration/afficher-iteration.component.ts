@@ -11,7 +11,9 @@ import { IterationService } from 'app/Services/gestionIterationServices/Iteratio
 export class AfficherIterationComponent implements OnInit {
 
   iterations: any[] = [];
-
+  originalIterations: Iteration[] = [];
+  startDateFilter: string;
+  endDateFilter: string;
   constructor(private iterationService: IterationService,private router: Router) {}
 
   ngOnInit(): void {
@@ -26,14 +28,16 @@ export class AfficherIterationComponent implements OnInit {
     this.router.navigateByUrl(`/Iteration/ShowEstimations/${id}`);
   }
     loadIterations(): void {
-    this.iterationService.getIterations().subscribe(
-      (data) => {
-        this.iterations = data;
-      },
-      (error) => {
-        console.error('Erreur lors du chargement des itérations :', error);
-      }
-    );
+      this.iterationService.getIterations().subscribe(
+        (data) => {
+          this.originalIterations = data;
+          this.iterations = [...this.originalIterations]; // Copie les données d'origine
+        },
+        (error) => {
+          console.error('Erreur lors du chargement des itérations :', error);
+        }
+      );
+  
   }
   deleteIteration(iteration: Iteration): void {
     const confirmDelete = confirm('Êtes-vous sûr de vouloir supprimer cette itération ?');
@@ -51,5 +55,24 @@ export class AfficherIterationComponent implements OnInit {
       );
     }
   }
+  filterByStartDate(): void {
+    if (this.startDateFilter) {
+      const filteredDate = new Date(this.startDateFilter);
+      this.iterations = this.originalIterations.filter(iteration => {
+        const iterationStartDate = new Date(iteration.date_IterationDebut);
+        const enDate = new Date(iteration.date_IterationFin);
+        return (
+          iterationStartDate.getFullYear() === filteredDate.getFullYear() &&
+          iterationStartDate.getMonth() === filteredDate.getMonth() &&
+          iterationStartDate.getDate() === filteredDate.getDate() ||
+          enDate.getFullYear() === filteredDate.getFullYear() &&
+          enDate.getMonth() === filteredDate.getMonth() &&
+          enDate.getDate() === filteredDate.getDate() 
+        );
+      });
+    } else {
+      this.iterations = [...this.originalIterations]; // Réinitialise avec les données d'origine
+    }
+  }
+  }
 
-}

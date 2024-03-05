@@ -7,6 +7,8 @@ import { FrontIterationComponent } from './FrontIteration/front-iteration/front-
 import { FrontModuleModule } from "./FrontIteration/front-iteration/front-module.module";
 import { EstimationShowComponent } from './estimation-show/estimation-show.component';
 import { EstimationShowModule } from "./estimation-show/estimation-show.module";
+import { VoteEstimationsComponent } from './vote-estimations/vote-estimations.component';
+import { VoteEstimationsModule } from "./vote-estimations/vote-estimations.module";
 
 
 @NgModule({
@@ -16,13 +18,16 @@ import { EstimationShowModule } from "./estimation-show/estimation-show.module";
    
   
     
+  
+    
   ],
     imports: [
         AfficherIterationModule,
         AjouterIterationModule,
         ModifierIterationModule,
         FrontModuleModule,
-        EstimationShowModule
+        EstimationShowModule,
+        VoteEstimationsModule
       ]
   })
   export class IterationModule {}
