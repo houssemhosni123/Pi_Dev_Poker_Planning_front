@@ -20,10 +20,15 @@ export class FrontIterationComponent implements OnInit {
   
     this.router.navigateByUrl(`/Iteration/ShowVotes`);
   }
+  ShowAllVotesScrumMaster():void
+  {
+    this.Showvotes();
+  }
   onSquareClick(value: number): void {
     // Créer une nouvelle estimation avec la valeur sélectionnée
     const newEstimation: Estimation = {
-      valeur: value
+      valeur: value,
+      dateVote: new Date()
       // Ajoutez d'autres propriétés d'estimation au besoin
     };
     this.Showvotes();
