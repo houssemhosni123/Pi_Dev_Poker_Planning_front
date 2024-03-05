@@ -32,4 +32,8 @@ export class SprintService {
   deleteSprint(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  getSprintProgression(sprintId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/${sprintId}/progression`);
+   
+  }
 }

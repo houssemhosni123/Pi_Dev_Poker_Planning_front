@@ -25,6 +25,8 @@ export class AjoutSprintBacklogComponent implements OnInit {
     this.initForm();
     this.loadSprints();
   }
+  sprintBacklogAddedSuccessfully = false;
+
 
   loadSprints(): void {
     this.sprintService.getAllSprints().subscribe(
@@ -71,6 +73,10 @@ export class AjoutSprintBacklogComponent implements OnInit {
           console.error('Erreur lors de l\'ajout du Sprint Backlog :', error);
         }
       );
+      this.sprintBacklogAddedSuccessfully = true;
+      setTimeout(() => {
+        this.sprintBacklogAddedSuccessfully = false;
+      }, 3000);
     }
   }
 }

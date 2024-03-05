@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TacheTechniqueService } from '../../../Services/gestionTacheTechnique/TacheTechniqueService';
+import { TacheTechnique, StatutTacheTechnique } from '../../apps/model/tachTechnique';
+
+
 
 @Component({
   selector: 'app-modifier-tache-technique',
@@ -14,6 +17,10 @@ export class ModifierTacheTechniqueComponent implements OnInit {
   tacheTechniqueId: number;
   tacheTechniqueForm: FormGroup;
   TTUpdatedSuccessfully: boolean = false;
+  statutsTacheTechnique: StatutTacheTechnique[] = Object.values(StatutTacheTechnique);
+
+
+
 
   constructor(
     private route: ActivatedRoute,

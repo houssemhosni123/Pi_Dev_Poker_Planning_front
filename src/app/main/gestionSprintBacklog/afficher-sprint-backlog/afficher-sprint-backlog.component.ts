@@ -14,17 +14,20 @@ export class SprintBacklogListComponent implements OnInit {
   sprintBacklogs: SprintBacklog[] = [];
   sprintBacklogUpdatedSuccessfully: boolean = false;
   sprintId: number;
+  startDate: Date | null = null;
+  endDate: Date | null = null;
 
   constructor(
     private sprintBacklogService: SprintBacklogService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.loadSprintBacklogs();
     this.initUpdateForm();
+    this.filterSprintBacklogs();
   }
 
   loadSprintBacklogs(): void {
@@ -37,9 +40,6 @@ export class SprintBacklogListComponent implements OnInit {
       }
     );
   }
-  
-
-  
 
   supprimerSprintBacklog(sprintBacklogId: number): void {
     this.sprintBacklogService.deleteSprintBacklog(sprintBacklogId).subscribe(
@@ -70,5 +70,26 @@ export class SprintBacklogListComponent implements OnInit {
       dateFinSprint: ['', Validators.required],
       etatSprint: ['En cours', Validators.required],
     });
+  }
+
+  filterSprintBacklogs(): void {
+    const startDateControl = this.updateForm.get('dateDebutSprint');
+    const endDateControl = this.updateForm.get('dateFinSprint');
+
+    if (startDateControl && endDateControl) {
+      const startDate: Date | null = startDateControl.value || null;
+      const endDate: Date | null = endDateControl.value || null;
+
+      const formattedStartDate: Date | null = startDate ? new Date(startDate) : null;
+      const formattedEndDate: Date | null = endDate ? new Date(endDate) : null;
+
+      console.log('Selected startDate:', formattedStartDate);
+      console.log('Selected endDate:', formattedEndDate);
+
+      this.sprintBacklogService.filterSprintBacklogsByDate(formattedStartDate, formattedEndDate)
+        .subscribe((sprintBacklogs: SprintBacklog[]) => {
+          this.sprintBacklogs = sprintBacklogs;
+        });
+    }
   }
 }

@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SprintBacklog } from '../../main/apps/model/sprintBacklog'; // Assurez-vous d'importer correctement votre modèle
 import { tap, catchError } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +63,21 @@ export class SprintBacklogService  {
       })
     );
   }
+  filterSprintBacklogsByDate(startDate?: Date, endDate?: Date): Observable<SprintBacklog[]> {
+    let params = new HttpParams();
+  
+    if (startDate) {
+      params = params.set('startDate', startDate.toISOString());
+    }
+  
+    if (endDate) {
+      params = params.set('endDate', endDate.toISOString());
+    }
+  
+    return this.http.get<SprintBacklog[]>(`${this.apiUrl}/filterByDate`, { params });
+  }
+  
+  
+  
   
 }

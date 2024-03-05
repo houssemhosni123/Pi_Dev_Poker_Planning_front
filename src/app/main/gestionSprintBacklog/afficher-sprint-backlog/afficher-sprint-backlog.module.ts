@@ -6,6 +6,7 @@ import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.mo
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 import { SprintBacklogListComponent } from "./afficher-sprint-backlog.component";
 
+
 const routes: Routes = [
     {path: 'AfficherSprintBacklog',component: SprintBacklogListComponent,data: { animation: 'layout' }}
   ];

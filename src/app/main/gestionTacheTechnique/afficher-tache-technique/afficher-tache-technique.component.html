@@ -1,6 +1,11 @@
 <h2>Liste des Taches Techniques:</h2>
 <br>
 <br>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Rechercher une tâche technique" [(ngModel)]="searchQuery" (input)="onSearch()">
+  <div class="input-group-append">
+  </div>
+</div>
 <br>
 <br>
 <div class="row">

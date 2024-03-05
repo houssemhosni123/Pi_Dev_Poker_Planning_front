@@ -1,0 +1,60 @@
+<!-- tableau-bord.component.html -->
+<h2 class="dashboard-title">Tableau de Bord:</h2>
+<br>
+<br>
+<br>
+<div class="dashboard-card">
+    <!-- Liste déroulante des noms de sprint -->
+    <label class="sprint-label" for="sprintSelect">Sélectionnez un Sprint :</label>
+    <select id="sprintSelect" [(ngModel)]="selectedSprint" (change)="onSprintSelected()">
+        <option *ngFor="let sprint of sprints" [value]="sprint.idSprint">{{ sprint.nomSprint }}</option>
+    </select>
+
+    <!-- Roue de pourcentage -->
+    <div *ngIf="selectedSprint !== null">
+        <h3>{{ selectedSprint.nomSprint }}</h3>
+        <apx-chart
+            [series]="[sprintProgression]"
+            [chart]="{
+                type: 'radialBar',
+                height: 300,
+                sparkline: {
+                    enabled: true
+                },
+                dropShadow: {
+                    enabled: true,
+                    blur: 3,
+                    left: 1,
+                    top: 1,
+                    opacity: 0.1
+                }
+            }"
+            [colors]="['#4caf50']" 
+            [plotOptions]="{
+                radialBar: {
+                    offsetY: -10,
+                    startAngle: -150,
+                    endAngle: 150,
+                    hollow: {
+                        size: '77%'
+                    },
+                    track: {
+                        background: '#f8f8f8',
+                        strokeWidth: '50%'
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false
+                        },
+                        value: {
+                            color: '#333',
+                            fontSize: '2.86rem',
+                            fontWeight: '600'
+                        }
+                    }
+                }
+            }"
+        ></apx-chart>
+        <p>Progression du Sprint : {{ sprintProgression }}%</p>
+    </div>
+</div>

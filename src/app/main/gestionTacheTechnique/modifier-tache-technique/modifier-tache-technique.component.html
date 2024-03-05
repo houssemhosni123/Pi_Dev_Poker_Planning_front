@@ -24,10 +24,15 @@
         <input type="date" class="form-control" id="dateCreation" formControlName="dateCreation" required>
       </div>
   
-      <div class="form-group">
-        <label for="statut_TT">Statut de la Tâche Technique</label>
-        <input type="text" class="form-control" id="statut_TT" formControlName="statut_TT" required>
-      </div>
+   <!-- modifier-tache-technique.component.html -->
+
+<div class="form-group">
+  <label for="statut_TT">Statut de la Tâche Technique</label>
+  <select class="form-control" id="statut_TT" formControlName="statut_TT">
+    <option *ngFor="let statut of statutsTacheTechnique" [value]="statut">{{ statut }}</option>
+  </select>
+</div>
+
   
       <!-- Ajoutez d'autres champs en fonction de votre modèle -->
   

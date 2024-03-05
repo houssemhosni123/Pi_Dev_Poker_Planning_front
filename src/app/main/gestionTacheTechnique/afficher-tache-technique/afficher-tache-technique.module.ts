@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { TacheTechniqueService } from '../../../Services/gestionTacheTechnique/TacheTechniqueService';
 import { AfficherTacheTechniqueComponent } from './afficher-tache-technique.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms'; // Importez le module FormsModule
+
 
 
 @NgModule({
@@ -15,6 +17,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     NgbPaginationModule,
+    FormsModule,
     RouterModule.forChild([
       { path: 'afficher-taches-techniques', component: AfficherTacheTechniqueComponent },
     ]),

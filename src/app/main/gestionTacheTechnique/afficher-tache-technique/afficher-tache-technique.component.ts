@@ -1,6 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
-import { TacheTechnique } from '../../apps/model/tachTechnique';
-import { TacheTechniqueService } from '../../../Services/gestionTacheTechnique/TacheTechniqueService';
+import { TacheTechnique } from '../../apps/model/tachTechnique';  
+import { TacheTechniqueService } from '../../../Services/gestionTacheTechnique/TacheTechniqueService';  
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class AfficherTacheTechniqueComponent implements OnInit {
 
   tacheTechniques: TacheTechnique[] | null = null;
- 
+  searchQuery: string = '';
 
   constructor(private tacheTechniqueService: TacheTechniqueService, private router: Router) { }
 
@@ -23,7 +24,6 @@ export class AfficherTacheTechniqueComponent implements OnInit {
     this.tacheTechniqueService.getAllTacheTechniques()
       .subscribe(tacheTechniques => {
         this.tacheTechniques = tacheTechniques;
-       
       });
   }
 
@@ -35,7 +35,6 @@ export class AfficherTacheTechniqueComponent implements OnInit {
     this.tacheTechniqueService.deleteTacheTechnique(id).subscribe(
       () => {
         console.log('Tâche technique supprimée avec succès !');
-        // Rechargez la liste des tâches après la suppression si nécessaire
         this.getAllTacheTechniques();
       },
       (error) => {
@@ -43,7 +42,20 @@ export class AfficherTacheTechniqueComponent implements OnInit {
       }
     );
   }
+  onSearch(): void {
+    this.searchTachesTechniques();
+  }
 
-
-  
+  searchTachesTechniques(): void {
+    if (this.searchQuery.trim() !== '') {
+      this.tacheTechniqueService.searchTachesTechniques(this.searchQuery).subscribe(
+        (result) => {
+          this.tacheTechniques = result;
+        },
+        (error) => {
+          console.error('Erreur lors de la recherche :', error);
+        }
+      );
+    }
+  }
 }

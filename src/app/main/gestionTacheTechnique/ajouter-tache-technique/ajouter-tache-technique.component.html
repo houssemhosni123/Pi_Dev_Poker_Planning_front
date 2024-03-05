@@ -2,6 +2,9 @@
 
 <div class="container">
     <h2>Ajouter une Tâche Technique</h2>
+    <div *ngIf="TacheTechniqueAddedSuccessfully" class="alert alert-success mb-3">
+      Tache Technique ajouté avec succès !
+    </div>
     <form [formGroup]="tacheTechniqueForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="nomTacheTechnique">Nom de la Tâche Technique :</label>

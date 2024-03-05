@@ -17,6 +17,7 @@ import { UserStory } from '../../apps/model/userStory';
 export class TacheTechniqueAddComponent {
   tacheTechniqueForm: FormGroup;
   statutsTacheTechnique: StatutTacheTechnique[] = Object.values(StatutTacheTechnique);
+  TacheTechniqueAddedSuccessfully = false;
 
   constructor(private formBuilder: FormBuilder, private tacheTechniqueService: TacheTechniqueService) {
     this.tacheTechniqueForm = this.formBuilder.group({
@@ -39,6 +40,10 @@ export class TacheTechniqueAddComponent {
           console.error('Erreur lors de l\'ajout de la tâche technique:', error);
         }
       );
+      this.TacheTechniqueAddedSuccessfully = true;
+      setTimeout(() => {
+        this.TacheTechniqueAddedSuccessfully = false;
+      }, 3000);
     }
   }
 }

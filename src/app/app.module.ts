@@ -71,6 +71,8 @@ import{TacheTechniqueAddModule} from './main/gestionTacheTechnique/ajouter-tache
 import{AfficherTacheTechniqueModule} from './main/gestionTacheTechnique/afficher-tache-technique/afficher-tache-technique.module'
 
 import{ModifierTacheTechniqueModule} from './main/gestionTacheTechnique/modifier-tache-technique/modifier-tache-technique.module'
+import { TableauBordModule } from './main/tableau-bord/tableau-bord.module';
+import { TableauBordComponent } from './main/tableau-bord/tableau-bord.component';
 
 
 
@@ -170,6 +172,8 @@ const appRoutes: Routes = [
   { path: 'AfficherSprintBacklogs/:sprintId', component: AfficherSprintBacklogsComponent },
 
   { path: 'AjouterTacheTechnique', component: TacheTechniqueAddComponent },
+  
+  {path: 'TableauBord',component: TableauBordComponent},
 
 
 
@@ -218,6 +222,7 @@ const appRoutes: Routes = [
         AnimatedCustomContextMenuComponent,
         SubMenuCustomContextMenuComponent,
         AfficherSprintBacklogsComponent,
+       
         
        
 
@@ -246,6 +251,7 @@ const appRoutes: Routes = [
         TacheTechniqueAddModule,
         AfficherTacheTechniqueModule,
         ModifierTacheTechniqueModule,
+       
         
        
         

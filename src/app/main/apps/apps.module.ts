@@ -7,6 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { TableauBordComponent } from '../tableau-bord/tableau-bord.component';
 
 // routing
 const routes: Routes = [
@@ -43,7 +44,9 @@ const routes: Routes = [
 FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]);
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    
+  ],
   imports: [CommonModule, RouterModule.forChild(routes)]
 })
 export class AppsModule {}
