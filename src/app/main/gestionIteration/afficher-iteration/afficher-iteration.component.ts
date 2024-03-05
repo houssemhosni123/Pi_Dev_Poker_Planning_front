@@ -14,6 +14,8 @@ export class AfficherIterationComponent implements OnInit {
   originalIterations: Iteration[] = [];
   startDateFilter: string;
   endDateFilter: string;
+  isSortActivated: boolean = false;
+
   constructor(private iterationService: IterationService,private router: Router) {}
 
   ngOnInit(): void {
@@ -32,6 +34,8 @@ export class AfficherIterationComponent implements OnInit {
         (data) => {
           this.originalIterations = data;
           this.iterations = [...this.originalIterations]; // Copie les données d'origine
+          this.updateIterationsList();
+
         },
         (error) => {
           console.error('Erreur lors du chargement des itérations :', error);
@@ -74,5 +78,30 @@ export class AfficherIterationComponent implements OnInit {
       this.iterations = [...this.originalIterations]; // Réinitialise avec les données d'origine
     }
   }
+  updateIterationsList(): void {
+    this.iterations = this.isSortActivated
+      ? AfficherIterationComponent.sortIterationsByStartDate([...this.originalIterations])
+      : [...this.originalIterations];
+  }
+
+  toggleSort(): void {
+    this.isSortActivated = !this.isSortActivated;
+    this.updateIterationsList();
+  }
+  static sortIterationsByStartDate(iterations: Iteration[]): Iteration[] {
+    return iterations.sort((a, b) => {
+      const dateA = new Date(a.date_IterationDebut);
+      const dateB = new Date(b.date_IterationDebut);
+
+      if (dateA < dateB) {
+        return -1;
+      } else if (dateA > dateB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   }
 

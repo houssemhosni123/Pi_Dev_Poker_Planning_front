@@ -12,7 +12,7 @@
           <div class="d-flex justify-content-end align-items-center">
             <span class="mr-1 custom-text-size">Filter</span>
             <input type="date" [(ngModel)]="startDateFilter" class="btn btn-outline-secondary mr-1" rippleEffect (input)="filterByStartDate()">
-           
+            <button class="btn btn-primary ml-1" (click)="toggleSort()">Toggle Sort</button>
           </div>
         </div>
       </div>
@@ -45,8 +45,10 @@
               </tr>
             </tbody>
           </table>
+            
         </div>
       </div>
     </div>
+    
   </div>
   
