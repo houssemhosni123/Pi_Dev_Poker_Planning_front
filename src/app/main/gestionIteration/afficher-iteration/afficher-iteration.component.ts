@@ -15,7 +15,8 @@ export class AfficherIterationComponent implements OnInit {
   startDateFilter: string;
   endDateFilter: string;
   isSortActivated: boolean = false;
-
+  p: number = 1; // page actuelle
+  itemsPerPage: number = 5;
   constructor(private iterationService: IterationService,private router: Router) {}
 
   ngOnInit(): void {
