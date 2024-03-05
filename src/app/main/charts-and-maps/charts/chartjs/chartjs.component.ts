@@ -39,7 +39,7 @@ export class ChartjsComponent implements OnInit {
   };
 
   // Bar Chart
-  public barChart = {
+  public   barChart = {
     chartType: 'bar',
     datasets: [
       {

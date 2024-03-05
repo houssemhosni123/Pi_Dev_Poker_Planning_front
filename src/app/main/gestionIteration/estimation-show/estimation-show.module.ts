@@ -6,6 +6,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
 import { FormsModule } from '@angular/forms';
 import { CoreCommonModule } from '@core/common.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 const routes: Routes = [
@@ -13,6 +14,6 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [EstimationShowComponent],
-  imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, CoreCommonModule]
+  imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, CoreCommonModule,  ChartsModule]
 })
 export class EstimationShowModule { }
