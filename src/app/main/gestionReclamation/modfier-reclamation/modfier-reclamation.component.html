@@ -1,1 +1,50 @@
-<p>modfier-reclamation works!</p>
+<!-- modifier-reclamation.component.html -->
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <section id="update-reclamation-form" class="custom-form">
+        <div class="row match-height">
+          <div class="col-12 mx-auto">
+            <h3 class="custom-title">Formulaire de mise à jour de Réclamation:</h3>
+  
+            <div *ngIf="reclamationUpdatedSuccessfully" class="alert alert-success mb-3" [class.fade-out]="!showSuccessMessage">
+              Réclamation mise à jour avec succès !
+            </div>
+  
+            <div class="card-body">
+              <form class="form form-horizontal" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="titre_Reclamation" class="font-size-lg">Titre de la Réclamation</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" id="titre_Reclamation" class="form-control form-control-lg" formControlName="titre_Reclamation" placeholder="Titre de la Réclamation" />
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="description_Reclamation" class="font-size-lg">Description de la Réclamation</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" id="description_Reclamation" class="form-control form-control-lg" formControlName="description_Reclamation" placeholder="Description de la Réclamation" />
+                      </div>
+                    </div>
+  
+                    <!-- Ajoutez d'autres champs de formulaire pour la réclamation selon vos besoins -->
+  
+                  </div>
+  
+                  <div class="col-sm-9 offset-sm-3 d-flex justify-content-center">
+                    <button type="submit" rippleEffect class="btn btn-primary btn-lg mx-1">Mettre à jour la Réclamation</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  

@@ -105,6 +105,8 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionReclamation/Reclamation.module').then(m => m.ReclamationModule),
     canActivate: [AuthGuard]
   },
+  { path: 'Reclamation/:id/update',component :  ModfierReclamationComponent },
+
   
   {
     path: 'Reunion',
@@ -112,6 +114,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'Reunions/:id/update',component :  ModfierReunionComponent },
+
   {
     path: 'Iteration',
     loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),

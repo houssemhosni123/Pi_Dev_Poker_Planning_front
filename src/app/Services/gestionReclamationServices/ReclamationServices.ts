@@ -30,6 +30,12 @@ import { Observable } from "rxjs";
       getReclamationCountByReunion(): Observable<any[]> {
         return this.http.get<any[]>(`${this.api}/countByReunion`);
       }
-  }
+      updateReclamation(id: number, recl:Reclam ): Observable<Reclam> {
+        return this.http.put<Reclam>(`${this.api}/update/${id}`,recl);
+      }
+      getReclamationById(id: number): Observable<Reclam> {
+        return this.http.get<Reclam>(`${this.api}/getRec/${id}`);
+      }  
+    }
   
     

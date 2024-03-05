@@ -8,6 +8,8 @@
           <p class="card-text">Date de soumission : {{ formatDate(reclam.dateSoumission) }}</p>
           <p class="card-text">Titre de réclamation : {{ reclam.titre_Reclamation }}</p>
           <div class="button-container mt-3">
+            <button class="btn btn-primary" (click)="ouvrirFormulaireUpdate(reclam.idReclamation)">Modifier</button>
+
             <button class="custom-button" (click)="supprimerReclamation(reclam.idReclamation)">Supprimer</button>
           </div>
           

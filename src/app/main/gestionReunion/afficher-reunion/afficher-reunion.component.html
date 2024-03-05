@@ -16,7 +16,7 @@
             </div>
             <div class="media-body">
               <p class="sprint-description">Lieu de la réunion: {{ eve.lieu_Reunion }}</p>
-              <p class="sprint-description">Priorité de la réunion: {{ eve.priorite_Reunion }}</p>
+              <p class="sprint-description">Descrption du réunion: {{ eve.priorite_Reunion }}</p>
               <p class="sprint-date">
                 Début du reunion: <span class="sprint-date-highlight">{{ eve.DateDebut_Reunion | date: 'd MMMM yyyy HH:mm' }}</span>
               </p>
@@ -24,12 +24,10 @@
                 Fin du reunion: <span class="sprint-date-highlight">{{ eve.DateFin_Reunion | date: 'd MMMM yyyy HH:mm' }}</span>
               </p>
               <div class="button-container mt-3">
-                <button class="btn btn-primary" (click)="ouvrirFormulaireUpdate(eve.idReunion)">Modifier</button>
+                <button class="btn btn-primary mr-2" (click)="ouvrirFormulaireUpdate(eve.idReunion)">Modifier</button>
                 <button class="btn btn-primary" (click)="supprimerSprint(eve.idReunion)">Supprimer</button>
-
-    
-    
               </div>
+              
             </div>
           </div>
         </div>

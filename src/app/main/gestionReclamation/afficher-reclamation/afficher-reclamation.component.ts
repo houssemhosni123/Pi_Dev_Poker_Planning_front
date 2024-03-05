@@ -40,6 +40,9 @@ export class AfficherReclamationComponent implements OnInit {
         }
       );
     }
+    ouvrirFormulaireUpdate(idReclamation: number): void {
+      this.router.navigate(['/Reclamation', idReclamation, 'update']);
+    }
     supprimerReclamation(idReclamation: number): void {
       this.serviceReclamation.deleteReclamation(idReclamation).subscribe(
         () => {

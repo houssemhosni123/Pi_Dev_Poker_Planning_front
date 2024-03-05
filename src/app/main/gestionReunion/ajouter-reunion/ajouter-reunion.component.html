@@ -15,8 +15,16 @@
             <small class="form-text text-danger" *ngIf="formNameRef.errors.required">This field is required!</small>
           </span>
         </div>
-        <ng2-flatpickr [config]="dateTimeOptions" [(ngModel)]="date1" name="dateTime"></ng2-flatpickr>
-        <ng2-flatpickr [config]="dateTimeOptions" [(ngModel)]="date2" name="dateTime"></ng2-flatpickr>
+        <div class="form-group">
+          <label for="dateDebutReunion" class="form-label">Date de début de la réunion</label>
+          <ng2-flatpickr [config]="dateTimeOptions" [(ngModel)]="date1" id="dateDebutReunion" name="dateDebutReunion"></ng2-flatpickr>
+        </div>
+        
+        <div class="form-group">
+          <label for="dateFinReunion" class="form-label">Date de fin de la réunion</label>
+          <ng2-flatpickr [config]="dateTimeOptions" [(ngModel)]="date2" id="dateFinReunion" name="dateFinReunion"></ng2-flatpickr>
+        </div>
+        
 
 
         <div class="form-group">
@@ -28,7 +36,7 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="priority" class="form-label">priorite_Reunion</label>
+          <label for="priority" class="form-label">Description du Reunion</label>
           <input type="text" class="form-control" id="priorite_Reunion" name="priorite_Reunion"
             placeholder="Event priorite_Reunion" required [(ngModel)]="newEvent.priorite_Reunion" #priority="ngModel" />
           <span *ngIf="eventForm.submitted && priority.invalid" class="invalid-form">
@@ -41,9 +49,12 @@
         
         
 
-        <button type="submit" class="btn btn-primary add-event-btn mr-1" (click)="addEvent()" rippleEffect>
-          Add
-        </button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary add-event-btn mr-1" (click)="addEvent()" rippleEffect>
+            ajouter
+          </button>
+        </div>
+        
         <ng-template #addEventRef>
           <button type="submit" class="btn btn-primary update-event-btn mr-1" (click)="updateEvent()" rippleEffect>
             Update
