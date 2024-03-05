@@ -20,8 +20,8 @@ import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.mo
 
 import { coreConfig } from 'app/app-config';
 import { AuthGuard } from 'app/auth/helpers/auth.guards';
-//import { fakeBackendProvider } from 'app/auth/helpers'; // used to create fake backend
-//import { JwtInterceptor, ErrorInterceptor } from 'app/auth/helpers';
+import { fakeBackendProvider } from 'app/auth/helpers'; // used to create fake backend
+import { JwtInterceptor, ErrorInterceptor } from 'app/auth/helpers';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
@@ -30,7 +30,31 @@ import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-m
 import { AnimatedCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component';
 import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component';
 import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
-import { Role } from './auth/models';
+import { AjouterReclamationComponent } from './main/gestionReclamation/ajouter-reclamation/ajouter-reclamation.component';
+import { ModfierReclamationComponent } from './main/gestionReclamation/modfier-reclamation/modfier-reclamation.component';
+import { AfficherReclamationComponent } from './main/gestionReclamation/afficher-reclamation/afficher-reclamation.component';
+import { AfficherReunionComponent } from './main/gestionReunion/afficher-reunion/afficher-reunion.component';
+import { ModfierReunionComponent } from './main/gestionReunion/modfier-reunion/modfier-reunion.component';
+import { AjouterReunionComponent } from './main/gestionReunion/ajouter-reunion/ajouter-reunion.component';
+import { AfficherIterationComponent } from './main/gestionIteration/afficher-iteration/afficher-iteration.component';
+import { AjouterIterationComponent } from './main/gestionIteration/ajouter-iteration/ajouter-iteration.component';
+import { ModfierIterationComponent } from './main/gestionIteration/modfier-iteration/modfier-iteration.component';
+import { AjouterFeedbackComponent } from './main/gestionFeedback/ajouter-feedback/ajouter-feedback.component';
+import { AfficherFeedbackComponent } from './main/gestionFeedback/afficher-feedback/afficher-feedback.component';
+import { ModfierFeedbackComponent } from './main/gestionFeedback/modfier-feedback/modfier-feedback.component';
+import { AfficherProjetComponent } from './main/gestionProjet/afficher-projet/afficher-projet.component';
+import { AjouterProjetComponent } from './main/gestionProjet/ajouter-projet/ajouter-projet.component';
+import { ModfierProjetComponent } from './main/gestionProjet/modfier-projet/modfier-projet.component';
+import { AjouterUserstoryComponent } from './main/gestionUserStory/ajouter-userstory/ajouter-userstory.component';
+import { AfficherUserstoryComponent } from './main/gestionUserStory/afficher-userstory/afficher-userstory.component';
+import { ModfierUserstoryComponent } from './main/gestionUserStory/modfier-userstory/modfier-userstory.component';
+import { ModfierSprintComponent } from './main/gestionSprint/modfier-sprint/modfier-sprint.component';
+import { AjouterSprintComponent } from './main/gestionSprint/ajouter-sprint/ajouter-sprint.component';
+import { AfficherSprintComponent } from './main/gestionSprint/afficher-sprint/afficher-sprint.component';
+import { AfficherSprintBacklogComponent } from './main/gestionSprintBacklog/afficher-sprint-backlog/afficher-sprint-backlog.component';
+import { AjouterSprintBacklogComponent } from './main/gestionSprintBacklog/ajouter-sprint-backlog/ajouter-sprint-backlog.component';
+import { ModfierSprintBacklogComponent } from './main/gestionSprintBacklog/modfier-sprint-backlog/modfier-sprint-backlog.component';
+import { DatePipe } from '@angular/common';
 
 const appRoutes: Routes = [
   {
@@ -71,7 +95,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionUser/gestionUser.module').then(m => m.UserModule),
     canActivate: [AuthGuard]
   },
-  /*{
+  {
     path: 'Session',
     loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
     canActivate: [AuthGuard]
@@ -87,6 +111,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionReunion/Reunion.module').then(m => m.ReunionModule),
     canActivate: [AuthGuard]
   },
+  { path: 'Reunions/:id/update',component :  ModfierReunionComponent },
   {
     path: 'Iteration',
     loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),
@@ -117,56 +142,9 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
     canActivate: [AuthGuard]
   },
-  */
   
-  {
-    path: 'Projet',
-    loadChildren: () => import('./main/gestionProjet/Projet.module').then(m => m.ProjetModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
-  },
-  {
-    path: 'UserStory',
-    loadChildren: () => import('./main/gestionUserStory/UserStory.module').then(m => m.UserStoryModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
-  },
-  {
-    path: 'Sprint',
-    loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
-  },
-  {
-    path: 'SprintBacklog',
-    loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
-  },
-  {
-    path: 'Session',
-    loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster] } // Only ScrumMaster role allowed
-  },
-  {
-    path: 'Reclamation',
-    loadChildren: () => import('./main/gestionReclamation/Reclamation.module').then(m => m.ReclamationModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster, Role.Developer] } // ScrumMaster and Developer roles allowed
-  },
-  {
-    path: 'Reunion',
-    loadChildren: () => import('./main/gestionReunion/Reunion.module').then(m => m.ReunionModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster, Role.Developer] } // ScrumMaster and Developer roles allowed
-  },
-  {
-    path: 'Iteration',
-    loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Developer] } // Only Developer role allowed
-  },
+  
+  
   
   {
     path: 'tables',
@@ -207,6 +185,7 @@ const appRoutes: Routes = [
         
         
         
+        
     ],
     imports: [
         BrowserModule,
@@ -236,7 +215,7 @@ const appRoutes: Routes = [
        // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         // ! IMPORTANT: Provider used to create fake backend, comment while using real API
-        //fakeBackendProvider
+        fakeBackendProvider,DatePipe
     ],
     bootstrap: [AppComponent]
 })

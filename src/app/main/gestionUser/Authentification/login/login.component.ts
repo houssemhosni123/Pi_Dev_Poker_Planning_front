@@ -13,7 +13,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class LoginComponent {
 
-
   authenticationRequest: AuthenticationRequest = {
     email: '',
     password: ''
@@ -81,18 +80,9 @@ import { AuthenticationRequest } from '../../Requests/AuthenticationRequest';
 })
 export class LoginComponent implements OnInit {
 
-  /*authenticationRequest: AuthenticationRequest = {
+  authenticationRequest: AuthenticationRequest = {
     email: '',
     password: ''
-  };*/
-  authRequest: AuthenticationRequest = {
-    email: '',
-    password: ''
-  };
-
-  authResponse: AuthenticationResponse = {
-    token: '',
-    rolee: ''
   };
 
   constructor(private authService: Userservice, private http: HttpClient, private router: Router) { }
@@ -106,8 +96,8 @@ export class LoginComponent implements OnInit {
     }*/
   }
 
- /* login(): void {
-    this.authService.login(this.authenticationRequest)
+  login(): void {
+    this.authService.authenticate(this.authenticationRequest)
       .subscribe(
         (response: AuthenticationResponse) => {
           // Handle successful authentication response
@@ -123,9 +113,9 @@ export class LoginComponent implements OnInit {
           console.error('Authentication failed!', error);
         }
       );
-  }*/
+  }
 
- /* redirectBasedOnRole(role: string): void {
+  redirectBasedOnRole(role: string): void {
     switch (role) {
       case 'Admin':
         this.router.navigate(['/admin']);
@@ -142,30 +132,5 @@ export class LoginComponent implements OnInit {
       default:
         this.router.navigate(['/']);
     }
-  }*/
-  authenticate() {
-    // Check if email and password are provided and not empty
-    if (!this.authRequest.email || !this.authRequest.password) {
-      // Handle validation error (e.g., display error message to user)
-      console.error('Email and password are required');
-      return;
-    }
-  
-    // Proceed with login request
-    this.authService.login(this.authRequest)
-      .subscribe({
-        next: (response) => {
-          // Store token in local storage
-          localStorage.setItem('token', response.token as string);
-          
-          // Redirect user to another page
-          this.router.navigate(['/User']); // Replace '/dashboard' with the desired route
-        },
-        error: (error) => {
-          // Handle authentication error (e.g., display error message to user)
-          console.error('Authentication failed:', error);
-        }
-      });
   }
-  
 }

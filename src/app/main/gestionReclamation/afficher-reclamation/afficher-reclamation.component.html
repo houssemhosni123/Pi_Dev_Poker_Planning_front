@@ -1,1 +1,22 @@
-<p>afficher-reclamation works!</p>
+<div class="container">
+    <h2>Liste des réclamations</h2>
+    <div *ngIf="reclamation && reclamation.length > 0; else noReclamation">
+      <div *ngFor="let reclam of reclamation" class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ reclam.titre_Reclamation }}</h5>
+          <p class="card-text">{{ reclam.contenu_Reclamation }}</p>
+          <p class="card-text">Date de soumission : {{ formatDate(reclam.dateSoumission) }}</p>
+          <p class="card-text">Titre de réclamation : {{ reclam.titre_Reclamation }}</p>
+          <div class="button-container mt-3">
+            <button class="custom-button" (click)="supprimerReclamation(reclam.idReclamation)">Supprimer</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noReclamation>
+      <p>Aucune réclamation n'est disponible pour le moment.</p>
+    </ng-template>
+  </div>
+  

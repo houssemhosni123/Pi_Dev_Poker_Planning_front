@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterRequest } from '../../Responses/responseRequest';
 import { Userservice } from 'app/Services/gestionUserServices/Userservice';
 import { AuthenticationResponse } from '../../Responses/AuthenticationResponse';
-import { RegisterRequest } from '../../Responses/RegisterRequest';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,31 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  /*registerRequest: RegisterRequest = {
+  registerRequest: RegisterRequest = {
     Nom: '',
     Prenom: '',
     email: '',
     password: '',
     role: ''
-  };*/
+  };
 
-  constructor(private authService: Userservice,private router: Router) { }
+  constructor(private authService: Userservice) { }
 
   ngOnInit(): void {
   }
-  registerRequest: RegisterRequest = {
-    nom: '',
-    prenom: '',
-    email: '',
-    password: '',
-    role: ''
-  };
-  authResponse: AuthenticationResponse = {
-    token: '',
-    rolee: ''
-  };
-  message = '';
-  /* register(): void {
+
+  register(): void {
     this.authService.register(this.registerRequest)
       .subscribe(
         (response: AuthenticationResponse) => {
@@ -48,21 +36,5 @@ export class SignupComponent implements OnInit {
           console.error('Registration failed!', error);
         }
       );
-  }*/
-  registerUser() {
-    this.message = '';
-    this.authService.register(this.registerRequest)
-      .subscribe({
-        next: (response) => {
-          if (response) {
-            this.authResponse = response;
-          } else {
-            // inform the user
-            this.message = 'Account created successfully\nYou will be redirected to the Login page in 3 seconds';
-            
-          }
-        }
-      });
-
   }
 }

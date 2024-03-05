@@ -6,7 +6,7 @@
  * Running an Angular 9 client app with the Node.js Role Based Auth API
  */
 
-/*import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpResponse,
@@ -21,7 +21,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { User, Role } from 'app/auth/models';
 
 // Users with role
-/*const users: User[] = [
+const users: User[] = [
   {
     id: 1,
     email: 'admin@demo.com',
@@ -56,11 +56,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const { url, method, headers, body } = request;
 
-    // wrap in delayed observable to simulate server API call
-    return of(null).pipe(mergeMap(handleRoute))
-                   .pipe(materialize())
-                   .pipe(delay(500))
-                   .pipe(dematerialize());
+    // wrap in delayed observable to simulate server api call
+    return of(null).pipe(mergeMap(handleRoute));
+    // .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+    // .pipe(delay(500))
+    // .pipe(dematerialize());
 
     function handleRoute() {
       switch (true) {
@@ -83,13 +83,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const user = users.find(x => x.email === email && x.password === password);
       if (!user) return error('Username or password is incorrect');
       return ok({
-        id: user.idUser,
+        id: user.id,
         email: user.email,
-        firstName: user.Nom,
-        lastName: user.Prenom,
-        avatar: user.Image,
-        role: user.rolee,
-        token: `fake-jwt-token.${user.idUser}`
+        firstName: user.firstName,
+        lastName: user.lastName,
+        avatar: user.avatar,
+        role: user.role,
+        token: `fake-jwt-token.${user.id}`
       });
     }
 
@@ -102,9 +102,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       // only admins can access other user records
-      if (!isAdmin() && currentUser().idUser !== idFromUrl()) return unauthorized();
+      if (!isAdmin() && currentUser().id !== idFromUrl()) return unauthorized();
 
-      const user = users.find(x => x.idUser === idFromUrl());
+      const user = users.find(x => x.id === idFromUrl());
       return ok(user);
     }
 
@@ -128,13 +128,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function isAdmin() {
-      return isLoggedIn() && currentUser().rolee=== Role.Admin;
+      return isLoggedIn() && currentUser().role === Role.Admin;
     }
 
     function currentUser() {
       if (!isLoggedIn()) return;
       const id = parseInt(headers.get('Authorization').split('.')[1]);
-      return users.find(x => x.idUser === id);
+      return users.find(x => x.id === id);
     }
 
     function idFromUrl() {
@@ -150,4 +150,3 @@ export const fakeBackendProvider = {
   useClass: FakeBackendInterceptor,
   multi: true
 };
-*/

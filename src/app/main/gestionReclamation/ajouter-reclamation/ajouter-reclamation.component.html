@@ -1,1 +1,25 @@
-<p>ajouter-reclamation works!</p>
+<div class="container">
+  <h2>Ajouter une réclamation</h2>
+  <form (ngSubmit)="addReclamation()" #reclamationForm="ngForm">
+    <div class="form-group">
+      <label for="titre">Titre de la réclamation:</label>
+      <input type="text" class="form-control" id="titre" name="titre" [(ngModel)]="newReclamation.titre_Reclamation" required>
+    </div>
+    <div class="form-group">
+      <label for="contenu">Contenu de la réclamation:</label>
+      <textarea class="form-control" id="contenu" name="contenu" [(ngModel)]="newReclamation.contenu_Reclamation" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="titreReunion">Titre de la réunion:</label>
+      <select class="form-control" id="titreReunion" name="titreReunion" [(ngModel)]="titreReunion" required>
+        <option value="" disabled selected>Choisissez un titre de réunion</option>
+        <option *ngFor="let titre of titresReunion" [value]="titre">{{ titre }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <!-- Affichage du message d'erreur -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    <!-- Affichage du message d'erreur -->
+
+  </form>
+</div>

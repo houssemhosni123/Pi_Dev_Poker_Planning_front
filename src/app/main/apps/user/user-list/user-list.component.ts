@@ -8,8 +8,6 @@ import { CoreConfigService } from '@core/services/config.service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 
 import { UserListService } from 'app/main/apps/user/user-list/user-list.service';
-import { User } from 'app/auth/models';
-import { UserService } from 'app/auth/service';
 
 @Component({
   selector: 'app-user-list',
@@ -18,11 +16,10 @@ import { UserService } from 'app/auth/service';
   encapsulation: ViewEncapsulation.None
 })
 export class UserListComponent implements OnInit {
-  users: User[];
   // Public
   public sidebarToggleRef = false;
   public rows;
-  public selectedOption = 2;
+  public selectedOption = 10;
   public ColumnMode = ColumnMode;
   public temp = [];
   public previousRoleFilter = '';
@@ -48,6 +45,7 @@ export class UserListComponent implements OnInit {
 
   public selectStatus: any = [
     { name: 'All', value: '' },
+    { name: 'Pending', value: 'Pending' },
     { name: 'Active', value: 'Active' },
     { name: 'Inactive', value: 'Inactive' }
   ];
@@ -72,7 +70,6 @@ export class UserListComponent implements OnInit {
    * @param {CoreSidebarService} _coreSidebarService
    */
   constructor(
-    private _userService:UserService,
     private _userListService: UserListService,
     private _coreSidebarService: CoreSidebarService,
     private _coreConfigService: CoreConfigService
@@ -174,56 +171,13 @@ export class UserListComponent implements OnInit {
       return isPartialNameMatch && isPartialGenderMatch && isPartialStatusMatch;
     });
   }
-  getUsers(): void {
-    this._userService.getAll().subscribe(
-      (users: User[]) => {
-        this.users = users;
-      },
-      (error) => {
-        console.error('Error fetching users:', error);
-        // Handle error here
-      }
-    );
-  }
 
-
-
-
-
-
-  activateUser(userId: number): void {
-    this._userService.activateUser(userId).subscribe(
-      () => {
-        // Optionally, you can handle success here, such as refreshing the user list
-        this.getUsers();
-      },
-      (error) => {
-        console.error('Error activating user:', error);
-        // Handle error here
-      }
-    );
-  }
-
-  // Deactivate user by ID
-  deactivateUser(userId: number): void {
-    this._userService.deactivateUser(userId).subscribe(
-      () => {
-        // Optionally, you can handle success here, such as refreshing the user list
-        this.getUsers();
-      },
-      (error) => {
-        console.error('Error deactivating user:', error);
-        // Handle error here
-      }
-    );
-  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
   /**
    * On init
    */
   ngOnInit(): void {
-    this.getUsers();
     // Subscribe config change
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       //! If we have zoomIn route Transition then load datatable after 450ms(Transition will finish in 400ms)

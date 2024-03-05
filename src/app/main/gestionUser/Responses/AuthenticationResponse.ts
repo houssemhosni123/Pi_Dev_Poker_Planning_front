@@ -1,4 +1,4 @@
 export interface AuthenticationResponse {
     token: string;
-    rolee: string;
+    role: string;
   }

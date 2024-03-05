@@ -1,18 +1,12 @@
-﻿import { StatusUser } from "./StatusUser";
-import { Role } from "./role";
+﻿import { Role } from './role';
 
 export class User {
-  idUser: number;
-  Nom: string;
-  Prenom: string;
-  avatar: string;
+  id: number;
   email: string;
   password: string;
-  rolee: Role;
-  Status: StatusUser;
-  Tel: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  role: Role;
   token?: string;
-
-
- 
 }
