@@ -86,6 +86,8 @@ export class UserService {
     // Make the HTTP request with the JWT token in the headers
     return this._http.patch<any>(`${environment.apiUrl1}/User/change-password`, request, { headers });
 }
-
+resetPassword(email: string): Observable<void> {
+  return this._http.post<void>(`${environment.apiUrl1}/User/reset-password`, { email });
+}
 }
  
