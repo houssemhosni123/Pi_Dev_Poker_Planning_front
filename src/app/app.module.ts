@@ -123,13 +123,13 @@ const appRoutes: Routes = [
     path: 'Projet',
     loadChildren: () => import('./main/gestionProjet/Projet.module').then(m => m.ProjetModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+    data: { roles: [Role.Admin] } // Only ProductOwner role allowed
   },
   {
     path: 'UserStory',
     loadChildren: () => import('./main/gestionUserStory/UserStory.module').then(m => m.UserStoryModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+    data: { roles: [Role.Admin] } // Only ProductOwner role allowed
   },
   {
     path: 'Sprint',
@@ -153,13 +153,13 @@ const appRoutes: Routes = [
     path: 'Reclamation',
     loadChildren: () => import('./main/gestionReclamation/Reclamation.module').then(m => m.ReclamationModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster, Role.Developer] } // ScrumMaster and Developer roles allowed
+    data: { roles: [Role.ScrumMaster, Role.Developer,Role.Admin] } // ScrumMaster and Developer roles allowed
   },
   {
     path: 'Reunion',
     loadChildren: () => import('./main/gestionReunion/Reunion.module').then(m => m.ReunionModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster, Role.Developer] } // ScrumMaster and Developer roles allowed
+    data: { roles: [Role.ScrumMaster, Role.Developer,Role.Admin] } // ScrumMaster and Developer roles allowed
   },
   {
     path: 'Iteration',

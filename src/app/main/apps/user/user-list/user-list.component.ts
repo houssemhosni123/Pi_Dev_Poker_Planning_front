@@ -32,12 +32,11 @@ export class UserListComponent implements OnInit {
   public selectRole: any = [
     { name: 'All', value: '' },
     { name: 'Admin', value: 'Admin' },
-    { name: 'Author', value: 'Author' },
-    { name: 'Editor', value: 'Editor' },
-    { name: 'Maintainer', value: 'Maintainer' },
-    { name: 'Subscriber', value: 'Subscriber' }
+    { name: 'ProductOwner', value: 'ProductOwner' },
+    { name: 'ScrumMaster', value: 'ScrumMaster' },
+    { name: 'developer', value: 'developer' },
   ];
-
+  
   public selectPlan: any = [
     { name: 'All', value: '' },
     { name: 'Basic', value: 'Basic' },
