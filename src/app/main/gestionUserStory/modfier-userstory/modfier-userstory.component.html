@@ -1,1 +1,25 @@
-<p>modfier-userstory works!</p>
+<tr *ngFor="let userstory of userstory" class="table-active">
+    <td>
+      <span class="font-weight-bold">{{ userstory.titre_US }}</span>
+    </td>
+    <td>{{ userstory.description_US }}</td>
+    <td>{{ userstory.statut_US }}</td>
+    <td><span class="badge badge-pill badge-light-primary mr-1">{{ userstory.velocite_US }}</span></td>
+    <td class="overflow-hidden">
+      <div ngbDropdown container="body">
+        <button type="button" class="btn btn-sm hide-arrow" ngbDropdownToggle data-toggle="dropdown">
+          <i data-feather="more-vertical"></i>
+        </button>
+        <div ngbDropdownMenu>
+          <a (click)="editUserStory(userstory.IdUserStory)" class="dropdown-item" href="javascript:void(0);"
+            ><i data-feather="edit-2" class="mr-50"></i><span>Edit</span></a
+          ><a (click)="deleteUserStory(userstory.IdUserStory)" class="dropdown-item" href="javascript:void(0);"
+            ><i data-feather="trash" class="mr-50"></i><span>Delete</span></a
+          >
+        </div>
+      </div>
+    </td>
+  </tr>
+  
+  
+  

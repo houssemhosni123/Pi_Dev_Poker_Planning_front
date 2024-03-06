@@ -1,219 +1,181 @@
-<!--div class="container">
-    <div class="row">
-      <div class="col-md-6 order-md-2 col-12">
-        <core-card-snippet [snippetCode]="_snippetCodeHorizontal">
-          <h4 class="card-title">Créer votre Projet</h4>
-          <div class="card-body">
-            <form class="form form-horizontal">
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-group row">
-                    <div class="col-sm-3 col-form-label">
-                      <label for="first-name">Projet</label>
-                    </div>
-                    <div class="col-sm-9">
-                      <input type="text" id="first-name" class="form-control" name="fname" placeholder="Projet" />
-                    </div>
+<!--form (ngSubmit)="saveProjet()" [formGroup]="projetForm">
+  
+  <label for="nomProjet">Nom du Projet:</label>
+  <input type="text" id="nomProjet" formControlName="Nom_Projet">
+
+  <label for="client">Client:</label>
+  <input type="text" id="client" formControlName="Client">
+
+  <label for="description">Description:</label>
+  <textarea id="description" formControlName="Description_Projet"></textarea>
+
+  <label for="dateDebut">Date de Début:</label>
+  <input type="date" id="dateDebut" formControlName="DateDebut_Projet">
+
+  <label for="dateFin">Date de Fin:</label>
+  <input type="date" id="dateFin" formControlName="DateFin_Projet">
+
+  <hr>
+
+  <h4>User Stories:</h4>
+  <div formArrayName="userStory">
+    <div *ngFor="let userStory of userStoryControls.controls; let i = index" [formGroupName]="i">
+      <label for="titreUS{{i}}">Titre:</label>
+      <input type="text" id="titreUS{{i}}" formControlName="titre_US">
+
+      <label for="descriptionUS{{i}}">Description:</label>
+      <textarea id="descriptionUS{{i}}" formControlName="description_US"></textarea>
+
+      <label for="statutUS{{i}}">Statut:</label>
+      <select id="statutUS{{i}}" formControlName="statut_US">
+        <option value="Afaire">A faire</option>
+        <option value="Encours">En cours</option>
+        <option value="Terminee">Terminée</option>
+      </select>
+
+      <label for="velociteUS{{i}}">Vélocité:</label>
+      <input type="number" id="velociteUS{{i}}" formControlName="velocite_US">
+    </div>
+  </div>
+
+  <button type="button" (click)="ajouterUserStory()">Ajouter User Story</button>
+  <hr>
+
+  
+  <button type="submit" [disabled]="projetForm.invalid">Enregistrer Projet</button>
+</form-->
+
+<form id="basic-horizontal-layouts" (ngSubmit)="saveProjet()" [formGroup]="projetForm" >
+  <div class="row match-height">
+    <div class="col-md-6 col-12">
+      <core-card-snippet [snippetCode]="_snippetCodeHorizontal">
+        <h4 class="card-title">Créer Projet</h4>
+
+        <div class="card-body">
+          <form class="form form-horizontal">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="nomProjet">Nom du Projet</label>
                   </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-group row">
-                    <div class="col-sm-3 col-form-label">
-                      <label for="email-id">Client</label>
-                    </div>
-                    <div class="col-sm-9">
-                      <input type="email" id="email-id" class="form-control" name="email-id" placeholder="Client" />
-                    </div>
+                  <div class="col-sm-9">
+                    <input type="text" id="nomProjet" class="form-control" formControlName="Nom_Projet" placeholder="Nom du Projet" />
                   </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-group row">
-                    <div class="col-sm-3 col-form-label">
-                      <label for="contact-info">Description</label>
-                    </div>
-                    <div class="col-sm-9">
-                      <input
-                        type="number"
-                        id="contact-info"
-                        class="form-control"
-                        name="contact"
-                        placeholder="Description"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-group row">
-                    <div class="col-sm-3 col-form-label">
-                      <label for="password">Date Debut</label>
-                    </div>
-                    <div class="col-sm-9">
-                      <input
-                        type="password"
-                        id="password"
-                        class="form-control"
-                        name="password"
-                        placeholder="Date Debut"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-sm-3 col-form-label">
-                        <label for="password">Date Fin</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <input
-                          type="password"
-                          id="password"
-                          class="form-control"
-                          name="password"
-                          placeholder="Date Fin"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                <div class="col-sm-9 offset-sm-3">
-                  <button type="submit" rippleEffect class="btn btn-primary mr-1">Ajouter</button>
-                  <button type="reset" rippleEffect class="btn btn-outline-secondary">Reset</button>
                 </div>
               </div>
-            </form>
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="client">Client</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" id="client" class="form-control" formControlName="Client" placeholder="Client" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="description">Description Projet</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" id="description" class="form-control" formControlName="Description_Projet" placeholder="Description Projet" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="dateDebut">Date de Début</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="date" id="dateDebut" class="form-control" formControlName="DateDebut_Projet" placeholder="Date de Début" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="dateFin">Date Fin</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="date" id="dateFin" class="form-control" formControlName="DateFin_Projet" placeholder="Date Fin" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9 offset-sm-3">
+                <button type="button" (click)="ajouterUserStory()" rippleEffect class="btn btn-primary mr-1">Ajouter UserStorys</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </core-card-snippet>
+    </div>
+  </div>
+
+  <form formArrayName="userStory">
+    <div class="row match-height">
+      <div class="col-md-6 col-12">
+        <core-card-snippet [snippetCode]="_snippetCodeHorizontal">
+          <h4 class="card-title">Créer userStory</h4>
+          <div *ngFor="let userStory of userStoryControls.controls; let i = index" [formGroupName]="i">
+            <div class="card-body">
+              <form class="form form-horizontal" [formGroup]="userStory">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="titreUS{{i}}">Titre UserStory</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" id="titreUS{{i}}" class="form-control" formControlName="titre_US" placeholder="Titre UserStory" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="descriptionUS{{i}}">Description UserStory</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="text" id="descriptionUS{{i}}" class="form-control" formControlName="description_US" placeholder="Description UserStory" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="statutUS{{i}}">Statut UserStory</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <select id="statutUS{{i}}" class="form-control" formControlName="statut_US">
+                          <option value="Afaire">A faire</option>
+                          <option value="Encours">En cours</option>
+                          <option value="Terminee">Terminée</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="velociteUS{{i}}">Vélocité</label>
+                      </div>
+                      <div class="col-sm-9">
+                        <input type="number" id="velociteUS{{i}}" class="form-control" formControlName="velocite_US" placeholder="Vélocité" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" [disabled]="projetForm.invalid" rippleEffect class="btn btn-primary mr-1">Enregistrer</button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </core-card-snippet>
       </div>
     </div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-12">
-    <core-card-snippet [snippetCode]="_snippetCodeIcons">
-      <h4 class="card-title">Horizontal Form with Icons</h4>
-
-      <div class="card-body">
-        <form class="form form-horizontal">
-          <div class="row">
-            <div class="col-12">
-              <div class="form-group row">
-                <div class="col-sm-3 col-form-label">
-                  <label for="fname-icon">First Name</label>
-                </div>
-                <div class="col-sm-9">
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><span [data-feather]="'user'"></span></span>
-                    </div>
-                    <input
-                      type="text"
-                      id="fname-icon"
-                      class="form-control"
-                      name="fname-icon"
-                      placeholder="First Name"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group row">
-                <div class="col-sm-3 col-form-label">
-                  <label for="email-icon">Email</label>
-                </div>
-                <div class="col-sm-9">
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><span [data-feather]="'mail'"></span></span>
-                    </div>
-                    <input
-                      type="email"
-                      id="email-icon"
-                      class="form-control"
-                      name="email-id-icon"
-                      placeholder="Email"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group row">
-                <div class="col-sm-3 col-form-label">
-                  <label for="contact-icon">Mobile</label>
-                </div>
-                <div class="col-sm-9">
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><span [data-feather]="'smartphone'"></span></span>
-                    </div>
-                    <input
-                      type="number"
-                      id="contact-icon"
-                      class="form-control"
-                      name="contact-icon"
-                      placeholder="Mobile"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group row">
-                <div class="col-sm-3 col-form-label">
-                  <label for="pass-icon">Password</label>
-                </div>
-                <div class="col-sm-9">
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><span [data-feather]="'lock'"></span></span>
-                    </div>
-                    <input
-                      type="password"
-                      id="pass-icon"
-                      class="form-control"
-                      name="contact-icon"
-                      placeholder="Password"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-9 offset-sm-3">
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck2" />
-                  <label class="custom-control-label" for="customCheck2">Remember me</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-9 offset-sm-3">
-              <button type="submit" rippleEffect class="btn btn-primary mr-1">Submit</button>
-              <button type="reset" rippleEffect class="btn btn-outline-secondary">Reset</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </core-card-snippet>
-  </div-->
-  <div class="container">
-    <h2>Créer un Nouveau Projet</h2>
-    <form (ngsubmit)="saveProjet()">
-      <!-- Champs du projet -->
-      <label for="nom">Nom du Projet</label>
-      <input type="text" id="nom" name="nom" [(ngModel)]="projet.Nom_Projet" required>
-  
-      <label for="client">Client</label>
-      <input type="text" id="client" name="client" [(ngModel)]="projet.Client" required>
-  
-      <label for="description">Description</label>
-      <textarea id="description" name="description" [(ngModel)]="projet.Description_Projet" required></textarea>
-
-      <label for="DateDebut_Projet">date debut</label>
-      <textarea id="DateDebut_Projet" name="DateDebut_Projet" [(ngModel)]="projet.DateDebut_Projet" required></textarea>
-
-      <label for="DateFin_Projet">DateFin_Projet</label>
-      <textarea id="DateFin_Projet" name="DateFin_Projet" [(ngModel)]="projet.DateFin_Projet" required></textarea>
-      <button type="submit" class="btn btn-primary">Enregistrer Projet</button>
-    </form>
-
-
+  </form>
+</form>

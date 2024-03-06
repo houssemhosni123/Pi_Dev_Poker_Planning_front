@@ -25,7 +25,7 @@ import { JwtInterceptor, ErrorInterceptor } from 'app/auth/helpers';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
-
+import { DateFormatPipe } from 'Models/date_format.pipe'; 
 import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-menu.component';
 import { AnimatedCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component';
 import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component';
@@ -64,6 +64,9 @@ const appRoutes: Routes = [
   },
   { path: 'projets', component: AfficherProjetComponent },
   { path: 'create-projet', component: AjouterProjetComponent },
+  { path: 'edit-projet/:idProjet', component: ModfierProjetComponent },
+  { path: 'edit-user-story/:IdUserStory', component: ModfierUserstoryComponent },
+  
   {
     path: 'apps',
     loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule),
@@ -176,6 +179,7 @@ const appRoutes: Routes = [
         BasicCustomContextMenuComponent,
         AnimatedCustomContextMenuComponent,
         SubMenuCustomContextMenuComponent,   
+        DateFormatPipe,
         
         
     ],

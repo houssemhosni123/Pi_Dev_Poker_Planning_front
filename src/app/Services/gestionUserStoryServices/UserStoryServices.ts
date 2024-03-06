@@ -14,4 +14,17 @@ import { Observable } from "rxjs";
     getUserStorys(): Observable<Userstory[]> {
         return this.httpClient.get<Userstory[]>(`${this.apiUrl}/getUserStory`);
     }
+    getUserStoryById(id: number): Observable<Userstory> {
+      return this.httpClient.get<Userstory>(`${this.apiUrl}/getUserStorys/${id}`);
+    }
+    
+  updateUserStory(id: number, userStory: Userstory): Observable<Userstory> {
+    const url = `${this.apiUrl}/updateUserStory/${id}`;
+    return this.httpClient.put<Userstory>(url, userStory);
+  }
+
+  deleteUserStory(id: number): Observable<void> {
+    const url = `${this.apiUrl}/deleteUserStory/${id}`;
+    return this.httpClient.delete<void>(url);
+  }
   }

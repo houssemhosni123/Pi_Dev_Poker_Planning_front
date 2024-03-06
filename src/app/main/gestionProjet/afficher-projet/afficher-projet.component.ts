@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProjetService } from 'app/Services/gestionProjetServices/ProjetServices';
 import { data } from 'autoprefixer';
 import { Projet } from 'Models/projet.model';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-afficher-projet',
   templateUrl: './afficher-projet.component.html',
@@ -10,7 +12,7 @@ import { Projet } from 'Models/projet.model';
 export class AfficherProjetComponent implements OnInit {
   projets:Projet[];
   public contentHeader: object;
-  constructor(private projetService: ProjetService ) { }
+  constructor(private projetService: ProjetService,private router: Router,private httpClient:HttpClient ) { }
 
   ngOnInit() : void {
     this.contentHeader = {
@@ -48,6 +50,23 @@ export class AfficherProjetComponent implements OnInit {
         console.log(error);
       }
     );
+    
+}
+updateProjet(idProjet: number, projet: Projet):void {
+  this.router.navigate(['/edit-projet', idProjet]);
+}
+deleteProjet(idProjet: number){
+  this.httpClient.delete(`http://localhost:8081/pokerplanning/Projet/deleteprojet/${idProjet}`).subscribe(
+    () => {
+      // Gérer la suppression réussie
+      console.log('Projet supprimé avec succès.');
+      // Mettre à jour la liste des projets ou toute autre logique nécessaire
+    
+    },
+    (error: any) => {
+      console.error('Erreur lors de la suppression du projet:', error);
+    }
+  );
 }
 
 }

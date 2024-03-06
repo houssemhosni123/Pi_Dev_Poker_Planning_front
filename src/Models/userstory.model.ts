@@ -1,11 +1,9 @@
+
 export interface Userstory {
-     IdUserStory:number;
-     Titre_US:string;
-     Description_US:string;
-     Velocite_US:number;
+     titre_US:string;
+     description_US:string;
+     velocite_US:number;
+     statut_US: 'Afaire' | 'Encours' | 'Terminée';
+     projet_id: number; 
+     nom_Projet: string; 
 }
-  enum StatutUserStory{
-    Encours,
-    Afaire,
-    Terminée
-  }

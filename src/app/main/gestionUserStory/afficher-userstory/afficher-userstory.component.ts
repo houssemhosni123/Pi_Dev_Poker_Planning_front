@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Userstory } from "Models/userstory.model";
 import { UserStoryService } from 'app/Services/gestionUserStoryServices/UserStoryServices';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-afficher-userstory',
   templateUrl: './afficher-userstory.component.html',
@@ -9,7 +10,7 @@ import { UserStoryService } from 'app/Services/gestionUserStoryServices/UserStor
 export class AfficherUserstoryComponent implements OnInit {
   public contentHeader: object;
   userstorys:Userstory[];
-  constructor(private UserstoryService:UserStoryService) {} 
+  constructor(private UserstoryService:UserStoryService,private router: Router) {} 
 
   ngOnInit(): void {
   
@@ -49,8 +50,8 @@ loadUserStorys(): void {
       console.log(error);
     }
   );
-}
-
+  
+  }
 
   }
 

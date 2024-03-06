@@ -38,9 +38,9 @@
                       <i data-feather="more-vertical"></i>
                     </button>
                     <div ngbDropdownMenu>
-                      <a ngbDropdownItem href="javascript:void(0);"
+                      <a (click)="updateProjet(projet.idProjet, projet)" class="dropdown-item" href="javascript:void(0);"
                         ><i data-feather="edit-2" class="mr-50"></i><span>Edit</span></a
-                      ><a ngbDropdownItem href="javascript:void(0);"
+                      ><a (click)="deleteProjet(projet.idProjet)" class="dropdown-item" href="javascript:void(0);"
                         ><i data-feather="trash" class="mr-50"></i><span>Delete</span></a
                       >
                     </div>
