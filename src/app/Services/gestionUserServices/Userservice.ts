@@ -20,8 +20,8 @@ export class Userservice {
 
   //private
   private currentUserSubject: BehaviorSubject<UserPoker>;
-    private baseUrl = 'http://localhost:8081'; // Your backend base URL
-    private baseUrl1 = 'http://localhost:8081/api/v1/auth';
+    private baseUrl = 'http://localhost:8080'; // Your backend base URL
+    private baseUrl1 = 'http://localhost:8080/api/v1/auth';
   
   public clientForm:  FormGroup; 
   constructor(private http: HttpClient ,private _toastrService: ToastrService) {

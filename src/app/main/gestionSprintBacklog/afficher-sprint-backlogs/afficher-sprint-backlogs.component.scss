@@ -1,0 +1,71 @@
+// Importez votre feuille de style globale ou les variables nécessaires ici
+
+.row {
+    .card-sprint {
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        transform: translateY(-10px);
+      }
+  
+      .sprint-item {
+        margin-bottom: 15px;
+        border: 1px solid #e1e5eb;
+        padding: 12px;
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+  
+        &:hover {
+          box-shadow: 0 0 8px rgba(33, 33, 33, 0.2);
+        }
+  
+        .media {
+          margin-bottom: 8px;
+  
+          .avatar {
+            background-color: #f4f5f8;
+            margin-right: 10px;
+  
+            i {
+              color: #39485e;
+            }
+          }
+  
+          .media-body {
+            h6 {
+              font-size: 14px;
+              margin-bottom: 4px;
+            }
+  
+            small {
+              color: #6b7c93;
+            }
+          }
+        }
+  
+        button {
+          background-color: #7367f0;
+          color: #fff;
+          border: none;
+          padding: 6px 10px;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+  
+          &:hover {
+            background-color: #574feb;
+          }
+        }
+      }
+  
+      .card-footer {
+        // Ajoutez les styles nécessaires pour le pied de la carte
+      }
+    }
+  }
+  .delete-icon {
+    cursor: pointer;
+  }
+  
+  // Ajoutez d'autres styles si nécessaire
+  

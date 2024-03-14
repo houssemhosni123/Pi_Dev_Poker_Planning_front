@@ -1,1 +1,97 @@
-<p>ajouter-sprint works!</p>
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+
+
+    <section id="basic-horizontal-layouts">
+      <div class="row match-height">
+        <div class="col-12 mx-auto">
+          
+          <h4 style="color: rgb(110, 48, 218);" class="card-title mb-4">Formulaire d'ajout de Sprint:</h4>
+
+          <div class="card-body">
+
+            <div *ngIf="sprintAddedSuccessfully" class="alert alert-success mb-3">
+              Sprint ajouté avec succès !
+            </div>
+
+            <form class="form form-horizontal" [formGroup]="sprintForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="nomSprint" class="font-size-lg">Nom du Sprint</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="text" id="nomSprint" class="form-control form-control-lg" formControlName="nomSprint" placeholder="Nom du Sprint" />
+                      <div *ngIf="sprintForm.get('nomSprint').hasError('required') && sprintForm.get('nomSprint').touched" class="text-danger">
+                        Le nom du Sprint est requis.
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="objectifSprint" class="font-size-lg">Objectif du Sprint</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <textarea id="objectifSprint" class="form-control form-control-lg" formControlName="objectifSprint" placeholder="Objectif du Sprint"></textarea>
+                      <div *ngIf="sprintForm.get('objectifSprint').hasError('required') && sprintForm.get('objectifSprint').touched" class="text-danger">
+                        L'objectif du Sprint est requis.
+                      </div>
+          
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="dateDebutSprint" class="font-size-lg">Date de début du Sprint</label> 
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="date" id="dateDebutSprint" class="form-control form-control-lg" formControlName="dateDebutSprint" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="dateFinSprint" class="font-size-lg">Date de fin du Sprint</label> 
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="date" id="dateFinSprint" class="form-control form-control-lg" formControlName="dateFinSprint" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="etatSprint" class="font-size-lg">État du Sprint</label> 
+                    </div>
+                    <div class="col-sm-9">
+                      <select id="etatSprint" class="form-control form-control-lg" formControlName="etatSprint">
+                        <option value="Planifié">Planifié</option>
+                        <option value="EnCours">En Cours</option>
+                        <option value="Terminé">Terminé</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-9 offset-sm-3 d-flex justify-content-between">
+                  <button type="submit" rippleEffect class="btn btn-success btn-lg mx-1">Créer le Sprint</button>
+                  <button type="reset" rippleEffect class="btn btn-warning btn-lg mx-1">Réinitialiser</button>
+                  <button class="btn btn-danger btn-lg mx-1" (click)="redirigerVersListeSprints()">Liste des Sprints</button>
+                </div>
+                
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<style>
+
+    .estimation-card {
+      display: inline-block;
+      border: 1px solid #000;
+      border-radius: 8px;
+      padding: 8px; /* Decrease padding */
+      margin: 3px;  /* Decrease margin */
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      min-width: 60px; /* Decrease min-width */
+      text-align: center;
+    }
+    
+    .estimation-card h5 {
+      margin-bottom: 8px; /* Decrease margin */
+      font-size: 1.2rem; /* Decrease font size */
+      color: #000;
+    }
+    
+    .estimation-card .card-suit {
+      font-size: 1rem; /* Decrease font size */
+      margin-bottom: 4px; /* Decrease margin */
+    }
+    
+    .estimation-card .card-value {
+      font-size: 1.2rem; /* Decrease font size */
+      font-weight: bold;
+      color: #c00;
+    }
+    
+    
+                
+                       
+                
+    
+    </style>
+    <div class="row" id="basic-table">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header"><h4 class="card-title">Votes</h4></div>
+            <div class="card-body">
+              
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Votes</th>
+                    
+                    <th>Users</th>
+                    
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let estimation of estimations">
+                    <td>
+                        <div class="estimation-card">
+                            <div class="card-suit">♥️</div>
+                            <div class="card-value">{{ estimation.valeur }}</div>
+                          </div>
+                    </td>
+                    
+                    <td>
+                      <div class="avatar-group">
+                        <div
+                          data-toggle="tooltip"
+                          data-popup="tooltip-custom"
+                          placement="top"
+                          container="body"
+                          title=""
+                          class="avatar pull-up my-0"
+                          ngbTooltip="Lilian Nenez"
+                        >
+                        <img src="assets/images/portrait/small/avatar-s-5.jpg" alt="Avatar" height="50" width="50" />
+                        </div>
+                                     </div>
+                    </td>
+            
+                    
+                  </tr>
+                              </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>

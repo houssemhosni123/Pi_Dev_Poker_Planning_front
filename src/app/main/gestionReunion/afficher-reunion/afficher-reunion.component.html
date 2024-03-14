@@ -1,1 +1,37 @@
-<p>afficher-reunion works!</p>
+<!-- Affichage des événements récupérés -->
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-12" *ngFor="let eve of events">
+    <div class="card card-sprint mb-4">
+      <div class="card-header">
+        <h4 class="card-title">{{ eve.titre_Reunion }}</h4>
+        <i data-feather="more-vertical" class="font-medium-3 cursor-pointer d-none"></i>
+      </div>
+      <div class="card-body">
+        <div class="sprint-item">
+          <div class="media">
+            <div class="avatar bg-light-primary rounded">
+              <div class="avatar-content">
+                <i data-feather="activity" class="avatar-icon font-medium-3"></i>
+              </div>
+            </div>
+            <div class="media-body">
+              <p class="sprint-description">Lieu de la réunion: {{ eve.lieu_Reunion }}</p>
+              <p class="sprint-description">Descrption du réunion: {{ eve.priorite_Reunion }}</p>
+              <p class="sprint-date">
+                Début du reunion: <span class="sprint-date-highlight">{{ eve.DateDebut_Reunion | date: 'd MMMM yyyy HH:mm' }}</span>
+              </p>
+              <p class="sprint-date">
+                Fin du reunion: <span class="sprint-date-highlight">{{ eve.DateFin_Reunion | date: 'd MMMM yyyy HH:mm' }}</span>
+              </p>
+              <div class="button-container mt-3">
+                <button class="btn btn-primary mr-2" (click)="ouvrirFormulaireUpdate(eve.idReunion)">Modifier</button>
+                <button class="btn btn-primary" (click)="supprimerSprint(eve.idReunion)">Supprimer</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

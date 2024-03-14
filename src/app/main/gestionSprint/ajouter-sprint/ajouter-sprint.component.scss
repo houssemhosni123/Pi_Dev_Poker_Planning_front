@@ -1,0 +1,94 @@
+.sprint-form {
+    max-width: 400px;
+    margin: auto;
+  
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      .form-group {
+        margin-bottom: 1.5rem;
+  
+        label {
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+          display: block;
+        }
+  
+        input,
+        textarea,
+        select {
+          width: 100%;
+          padding: 0.375rem 0.75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #495057;
+          background-color: #999494;
+          background-clip: padding-box;
+          border: 1px solid #ced4da;
+          border-radius: 0.25rem;
+        }
+  
+        textarea {
+          resize: vertical;
+        }
+  
+        button {
+          background-color: #0a2adf;
+          border: 1px solid #080cc9;
+          color: #fff;
+          padding: 0.75rem;
+          cursor: pointer;
+  
+          &:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+          }
+        }
+      }
+    }
+  }
+  /* Effet de survol */
+.btn:hover {
+  filter: brightness(90%);
+  transition: filter 0.3s ease;
+}
+
+/* Couleur orange pour le bouton "Liste des Sprints" */
+.btn-info {
+  background-color: #3807d7; /* Couleur orange */
+  border-color: #580483;
+}
+
+/* Effet de survol pour le bouton "Liste des Sprints" */
+.btn-info:hover {
+  background-color: #7700ff; /* Couleur orange plus claire au survol */
+  border-color: #27087c;
+}
+
+  /* Couleur verte pour le bouton "Créer le Sprint" */
+.btn-success {
+  background-color: #114fd4;
+  border-color: #2a0e66;
+  color: #290673;
+}
+
+/* Couleur jaune pour le bouton "Réinitialiser" */
+.btn-warning {
+  background-color: #2c0867;
+  border-color: #2014c6;
+  color: #000;
+}
+
+/* Couleur rouge pour le bouton "Liste des Sprints" */
+.btn-danger {
+  background-color: #122da3;
+  border-color: #312fc8;
+  color: #432bc0;
+}
+
+/* Effet de survol pour tous les boutons */
+.btn:hover {
+  filter: brightness(90%);
+  transition: filter 0.3s ease;
+}

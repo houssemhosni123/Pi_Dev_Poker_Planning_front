@@ -1,0 +1,36 @@
+<!-- afficher-sprint-backlogs.component.html -->
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-12" *ngFor="let sprintBacklog of sprintBacklogs">
+    <div class="card card-sprint mb-4">
+      <div class="card-header">
+        
+        <span class="delete-icon" (click)="unassignSprint(sprintBacklog.idSprintBacklog)">X</span>
+
+        <i data-feather="more-vertical" class="font-medium-3 cursor-pointer d-none"></i>
+      </div>
+      <div class="card-body">
+        <div class="sprint-item">
+          <div class="media">
+            <div class="avatar bg-light-primary rounded">
+              <div class="avatar-content">
+                <i data-feather="activity" class="avatar-icon font-medium-3"></i>
+              </div>
+            </div>
+            <div class="media-body">
+              <p class="sprint-date">Estimation de l'effort: {{ sprintBacklog.effortEstimation }}</p>
+              <p class="sprint-date">Définition de Terminé: {{ sprintBacklog.definitionOfDone }}</p>
+              <p class="sprint-date">Priorité: {{ sprintBacklog.priorite }}</p>
+              <p class="sprint-date">Est Terminé: {{ sprintBacklog.estTermine ? 'Oui' : 'Non' }}</p>
+              <p class="sprint-date">Date de Début: {{ sprintBacklog.dateDebut | date }}</p>
+              <p class="sprint-date">Date de Fin: {{ sprintBacklog.dateFin | date }}</p>
+            </div>
+          </div>
+          <div class="button-container mt-3">
+            <!-- Ajoutez le bouton Modifier ici -->
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+</div>

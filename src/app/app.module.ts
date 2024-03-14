@@ -31,6 +31,25 @@ import { AnimatedCustomContextMenuComponent } from './main/extensions/context-me
 import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component';
 import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
 import { Role } from './auth/models';
+import { ModfierSprintBacklogComponent } from './main/gestionSprintBacklog/modfier-sprint-backlog/modfier-sprint-backlog.component';
+import { SprintBacklogListComponent } from './main/gestionSprintBacklog/afficher-sprint-backlog/afficher-sprint-backlog.component';
+import { AjoutSprintBacklogComponent } from './main/gestionSprintBacklog/ajouter-sprint-backlog/ajouter-sprint-backlog.component';
+import { AfficherSprintComponent } from './main/gestionSprint/afficher-sprint/afficher-sprint.component';
+import { ModfierSprintComponent } from './main/gestionSprint/modfier-sprint/modfier-sprint.component';
+import { AfficherSprintBacklogsComponent } from './main/gestionSprintBacklog/afficher-sprint-backlogs/afficher-sprint-backlogs.component';
+import { TacheTechniqueAddComponent } from './main/gestionTacheTechnique/ajouter-tache-technique/ajouter-tache-technique.component';
+import { AjouterSprintModule } from './main/gestionSprint/ajouter-sprint/ajouter-sprint.module';
+import { AfficherSprintModule } from './main/gestionSprint/afficher-sprint/afficher-sprint.module';
+import { ModfierSprintModule } from './main/gestionSprint/modfier-sprint/modfier-sprint.module';
+import { TacheTechniqueAddModule } from './main/gestionTacheTechnique/ajouter-tache-technique/tache-technique-add.module';
+import { AfficherTacheTechniqueModule } from './main/gestionTacheTechnique/afficher-tache-technique/afficher-tache-technique.module';
+import { ModifierTacheTechniqueModule } from './main/gestionTacheTechnique/modifier-tache-technique/modifier-tache-technique.module';
+import { CommonModule } from '@angular/common';
+import { SprintService } from './Services/gestionSprintServices/SprintService';
+import { SprintBacklogService } from './Services/gestionSprintBacklogServices/SprintBacklogServices';
+import { ModfierReclamationComponent } from './main/gestionReclamation/modfier-reclamation/modfier-reclamation.component';
+import { ModfierReunionComponent } from './main/gestionReunion/modfier-reunion/modfier-reunion.component';
+import { ModfierSessionComponent } from './main/gestionSession/modfier-session/modfier-session.component';
 
 const appRoutes: Routes = [
   {
@@ -71,53 +90,6 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionUser/gestionUser.module').then(m => m.UserModule),
     canActivate: [AuthGuard]
   },
-  /*{
-    path: 'Session',
-    loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'Reclamation',
-    loadChildren: () => import('./main/gestionReclamation/Reclamation.module').then(m => m.ReclamationModule),
-    canActivate: [AuthGuard]
-  },
-  
-  {
-    path: 'Reunion',
-    loadChildren: () => import('./main/gestionReunion/Reunion.module').then(m => m.ReunionModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'Iteration',
-    loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'Feedback',
-    loadChildren: () => import('./main/gestionFeedback/feedback.module').then(m => m.FeedbackModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'Projet',
-    loadChildren: () => import('./main/gestionProjet/Projet.module').then(m => m.ProjetModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'UserStory',
-    loadChildren: () => import('./main/gestionUserStory/UserStory.module').then(m => m.UserStoryModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'Sprint',
-    loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'SprintBacklog',
-    loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
-    canActivate: [AuthGuard]
-  },
-  */
   
   {
     path: 'Projet',
@@ -147,25 +119,28 @@ const appRoutes: Routes = [
     path: 'Session',
     loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster] } // Only ScrumMaster role allowed
+    data: { roles: [Role.Admin] } // Only ScrumMaster role allowed
   },
+  {path: 'Session/:idSession/update',component:ModfierSessionComponent},
   {
     path: 'Reclamation',
     loadChildren: () => import('./main/gestionReclamation/Reclamation.module').then(m => m.ReclamationModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster, Role.Developer,Role.Admin] } // ScrumMaster and Developer roles allowed
+    canActivate: [AuthGuard]
   },
+  { path: 'Reclamation/:id/update',component :  ModfierReclamationComponent },
+
+  
   {
     path: 'Reunion',
     loadChildren: () => import('./main/gestionReunion/Reunion.module').then(m => m.ReunionModule),
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster, Role.Developer,Role.Admin] } // ScrumMaster and Developer roles allowed
+    canActivate: [AuthGuard]
   },
+  { path: 'Reunions/:id/update',component :  ModfierReunionComponent },
   {
     path: 'Iteration',
     loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Developer] } // Only Developer role allowed
+    data: { roles: [Role.Admin] } // Only Developer role allowed
   },
   
   {
@@ -178,6 +153,35 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/charts-and-maps/charts-and-maps.module').then(m => m.ChartsAndMapsModule),
     canActivate: [AuthGuard]
   },
+  { path: 'AfficherSprint', component: AfficherSprintComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] } },
+
+  { path: 'sprints/:id/update', component: ModfierSprintComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] } },
+
+  { path: 'sprintBacklog/:id/update', component: ModfierSprintBacklogComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] }  },
+
+  { path: 'AfficherSprintBacklog', component: SprintBacklogListComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] }  },
+  { path: 'ModifierSprintBacklog', component: ModfierSprintBacklogComponent ,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] }  },
+  { path: 'AjouterSprintBacklog', component: AjoutSprintBacklogComponent ,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] } },
+  { path: 'AfficherSprintBacklogs/:sprintId', component: AfficherSprintBacklogsComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] }  },
+
+  { path: 'AjouterTacheTechnique', component: TacheTechniqueAddComponent ,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.Admin] }  },
+  
   {
     path: '',
     redirectTo: '/dashboard/ecommerce',
@@ -196,7 +200,8 @@ const appRoutes: Routes = [
         BasicCustomContextMenuComponent,
         AnimatedCustomContextMenuComponent,
         SubMenuCustomContextMenuComponent,
-        
+        AfficherSprintBacklogsComponent,
+
         
         
         
@@ -211,6 +216,13 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        AjouterSprintModule,
+        CommonModule,
+        AfficherSprintModule,
+        ModfierSprintModule,
+        TacheTechniqueAddModule,
+        AfficherTacheTechniqueModule,
+        ModifierTacheTechniqueModule,
         HttpClientModule,
         HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
             delay: 0,
@@ -233,10 +245,9 @@ const appRoutes: Routes = [
         ContentHeaderModule
     ],
     providers: [
-       // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        // ! IMPORTANT: Provider used to create fake backend, comment while using real API
-        //fakeBackendProvider
+      SprintService,
+      SprintBacklogService,
+       
     ],
     bootstrap: [AppComponent]
 })

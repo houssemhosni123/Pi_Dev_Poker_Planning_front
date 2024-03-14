@@ -4,14 +4,15 @@ import { RouterModule, Routes } from "@angular/router";
 import { CoreCommonModule } from "@core/common.module";
 import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.module";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
-import { AfficherSprintBacklogComponent } from "./afficher-sprint-backlog.component";
+import { SprintBacklogListComponent } from "./afficher-sprint-backlog.component";
+
 
 const routes: Routes = [
-    {path: 'AfficherSprintBacklog',component: AfficherSprintBacklogComponent,data: { animation: 'layout' }}
+    {path: 'AfficherSprintBacklog',component: SprintBacklogListComponent,data: { animation: 'layout' }}
   ];
   
   @NgModule({
-    declarations: [AfficherSprintBacklogComponent],
+    declarations: [SprintBacklogListComponent],
     imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, FormsModule, CoreCommonModule]
   })
   export class AfficherSprintBacklogModule {}

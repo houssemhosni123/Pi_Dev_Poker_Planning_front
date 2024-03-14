@@ -7,7 +7,7 @@ import { ContentHeaderModule } from "app/layout/components/content-header/conten
 import { ModfierIterationComponent } from "./modfier-iteration.component";
 
 const routes: Routes = [
-    {path: 'ModifierIteration',component: ModfierIterationComponent,data: { animation: 'layout' }}
+    {path: 'modifier-iteration/:id',component: ModfierIterationComponent,data: { animation: 'layout' }}
   ];
   
   @NgModule({

@@ -1,1 +1,99 @@
-<p>ajouter-sprint-backlog works!</p>
+<!-- ajout-sprint-backlog.component.html -->
+
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <section id="ajout-sprint-backlog">
+      <div class="row match-height">
+        <div class="col-12 mx-auto">
+
+          <h4 style="color: rgb(110, 48, 218);" class="card-title mb-4">Formulaire Sprint Backlog:</h4>
+
+          <div *ngIf="sprintBacklogAddedSuccessfully" class="alert alert-success mb-3">
+            Sprint Backlog ajouté avec succès !
+          </div>
+
+          <div class="card-body">
+
+
+            <form class="form form-horizontal" [formGroup]="ajoutForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group row">
+                    <label for="effortEstimation" class="col-sm-3 col-form-label font-size-lg">Estimation de l'effort</label>
+                    <div class="col-sm-9">
+                      <input type="number" id="effortEstimation" class="form-control form-control-lg" formControlName="effortEstimation" placeholder="Estimation de l'effort" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <label for="definitionOfDone" class="col-sm-3 col-form-label font-size-lg">Définition de terminé</label>
+                    <div class="col-sm-9">
+                      <textarea id="definitionOfDone" class="form-control form-control-lg" formControlName="definitionOfDone" placeholder="Définition de terminé"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <label for="priorite" class="col-sm-3 col-form-label font-size-lg">Priorité</label>
+                    <div class="col-sm-9">
+                      <input type="number" id="priorite" class="form-control form-control-lg" formControlName="priorite" placeholder="Priorité" />
+                    </div>
+                  </div>
+                </div>
+
+           <!--     <div class="col-12">
+                  <div class="form-group row">
+                    <label for="estTermine" class="col-sm-3 col-form-label font-size-lg">Est terminé</label>
+                    <div class="col-sm-9">
+                      <div class="form-check">
+                        <input type="checkbox" id="estTermine" class="form-check-input" formControlName="estTermine" />
+                        <label class="form-check-label" for="estTermine">Cochez si terminé</label>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <label for="dateDebut" class="col-sm-3 col-form-label font-size-lg">Date de début</label>
+                    <div class="col-sm-9">
+                      <input type="date" id="dateDebut" class="form-control form-control-lg" formControlName="dateDebut" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <label for="dateFin" class="col-sm-3 col-form-label font-size-lg">Date de fin</label>
+                    <div class="col-sm-9">
+                      <input type="date" id="dateFin" class="form-control form-control-lg" formControlName="dateFin" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group row">
+                    <label for="sprintId" class="col-sm-3 col-form-label font-size-lg">Sprint</label>
+                    <div class="col-sm-9">
+                      <select id="sprintId" formControlName="sprintId" class="form-control form-control-lg">
+                        <option *ngFor="let sprint of sprints" [value]="sprint.idSprint">{{ sprint.nomSprint }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-9 offset-sm-3 d-flex justify-content-between">
+                  <button type="submit" class="btn btn-success btn-lg mx-1">Ajouter Sprint Backlog</button>
+                  <button type="reset" class="btn btn-warning btn-lg mx-1">Réinitialiser</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

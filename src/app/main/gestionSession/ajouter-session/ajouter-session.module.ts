@@ -5,9 +5,11 @@ import { CoreCommonModule } from "@core/common.module";
 import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.module";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 import { AjouterSessionComponent } from "./ajouter-session.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const routes: Routes = [
-    {path: 'ajouterSession',component: AjouterSessionComponent,data: { animation: 'layout' }}
+    {path: 'get',component: AjouterSessionComponent,data: { animation: 'layout' }}
   ];
   
   @NgModule({

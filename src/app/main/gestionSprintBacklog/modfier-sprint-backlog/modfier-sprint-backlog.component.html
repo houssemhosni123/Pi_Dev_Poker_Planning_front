@@ -1,1 +1,98 @@
-<p>modfier-sprint-backlog works!</p>
+<!-- modifier-sprint-backlog.component.html -->
+
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <section id="update-sprint-backlog-form" class="custom-form"> <!-- Ajout de la classe custom-form -->
+      <div class="row match-height">
+        <div class="col-12 mx-auto"> <!-- Ajustement de la largeur à 100% -->
+          <h3 class="custom-title">Formulaire de mise à jour de Sprint Backlog:</h3>
+
+          <div *ngIf="sprintBacklogUpdatedSuccessfully" class="alert alert-success mb-3" [class.fade-out]="!showSuccessMessage">
+            Sprint Backlog mis à jour avec succès !
+          </div>
+
+          <div class="card-body">
+            <form class="form form-horizontal" [formGroup]="sprintBacklogForm" (ngSubmit)="onSubmit()">
+              <!-- Ajoutez les champs du formulaire selon votre modèle -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="effortEstimation" class="font-size-lg">Effort Estimation</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="number" id="effortEstimation" class="form-control form-control-lg" formControlName="effortEstimation" />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="definitionOfDone" class="font-size-lg">Définition de Terminé</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <textarea id="definitionOfDone" class="form-control form-control-lg" formControlName="definitionOfDone"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="priorite" class="font-size-lg">Priorité</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="number" id="priorite" class="form-control form-control-lg" formControlName="priorite" />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="estTermine" class="font-size-lg">Est Terminé</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="estTermine" class="form-check-input" formControlName="estTermine" />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="dateDebut" class="font-size-lg">Date de Début</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="date" id="dateDebut" class="form-control form-control-lg" formControlName="dateDebut" />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="dateFin" class="font-size-lg">Date de Fin</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input type="date" id="dateFin" class="form-control form-control-lg" formControlName="dateFin" />
+                    </div>
+                  </div>
+
+
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <label for="sprintId" class="col-sm-3 col-form-label font-size-lg">Sprint</label>
+                      <div class="col-sm-9">
+                        <select id="sprintId" formControlName="sprintId" class="form-control form-control-lg">
+                          <option *ngFor="let sprint of sprints" [value]="sprint.idSprint">{{ sprint.nomSprint }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                 
+                </div>
+                <div class="col-sm-9 offset-sm-3 d-flex justify-content-between">
+                  <button type="submit" rippleEffect class="btn btn-primary btn-lg mx-1">Enregistrer les modifications</button>
+                  <button type="reset" rippleEffect class="btn btn-outline-secondary btn-lg mx-1">Réinitialiser</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

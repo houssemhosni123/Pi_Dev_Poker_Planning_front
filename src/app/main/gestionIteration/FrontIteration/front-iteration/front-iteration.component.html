@@ -1,0 +1,59 @@
+
+             
+                  <style>
+                  
+                 
+                    #poker-container {
+                        text-align: center;
+                    }
+            
+                    #cards-container {
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 20px;
+                    }
+            
+                    .card {
+                        cursor: pointer;
+                        border: 2px solid #333;
+                        border-radius: 10px;
+                        width: 125px;
+                        height: 233px;
+                        margin: 0 10px;
+                        background-color: #fff;
+                        font-size: 18px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+            
+                    .card:hover {
+                        background-color: #ddd;
+                    }
+                </style>
+           
+           
+           <div id="poker-container">
+              <h1>Poker Planning</h1>
+              <div id="cards-container">
+                  <div class="card" (click)="onSquareClick(0)">0</div>
+                  <div class="card" (click)="onSquareClick(1)">1</div>
+                  <div class="card" (click)="onSquareClick(2)">2</div>
+                  <div class="card" (click)="onSquareClick(3)">3</div>
+                  <div class="card" (click)="onSquareClick(5)">5</div>
+                  <div class="card" (click)="onSquareClick(8)">8</div>
+                  <div class="card" (click)="onSquareClick(13)">13</div>
+                  <div class="card" (click)="onSquareClick(20)">20</div>
+                  <div class="card" (click)="onSquareClick(40)">40</div>
+                  <div class="card" (click)="onSquareClick(0)">?</div>
+                  
+              </div>
+           <br>
+           
+              <div class="btn btn-primary me-sm-3 me-1" (click)="lancerIteration()">Lanch Iteration</div>
+              <div class="btn btn-primary me-sm-3 me-1" (click)=" ShowAllVotesScrumMaster()">ALL votes</div>
+          </div>
+         
+            
+           
+

@@ -32,6 +32,7 @@ export const menu: CoreMenu[] = [
         title: 'eCommerce',
         translate: 'MENU.DASHBOARD.ECOMMERCE',
         type: 'item',
+        role:['Admin'],
         icon: 'circle',
         url: 'dashboard/ecommerce'
       }
@@ -47,11 +48,11 @@ export const menu: CoreMenu[] = [
     children: [
       {
         id: 'email',
-        title: 'Projects',
+        title: 'TacheTechnique',
         translate: 'MENU.APPS.EMAIL',
         type: 'item',
         icon: 'briefcase',
-        url: 'Projet/AfficherProjet'
+        url: 'AjouterTacheTechnique'
       },
       {
         id: 'chat',
@@ -67,7 +68,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.TODO',
         type: 'item',
         icon: 'calendar',
-        url: 'Reunion/AfficherReunions'
+        url: 'Reunion/AjouterReunion'
       },
       {
         id: 'calendar',
@@ -75,7 +76,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CALENDAR',
         type: 'item',
         icon: 'calendar',
-        url: 'apps/calendar'
+        url: 'Reunion/AfficherCalendar'
       },
       {
         id: 'Reclamation',
@@ -83,7 +84,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CALENDAR',
         type: 'item',
         icon: 'alert-triangle',
-        url: 'Reclamation/AfficherReclamation'
+        url: 'Reclamation/ajouterReclamation'
       },
       {
         id: 'users',
@@ -130,11 +131,11 @@ export const menu: CoreMenu[] = [
     children: [
       {
         id: 'typography',
-        title: 'Session',
+        title: 'Iterations',
         translate: 'MENU.UI.TYPOGRAPHY',
         type: 'item',
         icon: 'clock',
-        url: 'ui/content/typography'
+        url: 'Iteration/AfficherIteration'
       },
       {
         id: 'colors',
@@ -142,22 +143,15 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.UI.COLORS',
         type: 'item',
         icon: 'activity',
-        url: 'ui/colors'
+        url: 'AjouterSprint'
       },
-      {
-        id: 'feather',
-        title: 'SprintBacklog',
-        translate: 'MENU.UI.FEATHER',
-        type: 'item',
-        icon: 'list',
-        url: 'ui/icons/feather'
-      },
+      
       {
         id: 'cards',
-        title: 'Feedback',
+        title: 'SprintBacklog',
         translate: 'MENU.UI.CARDS.COLLAPSIBLE',
         type: 'collapsible',
-        icon: 'message-square',
+        icon: 'list',
         badge: {
           title: 'New',
           translate: 'MENU.UI.CARDS.BADGE',
@@ -166,19 +160,19 @@ export const menu: CoreMenu[] = [
         children: [
           {
             id: 'card-basic',
-            title: 'Basic',
+            title: 'Ajouter SprintBacklog',
             translate: 'MENU.UI.CARDS.BASIC',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/card-basic'
+            url: 'AjouterSprintBacklog'
           },
           {
             id: 'card-advance',
-            title: 'Advance',
+            title: 'Affichage Sprint Backlog',
             translate: 'MENU.UI.CARDS.ADVANCE',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/advance'
+            url: 'AfficherSprintBacklog'
           },
           {
             id: 'card-statistics',
