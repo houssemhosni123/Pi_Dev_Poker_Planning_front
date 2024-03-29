@@ -16,4 +16,5 @@ import { ModfierProjetModule } from "./modfier-projet/modfier-projet.module";
         ModfierProjetModule
       ]
   })
-  export class ProjetModule {}
+  export class ProjetModule {
+  }

@@ -50,6 +50,9 @@ import { SprintBacklogService } from './Services/gestionSprintBacklogServices/Sp
 import { ModfierReclamationComponent } from './main/gestionReclamation/modfier-reclamation/modfier-reclamation.component';
 import { ModfierReunionComponent } from './main/gestionReunion/modfier-reunion/modfier-reunion.component';
 import { ModfierSessionComponent } from './main/gestionSession/modfier-session/modfier-session.component';
+import { AfficherTacheProjetComponent } from './main/GestionTacheProjet/afficher-tache-projet/afficher-tache-projet.component';
+import { ModifierTacheProjetComponent } from './main/GestionTacheProjet/modifier-tache-projet/modifier-tache-projet.component';
+import { AjouterTacheProjetComponent } from './main/GestionTacheProjet/ajouter-tache-projet/ajouter-tache-projet.component';
 
 const appRoutes: Routes = [
   {
@@ -108,6 +111,12 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
     canActivate: [AuthGuard],
     data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+  },
+  {
+    path: 'TacheProjet',
+    loadChildren: () => import('./main/GestionTacheProjet/tacheProjet.module').then(m => m.TacheProjetModule),
+    canActivate: [AuthGuard],
+    
   },
   {
     path: 'SprintBacklog',
@@ -201,6 +210,7 @@ const appRoutes: Routes = [
         AnimatedCustomContextMenuComponent,
         SubMenuCustomContextMenuComponent,
         AfficherSprintBacklogsComponent,
+        
 
         
         
