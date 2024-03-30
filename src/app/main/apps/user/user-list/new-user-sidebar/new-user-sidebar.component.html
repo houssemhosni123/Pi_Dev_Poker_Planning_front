@@ -101,6 +101,17 @@
             <small *ngIf="!registerRequest.role && newUserForm.submitted" class="text-danger">Role is required</small>
         </div>
         
+  <div class="form-group">
+    <label class="form-label" for="user-photo">Photo</label>
+    <input
+      type="file"
+      id="user-photo"
+      class="form-control"
+      name="user-photo"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+    />
+  </div>
           
           <button type="submit" class="btn btn-primary mr-1" rippleEffect>Submit</button>
           <button

@@ -5,7 +5,7 @@ export class User {
   idUser: number;
   nom: string;
   prenom: string;
-  avatar: string;
+  photo: string;
   email: string;
   Status: StatusUser;
 

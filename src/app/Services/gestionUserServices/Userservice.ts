@@ -95,11 +95,12 @@ get isdeveloper() {
   authenticate(request: AuthenticationRequest): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(`${this.baseUrl1}/authenticate`, request);
   }*/
-  register(
-    registerRequest: RegisterRequest
-  ) {
-    return this.http.post<AuthenticationResponse>
-    (`${this.baseUrl1}/register`, registerRequest);
+  registerUser(registerRequest: RegisterRequest, imageFile: File): Observable<AuthenticationResponse> {
+    const formData: FormData = new FormData();
+    formData.append('request', JSON.stringify(registerRequest)); // Convert RegisterRequest to JSON string
+    formData.append('imageFile', imageFile);
+
+    return this.http.post<AuthenticationResponse>(`${this.baseUrl}/register`, formData);
   }
 
   login(authRequest: AuthenticationRequest) {

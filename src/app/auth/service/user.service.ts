@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { environment } from 'environments/environment';
 import { User } from 'app/auth/models';
@@ -24,7 +24,24 @@ export class UserService {
   getAll() {
     return this._http.get<User[]>(`${environment.apiUrl1}/User/GetUsers/`);
   }
+  uploadPhoto(id: any, file: File): Observable<any> {
+    const uploadUrl = `${environment.apiUrl1}/User/upload/${id}`;
 
+    const formData: FormData = new FormData();
+    formData.append('photo', file, file.name);
+
+    return this._http.post(uploadUrl, formData);
+  }
+  downloadFile(fileName: string): Observable<Blob> {
+    const url = `${environment.apiUrl1}/download/${fileName}`;
+    return this._http.get(url, { responseType: 'blob' });
+  }
+
+  getPhoto(photo: string): string{
+    const photoUrl = `${environment.apiUrl1}/download/${photo}`;
+
+    return `${environment.apiUrl1}/download/${photo}`;
+  }
   /**
    * Get user by id
    */

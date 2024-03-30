@@ -15,8 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./ajouter-tache-projet.component.scss']
 })
 export class AjouterTacheProjetComponent implements OnInit {
-  projets:Projet1[];
-
+  projets: Projet1[];
   users: User[];
   filteredUsers: User[];
   selectedRole: string = 'All';
@@ -24,49 +23,56 @@ export class AjouterTacheProjetComponent implements OnInit {
   searchText: string = '';
   showUserCard: boolean = false;
   showProjectCard: boolean = false;
-  snackBar: any;
 
-  constructor(private toastr: ToastrService,private _projetService: ProjetService,private formBuilder: FormBuilder,private userService: UserService,private _tacheService: TacheService) {
+  constructor(
+    private toastr: ToastrService,
+    private _projetService: ProjetService,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private _tacheService: TacheService
+  ) {
     this.taskDetailsForm = this.formBuilder.group({
       description: [''],
       dateCreation: [''],
       tacheProjet: [''],
       lieu: [''],
-      user: [''], // This will hold the ID of the selected user
-      selectedUser: [''], // This will display the selected user's nom and prenom
+      user: [''],
+      selectedUser: [''],
       selectedProject: [''],
-      projet: ['']
+      projet: [''],
+      dateDebutTache: [''], // Added dateDebutTache control
+      dateFinTache: [''] // Added dateFinTache control
     });
   }
 
   ngOnInit(): void {
     this.getUsers();
     this.loadProjets();
-
   }
 
   getUsers(): void {
     this.userService.getAll().subscribe(
       (users: User[]) => {
         this.users = users;
-        this.applyRoleFilter(); // Apply filter initially
+        this.applyRoleFilter();
       },
       (error) => {
         console.error('Error fetching users:', error);
       }
     );
   }
+
   loadProjets(): void {
-    this._projetService.getProjets1().subscribe((data:Projet1[]) => {
+    this._projetService.getProjets1().subscribe(
+      (data: Projet1[]) => {
         this.projets = data;
-        console.log(this.projets)
       },
       (error) => {
-        console.log(error);
+        console.error('Error fetching projects:', error);
       }
     );
-    
-}
+  }
+
   applyRoleFilter(): void {
     if (this.selectedRole === 'All') {
       this.filteredUsers = this.users;
@@ -76,17 +82,21 @@ export class AjouterTacheProjetComponent implements OnInit {
   }
 
   addUserToTask(user: User): void {
-    // Set the selected user's nom and prenom in the form
     this.taskDetailsForm.patchValue({
       selectedUser: `${user.nom} ${user.prenom}`,
-      user: user.idUser // Set the selected user's ID
+      user: user.idUser
     });
   }
+
   addProjectToTask(projet: Projet1): void {
-    // Set the selected user's nom and prenom in the form
+    const dateDebutTache = new Date(projet.dateDebut_Projet);
+    const dateFinTache = new Date(projet.dateFin_Projet);
+  
     this.taskDetailsForm.patchValue({
       selectedProject: `${projet.nom_Projet}`,
-      projet: projet.idProjet// Set the selected user's ID
+      projet: projet.idProjet,
+      dateDebutTache: dateDebutTache,
+      dateFinTache: dateFinTache
     });
   }
   
@@ -100,6 +110,7 @@ export class AjouterTacheProjetComponent implements OnInit {
       );
     }
   }
+
   addTask(): void {
     const tache = this.taskDetailsForm.value as Tache;
     const idProjet = this.taskDetailsForm.get('projet').value;
@@ -112,31 +123,28 @@ export class AjouterTacheProjetComponent implements OnInit {
         
         setTimeout(() => {
           this.toastr.success(
-            'Task added successfully!', // Message
-            'Success', // Title
-            { closeButton: true } // Options
+            'Task added successfully!',
+            'Success',
+            { closeButton: true }
           );
         }, 2500);
       },
       (error) => {
         console.error('Error adding task:', error);
+        this.toastr.error(
+          'An error occurred while adding the task. Please try again.',
+          'Error',
+          { closeButton: true }
+        );
       }
     );
   }
-
-showSuccess(message: string): void {
-  this.snackBar.open(message, 'Close', {
-    duration: 3000, // Duration in milliseconds
-    panelClass: ['success-snackbar'] // Custom CSS class for styling
-  });
-}
 
   showUserList() {
     this.showUserCard = true;
     this.showProjectCard = false;
   }
 
-  // Method to handle showing the list of projects card
   showProjectList() {
     this.showProjectCard = true;
     this.showUserCard = false;

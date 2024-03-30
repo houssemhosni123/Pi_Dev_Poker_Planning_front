@@ -10,6 +10,8 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 import { UserListService } from 'app/main/apps/user/user-list/user-list.service';
 import { User } from 'app/auth/models';
 import { UserService } from 'app/auth/service';
+import { environment } from 'environments/environment';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-list',
@@ -79,6 +81,8 @@ export class UserListComponent implements OnInit {
   ) {
     this._unsubscribeAll = new Subject();
   }
+  ngOnInit(): void {
+this.getUsers();  }
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -115,7 +119,9 @@ export class UserListComponent implements OnInit {
   toggleSidebar(name): void {
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
+  
 
+  
   /**
    * Filter By Roles
    *
@@ -221,7 +227,7 @@ export class UserListComponent implements OnInit {
   // -----------------------------------------------------------------------------------------------------
   /**
    * On init
-   */
+   
   ngOnInit(): void {
     this.getUsers();
     // Subscribe config change

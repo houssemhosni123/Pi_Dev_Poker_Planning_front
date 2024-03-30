@@ -1,4 +1,6 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { AuthenticationService, UserService } from 'app/auth/service';
 import { AuthenticationResponse } from 'app/main/gestionUser/Responses/AuthenticationResponse';
@@ -13,59 +15,71 @@ export class NewUserSidebarComponent implements OnInit {
   public fullname;
   public username;
   public email;
+  public photo: string; // Changed type to string
+  selectedFile: File | null = null;
+  private idUser: number; // Removed default value
 
-  /**
-   * Constructor
-   *
-   * @param {CoreSidebarService} _coreSidebarService
-   */
-  constructor( private _toastrService: ToastrService,private _userService:UserService,private _coreSidebarService: CoreSidebarService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _toastrService: ToastrService,
+    private _userService: UserService,
+    private _coreSidebarService: CoreSidebarService
+  ) {}
 
-  /**
-   * Toggle the sidebar
-   *
-   * @param name
-   */
   toggleSidebar(name): void {
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
 
-  /**
-   * Submit
-   *
-   * @param form
-   */
   submit(form) {
     if (form.valid) {
       this.registerUser();
       this.toggleSidebar('new-user-sidebar');
     }
   }
+
+  // Method to handle file selection
+  onFileSelected(event: any): void {
+    const fileInput = event.target as HTMLInputElement;
+
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedFile = fileInput.files[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
+  
+
+  // Method to convert file to base64
+ 
+
   registerRequest: RegisterRequest = {
     nom: '',
     prenom: '',
     email: '',
     password: '',
-    role: ''
+    role: '',
+    photo: ''
   };
+
   authResponse: AuthenticationResponse = {
     token: '',
     rolee: ''
   };
+
   message = '';
+
   registerUser() {
     this.message = '';
+    // Set photo in register request
+
     this._userService.register(this.registerRequest)
       .subscribe({
         next: (response) => {
           console.log(this.registerRequest);
           if (response) {
             this.authResponse = response;
-
-            // Assuming user's role is available in authResponse
             const userRole = this.authResponse.rolee;
-
-            // Display success message after a delay
             setTimeout(() => {
               this._toastrService.success(
                 'You have registered a user with role: ' + userRole,
@@ -78,15 +92,14 @@ export class NewUserSidebarComponent implements OnInit {
           }
         },
         error: (error) => {
-          // Handle error response
           console.error('Error during user registration:', error);
-          // You can also show an error toast here if needed
         }
       });
-}
+  }
 
-
-
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.idUser = params['id'] || 1; // Use a default value if id is undefined
+    });
+  }
 }

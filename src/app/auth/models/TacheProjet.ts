@@ -5,6 +5,8 @@ export interface Tache {
     idTache: number;
     description: string;
     dateCreation: Date;
+    dateDebutTache: Date; // New attribute
+    dateFinTache: Date;
     tacheProjet: RoleProjet;
     lieu: Location;
     projet: Projet1;
