@@ -9,7 +9,7 @@ import { ModifierTacheProjetComponent } from "./modifier-tache-projet.component"
 
 
 const routes: Routes = [
-    {path: 'ModifierTacheProjet',component: ModifierTacheProjetComponent,data: { animation: 'layout' }},
+    { path: 'ModifierTacheProjet/:id', component: ModifierTacheProjetComponent, data: { animation: 'layout' } }
 ];
 
 @NgModule({

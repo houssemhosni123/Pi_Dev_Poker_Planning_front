@@ -112,8 +112,8 @@
                 <h5 class="mt-0">{{ projet.nom_Projet }}</h5>
                 <p>Description: {{ projet.description_Projet }}</p>
                 <!-- Add more project details as needed -->
-                <p>Start Date:<span class="badge badge-pill badge-light-primary mr-1">{{ projet.dateDebut_Projet | date: 'shortDate' }}</span></p>
-                <p>End Date: <span class="badge badge-pill badge-light-primary mr-1">{{ projet.dateFin_Projet | date: 'shortDate'  }}</span></p>
+                <p>Start Date:<span class="badge badge-pill badge-light-primary mr-1">{{ projet.dateDebut_Projet | date}}</span></p>
+                <p>End Date: <span class="badge badge-pill badge-light-primary mr-1">{{ projet.dateFin_Projet | date }}</span></p>
               </div>
             </div>
           </div>

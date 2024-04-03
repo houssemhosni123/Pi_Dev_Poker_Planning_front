@@ -50,9 +50,6 @@ import { SprintBacklogService } from './Services/gestionSprintBacklogServices/Sp
 import { ModfierReclamationComponent } from './main/gestionReclamation/modfier-reclamation/modfier-reclamation.component';
 import { ModfierReunionComponent } from './main/gestionReunion/modfier-reunion/modfier-reunion.component';
 import { ModfierSessionComponent } from './main/gestionSession/modfier-session/modfier-session.component';
-import { AfficherTacheProjetComponent } from './main/GestionTacheProjet/afficher-tache-projet/afficher-tache-projet.component';
-import { ModifierTacheProjetComponent } from './main/GestionTacheProjet/modifier-tache-projet/modifier-tache-projet.component';
-import { AjouterTacheProjetComponent } from './main/GestionTacheProjet/ajouter-tache-projet/ajouter-tache-projet.component';
 
 const appRoutes: Routes = [
   {
@@ -122,7 +119,7 @@ const appRoutes: Routes = [
     path: 'SprintBacklog',
     loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+    data: { roles: [Role.ScrumMaster] } // Only ProductOwner role allowed
   },
   {
     path: 'Session',
@@ -164,32 +161,32 @@ const appRoutes: Routes = [
   },
   { path: 'AfficherSprint', component: AfficherSprintComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] } },
+  data: { roles: [Role.ScrumMaster] } },
 
   { path: 'sprints/:id/update', component: ModfierSprintComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] } },
+  data: { roles: [Role.ScrumMaster] } },
 
   { path: 'sprintBacklog/:id/update', component: ModfierSprintBacklogComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] }  },
+  data: { roles: [Role.ScrumMaster] }  },
 
   { path: 'AfficherSprintBacklog', component: SprintBacklogListComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] }  },
+  data: { roles: [Role.ScrumMaster] }  },
   { path: 'ModifierSprintBacklog', component: ModfierSprintBacklogComponent ,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] }  },
+  data: { roles: [Role.ScrumMaster] }  },
   { path: 'AjouterSprintBacklog', component: AjoutSprintBacklogComponent ,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] } },
+  data: { roles: [Role.ScrumMaster] } },
   { path: 'AfficherSprintBacklogs/:sprintId', component: AfficherSprintBacklogsComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] }  },
+  data: { roles: [Role.ScrumMaster] }  },
 
   { path: 'AjouterTacheTechnique', component: TacheTechniqueAddComponent ,
   canActivate: [AuthGuard],
-  data: { roles: [Role.Admin] }  },
+  data: { roles: [Role.ScrumMaster] }  },
   
   {
     path: '',

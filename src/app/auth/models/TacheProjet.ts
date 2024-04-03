@@ -4,6 +4,7 @@ import { User } from "./user";
 export interface Tache {
     idTache: number;
     description: string;
+    remainingDays: number;
     dateCreation: Date;
     dateDebutTache: Date; // New attribute
     dateFinTache: Date;

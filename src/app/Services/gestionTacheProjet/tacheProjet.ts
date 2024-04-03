@@ -15,17 +15,25 @@ export class TacheService {
   constructor(private http: HttpClient) { }
 
   // Method to add a new task
-  addTache(tache: Tache, idUser: any, idProjet: number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/ajouterTache/${idUser}/${idProjet}`, tache);
+  addTache(tache: Tache): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/ajouterTache`, tache);
   }
-
+  calculateRemainingDays(id: number): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/calculateRemainingDays/${id}`);
+  }
   // Method to get all tasks
   getAllTaches(): Observable<Tache[]> {
     return this.http.get<Tache[]>(`${this.baseUrl}/GetTache/`);
   }
-
+  getTachesByUserId(userId: number): Observable<any[]> {
+    return this.
+    http.get<any[]>(`${this.baseUrl}/byUser/${userId}`);
+  }
+  getTacheById(id: number) {
+    return this.http.get<Tache>(`${this.baseUrl}/GetTache/${id}`);
+  }
   // Method to update a task
-  updateTache(tache: Tache, id: number): Observable<Tache> {
+  updateTache(id: number, tache: Tache): Observable<Tache> {
     return this.http.put<Tache>(`${this.baseUrl}/Updatetache/${id}`, tache);
   }
 

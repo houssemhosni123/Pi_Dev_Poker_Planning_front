@@ -4,10 +4,9 @@ import { User } from 'app/auth/models';
 import { UserService } from 'app/auth/service';
 import { TacheService } from 'app/Services/gestionTacheProjet/tacheProjet';
 import { Tache } from 'app/auth/models/TacheProjet';
-import { Projet } from 'Models/projet.model';
-import { ProjetService } from 'app/Services/gestionProjetServices/ProjetServices';
 import { Projet1 } from 'app/auth/models/Projet';
 import { ToastrService } from 'ngx-toastr';
+import { ProjetService } from 'app/Services/gestionProjetServices/ProjetServices';
 
 @Component({
   selector: 'app-ajouter-tache-projet',
@@ -25,24 +24,24 @@ export class AjouterTacheProjetComponent implements OnInit {
   showProjectCard: boolean = false;
 
   constructor(
-    private toastr: ToastrService,
     private _projetService: ProjetService,
+    private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private _tacheService: TacheService
   ) {
-    this.taskDetailsForm = this.formBuilder.group({
-      description: [''],
-      dateCreation: [''],
-      tacheProjet: [''],
-      lieu: [''],
-      user: [''],
-      selectedUser: [''],
-      selectedProject: [''],
-      projet: [''],
-      dateDebutTache: [''], // Added dateDebutTache control
-      dateFinTache: [''] // Added dateFinTache control
-    });
+      this.taskDetailsForm = this.formBuilder.group({
+        description: [''],
+        remainingDays:[''],
+        tacheProjet: [''],
+        lieu: [''],
+        user: [''],
+        selectedUser: [''],
+        selectedProject: [''],
+        projet: [''],
+        dateDebutTache: [''],
+        dateFinTache: ['']
+      });
   }
 
   ngOnInit(): void {
@@ -91,7 +90,7 @@ export class AjouterTacheProjetComponent implements OnInit {
   addProjectToTask(projet: Projet1): void {
     const dateDebutTache = new Date(projet.dateDebut_Projet);
     const dateFinTache = new Date(projet.dateFin_Projet);
-  
+
     this.taskDetailsForm.patchValue({
       selectedProject: `${projet.nom_Projet}`,
       projet: projet.idProjet,
@@ -113,10 +112,8 @@ export class AjouterTacheProjetComponent implements OnInit {
 
   addTask(): void {
     const tache = this.taskDetailsForm.value as Tache;
-    const idProjet = this.taskDetailsForm.get('projet').value;
-    const idUser = this.taskDetailsForm.get('user').value;
-    
-    this._tacheService.addTache(tache, idUser, idProjet).subscribe(
+  
+    this._tacheService.addTache(tache).subscribe(
       (response) => {
         console.log('Task added successfully:', response);
         this.taskDetailsForm.reset();

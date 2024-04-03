@@ -21,6 +21,9 @@ export class UserService {
   /**
    * Get all users
    */
+  getUserById(id: number) {
+    return this._http.get<User>(`${environment.apiUrl1}/User/GetUser/${id}`);
+  }
   getAll() {
     return this._http.get<User[]>(`${environment.apiUrl1}/User/GetUsers/`);
   }
@@ -45,9 +48,7 @@ export class UserService {
   /**
    * Get user by id
    */
-  getUserById(id: number) {
-    return this._http.get<User>(`${environment.apiUrl1}/User/GetUser/${id}`);
-  }
+  
 
 
   updateUser(id: any, user: User): Observable<User> {
