@@ -1,0 +1,24 @@
+<form (ngSubmit)="saveChanges()">
+    <div class="form-group">
+      <label for="nomProjet">Nom du Projet:</label>
+      <input type="text" id="nomProjet" class="form-control" [(ngModel)]="projet.nom_Projet" name="nomProjet" required>
+    </div>
+    <div class="form-group">
+      <label for="client">Client:</label>
+      <input type="text" id="client" class="form-control" [(ngModel)]="projet.client" name="client" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" class="form-control" [(ngModel)]="projet.description_Projet" name="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dateDebut">Date de Début:</label>
+      <input type="date" id="dateDebut" class="form-control" [(ngModel)]="projet.dateDebut_Projet" name="dateDebut" required>
+    </div>
+    <div class="form-group">
+      <label for="dateFin">Date de Fin:</label>
+      <input type="date" id="dateFin" class="form-control" [(ngModel)]="projet.dateFin_Projet" name="dateFin" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </form>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>

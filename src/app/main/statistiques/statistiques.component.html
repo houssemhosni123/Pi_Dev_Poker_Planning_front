@@ -1,0 +1,19 @@
+<div *ngFor="let data of kpiData">
+  <div class="card-header">
+    <h4 class="card-title">{{ data.projectName }}</h4>
+  </div>
+  <section id="Donut-and-scatter-charts">
+    <div class="row">
+      <div class="col-lg-4 col-12">
+        <app-velocity-data-chart [data]="data"></app-velocity-data-chart>
+      </div>
+      <div class="col-lg-8 col-12">
+        <app-us-data-chart [data]="data"></app-us-data-chart>
+      </div>
+    </div>
+  </section>
+
+  <section id="bar-and-hori-bar-charts">
+    <div class="row"></div>
+  </section>
+</div>

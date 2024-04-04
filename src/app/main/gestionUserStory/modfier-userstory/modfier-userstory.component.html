@@ -1,0 +1,25 @@
+<form (ngSubmit)="saveChanges()">
+  <div class="form-group">
+    <label for="editTitre">Titre User Story:</label>
+    <input type="text" id="editTitre" class="form-control" [(ngModel)]="userstory.titre_US" name="editTitre" required>
+  </div>
+  <div class="form-group">
+    <label for="editDescription">Description:</label>
+    <textarea id="editDescription" class="form-control" [(ngModel)]="userstory.description_US" name="editDescription" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="editStatut">Statut User Story:</label>
+    <input type="text" id="editStatut" class="form-control" [(ngModel)]="userstory.statut_US" name="editStatut" required>
+  </div>
+  <div class="form-group">
+    <label for="editVelocite">Vélocité:</label>
+    <input type="number" id="editVelocite" class="form-control" [(ngModel)]="userstory.velocite_US" name="editVelocite" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
+<div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+
+
+  
+  
+  
