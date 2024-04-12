@@ -7,7 +7,7 @@ import { ContentHeaderModule } from "app/layout/components/content-header/conten
 import { ModfierSessionComponent } from "./modfier-session.component";
 
 const routes: Routes = [
-    {path: 'modifierSession',component: ModfierSessionComponent,data: { animation: 'layout' }}
+    {path: 'update',component: ModfierSessionComponent,data: { animation: 'layout' }}
   ];
   
   @NgModule({

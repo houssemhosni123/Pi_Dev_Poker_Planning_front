@@ -1,0 +1,28 @@
+<!-- tache-technique-add.component.html -->
+
+<div class="container">
+    <h2>Ajouter une Tâche Technique</h2>
+    <div *ngIf="TacheTechniqueAddedSuccessfully" class="alert alert-success mb-3">
+      Tache Technique ajouté avec succès !
+    </div>
+    <form [formGroup]="tacheTechniqueForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nomTacheTechnique">Nom de la Tâche Technique :</label>
+        <input type="text" class="form-control" id="nomTacheTechnique" formControlName="nomTacheTechnique" required>
+      </div>
+      <div class="form-group">
+        <label for="descriptionTacheTechnique">Description :</label>
+        <textarea class="form-control" id="descriptionTacheTechnique" formControlName="descriptionTacheTechnique" required></textarea>
+      </div>
+     
+      <div class="form-group">
+        <label for="statut_TT">Statut :</label>
+        <select class="form-control" id="statut_TT" formControlName="statut_TT" required>
+          <option *ngFor="let statut of statutsTacheTechnique" [value]="statut">{{ statut }}</option>
+        </select>
+      </div>
+     
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+  </div>
+  

@@ -9,7 +9,7 @@ export const menu: CoreMenu[] = [
     title: 'Dashboard',
     translate: 'MENU.DASHBOARD.COLLAPSIBLE',
     type: 'collapsible',
-    // role: ['Admin'], //? To hide collapsible based on user role
+    //role: ['Admin'], //? To hide collapsible based on user role
     icon: 'home',
     badge: {
       title: '2',
@@ -17,7 +17,7 @@ export const menu: CoreMenu[] = [
       classes: 'badge-light-warning badge-pill'
     },
     children: [
-      {
+      /*{
         id: 'analytics',
         title: 'Analytics',
         translate: 'MENU.DASHBOARD.ANALYTICS',
@@ -25,13 +25,14 @@ export const menu: CoreMenu[] = [
         role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
         icon: 'circle',
         url: 'dashboard/analytics'
-      },
+      },*/
       {
         // If role is not assigned will be display to all
         id: 'ecommerce',
         title: 'eCommerce',
         translate: 'MENU.DASHBOARD.ECOMMERCE',
         type: 'item',
+        role:['Admin'],
         icon: 'circle',
         url: 'dashboard/ecommerce'
       }
@@ -47,27 +48,27 @@ export const menu: CoreMenu[] = [
     children: [
       {
         id: 'email',
-        title: 'Email',
+        title: 'TacheTechnique',
         translate: 'MENU.APPS.EMAIL',
         type: 'item',
-        icon: 'mail',
-        url: 'apps/email'
+        icon: 'briefcase',
+        url: 'AjouterTacheTechnique'
       },
       {
         id: 'chat',
-        title: 'Chat',
+        title: 'UserStorys',
         translate: 'MENU.APPS.CHAT',
         type: 'item',
-        icon: 'message-square',
-        url: 'apps/chat'
+        icon: 'book',
+        url: 'UserStory/AfficherUserStroy'
       },
       {
         id: 'todo',
-        title: 'Todo',
+        title: 'Reunion',
         translate: 'MENU.APPS.TODO',
         type: 'item',
-        icon: 'check-square',
-        url: 'apps/todo'
+        icon: 'calendar',
+        url: 'Reunion/AjouterReunion'
       },
       {
         id: 'calendar',
@@ -75,350 +76,15 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CALENDAR',
         type: 'item',
         icon: 'calendar',
-        url: 'apps/calendar'
+        url: 'Reunion/AfficherCalendar'
       },
       {
-        id: 'pages',
-        title: 'Pages',
-        translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'file-text',
-        children: [
-          {
-            id: 'authentication',
-            title: 'Authentication',
-            translate: 'MENU.PAGES.AUTH.COLLAPSIBLE',
-            type: 'collapsible',
-            icon: 'circle',
-            children: [
-              {
-                id: 'login-v1',
-                title: 'Login V1',
-                translate: 'MENU.PAGES.AUTH.LOGIN1',
-                type: 'item',
-                url: 'pages/authentication/login-v1',
-                openInNewTab: true
-              },
-              {
-                id: 'login-v2',
-                title: 'Login V2',
-                translate: 'MENU.PAGES.AUTH.LOGIN2',
-                type: 'item',
-                url: 'pages/authentication/login-v2',
-                openInNewTab: true
-              },
-              {
-                id: 'register-v1',
-                title: 'Register V1',
-                translate: 'MENU.PAGES.AUTH.REGISTER1',
-                type: 'item',
-                url: 'pages/authentication/register-v1',
-                openInNewTab: true
-              },
-              {
-                id: 'register-v2',
-                title: 'Register V2',
-                translate: 'MENU.PAGES.AUTH.REGISTER2',
-                type: 'item',
-                url: 'pages/authentication/register-v2',
-                openInNewTab: true
-              },
-              {
-                id: 'forgot-password-v1',
-                title: 'Forgot Password V1',
-                translate: 'MENU.PAGES.AUTH.FORGOTPASSWORD1',
-                type: 'item',
-                url: 'pages/authentication/forgot-password-v1',
-                openInNewTab: true
-              },
-              {
-                id: 'forgot-password-v2',
-                title: 'Forgot Password V2',
-                translate: 'MENU.PAGES.AUTH.FORGOTPASSWORD2',
-                type: 'item',
-                url: 'pages/authentication/forgot-password-v2',
-                openInNewTab: true
-              },
-              {
-                id: 'reset-password-v1',
-                title: 'Reset Password V1',
-                translate: 'MENU.PAGES.AUTH.RESETPASSWORD1',
-                type: 'item',
-                url: 'pages/authentication/reset-password-v1',
-                openInNewTab: true
-              },
-              {
-                id: 'reset-password-v2',
-                title: 'Reset Password V2',
-                translate: 'MENU.PAGES.AUTH.RESETPASSWORD2',
-                type: 'item',
-                url: 'pages/authentication/reset-password-v2',
-                openInNewTab: true
-              }
-            ]
-          },
-          {
-            id: 'account-settings',
-            title: 'Account Settings',
-            translate: 'MENU.PAGES.ACCOUNTSETTINGS',
-            type: 'item',
-            icon: 'circle',
-            url: 'pages/account-settings'
-          },
-          {
-            id: 'profile',
-            title: 'Profile',
-            translate: 'MENU.PAGES.PROFILE',
-            type: 'item',
-            icon: 'circle',
-            url: 'pages/profile'
-            // collapsed: true
-          },
-          {
-            id: 'faq',
-            title: 'FAQ',
-            translate: 'MENU.PAGES.FAQ',
-            type: 'item',
-            icon: 'circle',
-            url: 'pages/faq'
-          },
-          {
-            id: 'knowledgeBase',
-            title: 'Knowledge Base',
-            translate: 'MENU.PAGES.KB',
-            type: 'item',
-            icon: 'circle',
-            url: 'pages/knowledge-base'
-          },
-          {
-            id: 'pricing',
-            title: 'Pricing',
-            translate: 'MENU.PAGES.PRICING',
-            type: 'item',
-            icon: 'circle',
-            url: 'pages/pricing'
-          },
-
-          {
-            id: 'blog',
-            title: 'Blog',
-            translate: 'MENU.PAGES.BLOG.COLLAPSIBLE',
-            type: 'collapsible',
-            icon: 'circle',
-            children: [
-              {
-                id: 'blog-list',
-                title: 'List',
-                translate: 'MENU.PAGES.BLOG.LIST',
-                type: 'item',
-                url: 'pages/blog-list'
-              },
-              {
-                id: 'blog-details',
-                title: 'Detail',
-                translate: 'MENU.PAGES.BLOG.DETAILS',
-                type: 'item',
-                url: 'pages/blog-details'
-              },
-              {
-                id: 'blog-edit',
-                title: 'Edit',
-                translate: 'MENU.PAGES.BLOG.EDIT',
-                type: 'item',
-                url: 'pages/blog-edit'
-              }
-            ]
-          },
-
-          {
-            id: 'mail-template',
-            title: 'Mail Template',
-            translate: 'MENU.PAGES.MAIL.COLLAPSIBLE',
-            type: 'collapsible',
-            icon: 'circle',
-            children: [
-              {
-                id: 'mail-welcome',
-                title: 'Welcome',
-                translate: 'MENU.PAGES.MAIL.WELCOME',
-                type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-welcome.html',
-                externalUrl: true,
-                openInNewTab: true
-              },
-              {
-                id: 'mail-reset',
-                title: 'Reset Password',
-                translate: 'MENU.PAGES.MAIL.RESET',
-                type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-reset-password.html',
-                externalUrl: true,
-                openInNewTab: true
-              },
-              {
-                id: 'mail-verify',
-                title: 'Verify',
-                translate: 'MENU.PAGES.MAIL.VERIFY',
-                type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-verify-email.html',
-                externalUrl: true,
-                openInNewTab: true
-              },
-              {
-                id: 'mail-deactivate',
-                title: 'Deactivate',
-                translate: 'MENU.PAGES.MAIL.DEACTIVATE',
-                type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-deactivate-account.html',
-                externalUrl: true,
-                openInNewTab: true
-              },
-              {
-                id: 'mail-invoice',
-                title: 'Invoice',
-                translate: 'MENU.PAGES.MAIL.INVOICE',
-                type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-invoice.html',
-                externalUrl: true,
-                openInNewTab: true
-              },
-              {
-                id: 'mail-promotional',
-                title: 'Promotional',
-                translate: 'MENU.PAGES.MAIL.PROMOTIONAL',
-                type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-promotional.html',
-                externalUrl: true,
-                openInNewTab: true
-              }
-            ]
-          },
-
-          {
-            id: 'miscellaneous',
-            title: 'Miscellaneous',
-            translate: 'MENU.PAGES.MISC.COLLAPSIBLE',
-            type: 'collapsible',
-            icon: 'circle',
-            children: [
-              {
-                id: 'misc-comingsoon',
-                title: 'Coming Soon',
-                translate: 'MENU.PAGES.MISC.COMINGSOON',
-                type: 'item',
-                url: 'pages/miscellaneous/coming-soon',
-                openInNewTab: true
-              },
-
-              {
-                id: 'misc-not-authorized',
-                title: 'Not Authorized',
-                translate: 'MENU.PAGES.MISC.NOTAUTH',
-                type: 'item',
-                url: 'pages/miscellaneous/not-authorized',
-                openInNewTab: true
-              },
-              {
-                id: 'maintenance',
-                title: 'Maintenance',
-                translate: 'MENU.PAGES.MISC.MAINTENANCE',
-                type: 'item',
-                url: 'pages/miscellaneous/maintenance',
-                openInNewTab: true
-              },
-              {
-                id: 'error',
-                title: 'Error',
-                translate: 'MENU.PAGES.MISC.ERROR',
-                type: 'item',
-                url: 'pages/miscellaneous/error',
-                openInNewTab: true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'invoice',
-        title: 'Invoice',
-        translate: 'MENU.APPS.INVOICE.COLLAPSIBLE',
-        type: 'collapsible',
-        icon: 'file-text',
-        children: [
-          {
-            id: 'invoice-list',
-            title: 'List',
-            translate: 'MENU.APPS.INVOICE.LIST',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/invoice/list'
-          },
-          {
-            id: 'invoicePreview',
-            title: 'Preview',
-            translate: 'MENU.APPS.INVOICE.PREVIEW',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/invoice/preview'
-          },
-          {
-            id: 'invoiceEdit',
-            title: 'Edit',
-            translate: 'MENU.APPS.INVOICE.EDIT',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/invoice/edit'
-          },
-          {
-            id: 'invoiceAdd',
-            title: 'Add',
-            translate: 'MENU.APPS.INVOICE.ADD',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/invoice/add'
-          }
-        ]
-      },
-      {
-        id: 'e-commerce',
-        title: 'eCommerce',
-        translate: 'MENU.APPS.ECOMMERCE.COLLAPSIBLE',
-        type: 'collapsible',
-        icon: 'shopping-cart',
-        children: [
-          {
-            id: 'shop',
-            title: 'Shop',
-            translate: 'MENU.APPS.ECOMMERCE.SHOP',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/e-commerce/shop'
-          },
-          {
-            id: 'details',
-            title: 'Details',
-            translate: 'MENU.APPS.ECOMMERCE.DETAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/e-commerce/details'
-          },
-          {
-            id: 'wishList',
-            title: 'Wish List',
-            translate: 'MENU.APPS.ECOMMERCE.WISHLIST',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/e-commerce/wishlist'
-          },
-          {
-            id: 'checkout',
-            title: 'Checkout',
-            translate: 'MENU.APPS.ECOMMERCE.CHECKOUT',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/e-commerce/checkout'
-          }
-        ]
+        id: 'Reclamation',
+        title: 'Reclamation',
+        translate: 'MENU.APPS.CALENDAR',
+        type: 'item',
+        icon: 'alert-triangle',
+        url: 'Reclamation/ajouterReclamation'
       },
       {
         id: 'users',
@@ -465,34 +131,27 @@ export const menu: CoreMenu[] = [
     children: [
       {
         id: 'typography',
-        title: 'Typography',
+        title: 'Iterations',
         translate: 'MENU.UI.TYPOGRAPHY',
         type: 'item',
-        icon: 'type',
-        url: 'ui/content/typography'
+        icon: 'clock',
+        url: 'Iteration/AfficherIteration'
       },
       {
         id: 'colors',
-        title: 'Colors',
+        title: 'Sprint',
         translate: 'MENU.UI.COLORS',
         type: 'item',
-        icon: 'droplet',
-        url: 'ui/colors'
+        icon: 'activity',
+        url: 'AjouterSprint'
       },
-      {
-        id: 'feather',
-        title: 'Feather',
-        translate: 'MENU.UI.FEATHER',
-        type: 'item',
-        icon: 'eye',
-        url: 'ui/icons/feather'
-      },
+      
       {
         id: 'cards',
-        title: 'Cards',
+        title: 'SprintBacklog',
         translate: 'MENU.UI.CARDS.COLLAPSIBLE',
         type: 'collapsible',
-        icon: 'credit-card',
+        icon: 'list',
         badge: {
           title: 'New',
           translate: 'MENU.UI.CARDS.BADGE',
@@ -501,19 +160,19 @@ export const menu: CoreMenu[] = [
         children: [
           {
             id: 'card-basic',
-            title: 'Basic',
+            title: 'Ajouter SprintBacklog',
             translate: 'MENU.UI.CARDS.BASIC',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/card-basic'
+            url: 'AjouterSprintBacklog'
           },
           {
             id: 'card-advance',
-            title: 'Advance',
+            title: 'Affichage Sprint Backlog',
             translate: 'MENU.UI.CARDS.ADVANCE',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/advance'
+            url: 'AfficherSprintBacklog'
           },
           {
             id: 'card-statistics',
@@ -899,7 +558,7 @@ export const menu: CoreMenu[] = [
     ]
   },
   // Forms & Tables
-  {
+  /*{
     id: 'forms-table',
     type: 'section',
     title: 'Forms & Tables',
@@ -1068,9 +727,9 @@ export const menu: CoreMenu[] = [
         url: 'tables/datatables'
       }
     ]
-  },
+  },*/
   // Charts & Maps
-  {
+  /*{
     id: 'charts-maps',
     type: 'section',
     title: 'Charts & Maps',
@@ -1116,9 +775,9 @@ export const menu: CoreMenu[] = [
         url: 'charts-and-maps/google-maps'
       }
     ]
-  },
+  },*/
   // Others
-  {
+ /* {
     id: 'others',
     type: 'section',
     title: 'Others',
@@ -1195,5 +854,5 @@ export const menu: CoreMenu[] = [
         openInNewTab: true
       }
     ]
-  }
+  }*/
 ];

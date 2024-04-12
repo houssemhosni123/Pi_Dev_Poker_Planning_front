@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { environment } from 'environments/environment';
 import { User } from 'app/auth/models';
@@ -10,7 +10,7 @@ import { ChangePasswordRequest } from 'app/main/gestionUser/Requests/ChangePassw
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private baseUrl1 = 'http://localhost:8081/api/v1/auth';
+  private baseUrl1 = 'http://localhost:8089/api/v1/auth';
 
   /**
    *
@@ -21,16 +21,34 @@ export class UserService {
   /**
    * Get all users
    */
-  getAll() {
-    return this._http.get<User[]>(`${environment.apiUrl1}/User/GetUsers/`);
-  }
-
-  /**
-   * Get user by id
-   */
   getUserById(id: number) {
     return this._http.get<User>(`${environment.apiUrl1}/User/GetUser/${id}`);
   }
+  getAll() {
+    return this._http.get<User[]>(`${environment.apiUrl1}/User/GetUsers/`);
+  }
+  uploadPhoto(id: any, file: File): Observable<any> {
+    const uploadUrl = `${environment.apiUrl1}/User/upload/${id}`;
+
+    const formData: FormData = new FormData();
+    formData.append('photo', file, file.name);
+
+    return this._http.post(uploadUrl, formData);
+  }
+  downloadFile(fileName: string): Observable<Blob> {
+    const url = `${environment.apiUrl1}/download/${fileName}`;
+    return this._http.get(url, { responseType: 'blob' });
+  }
+
+  getPhoto(photo: string): string{
+    const photoUrl = `${environment.apiUrl1}/download/${photo}`;
+
+    return `${environment.apiUrl1}/download/${photo}`;
+  }
+  /**
+   * Get user by id
+   */
+  
 
 
   updateUser(id: any, user: User): Observable<User> {
@@ -86,6 +104,8 @@ export class UserService {
     // Make the HTTP request with the JWT token in the headers
     return this._http.patch<any>(`${environment.apiUrl1}/User/change-password`, request, { headers });
 }
-
+resetPassword(email: string): Observable<void> {
+  return this._http.post<void>(`${environment.apiUrl1}/User/reset-password`, { email });
+}
 }
  

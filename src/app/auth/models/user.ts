@@ -3,13 +3,14 @@ import { Role } from "./role";
 
 export class User {
   idUser: number;
-  Nom: string;
-  Prenom: string;
-  avatar: string;
+  nom: string;
+  prenom: string;
+  photo: string;
   email: string;
+  Status: StatusUser;
+
   password: string;
   rolee: Role;
-  Status: StatusUser;
   Tel: string;
   token?: string;
 

@@ -27,7 +27,8 @@ export class SignupComponent implements OnInit {
     prenom: '',
     email: '',
     password: '',
-    role: ''
+    role: '',
+    photo:''
   };
   authResponse: AuthenticationResponse = {
     token: '',
@@ -49,7 +50,7 @@ export class SignupComponent implements OnInit {
         }
       );
   }*/
-  registerUser() {
+ /* registerUser() {
     this.message = '';
     this.authService.register(this.registerRequest)
       .subscribe({
@@ -64,5 +65,5 @@ export class SignupComponent implements OnInit {
         }
       });
 
-  }
+  }*/
 }

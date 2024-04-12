@@ -7,7 +7,7 @@ import { ContentHeaderModule } from "app/layout/components/content-header/conten
 import { AfficherSessionComponent } from "./afficher-session.component";
 
 const routes: Routes = [
-    {path: 'afficherSession',component: AfficherSessionComponent,data: { animation: 'layout' }}
+    {path: 'add',component: AfficherSessionComponent,data: { animation: 'layout' }}
   ];
   
   @NgModule({

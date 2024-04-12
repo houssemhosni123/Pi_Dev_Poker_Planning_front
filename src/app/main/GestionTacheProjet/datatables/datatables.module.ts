@@ -9,13 +9,15 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CoreCommonModule } from '@core/common.module';
 import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
+import { DatatablesComponent } from './datatables.component';
+import { DatatablesService } from './datatables.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DatatablesComponent } from 'app/main/tables/datatables/datatables.component';
-import { DatatablesService } from 'app/main/tables/datatables/datatables.service';
+
 
 const routes: Routes = [
   {
-    path: 'datatables',
+    path: 'AfficherTacheProjet',
     component: DatatablesComponent,
     resolve: {
       datatables: DatatablesService
@@ -34,7 +36,9 @@ const routes: Routes = [
     ContentHeaderModule,
     CardSnippetModule,
     NgxDatatableModule,
-    CsvModule
+    CsvModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DatatablesService]
 })

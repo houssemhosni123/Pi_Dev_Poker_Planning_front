@@ -1,0 +1,68 @@
+/* tableau-bord.component.scss */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .dashboard-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 50%;
+    transition: transform 0.3s ease-in-out;
+  
+    /* Add more styles to enhance the overall look and feel */
+  }
+  
+  .dashboard-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .dashboard-card h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #4caf50; /* Green color for the title */
+  }
+  
+  label {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 5px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333333;
+  }
+  
+  apx-chart {
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #4caf50;
+    font-weight: 600;
+  }
+  /* tableau-bord.component.scss */
+
+.dashboard-title {
+    color: #703fca; /* Violet color for the title */
+  }
+  
+  .sprint-label {
+    color: #29a42d; /* Green color for the label */
+  }
+  
+  

@@ -1,0 +1,22 @@
+/* Style the scrollbar */
+.card-body::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+  
+  /* Track */
+  .card-body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the scrollbar track */
+  }
+  
+  /* Handle */
+  .card-body::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar handle */
+  }
+  
+  /* Handle on hover */
+  .card-body::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar handle on hover */
+  }
+  @import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/base/pages/app-user.scss';
+@import '@core/scss/angular/libs/select.component.scss';

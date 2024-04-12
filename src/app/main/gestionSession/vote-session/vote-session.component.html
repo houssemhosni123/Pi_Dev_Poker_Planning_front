@@ -1,0 +1,94 @@
+<div class="right-section">
+  <section id="faq-search-filter">
+    <div class="card faq-search" style="background-image: url('assets/images/banner/banner.png')">
+      <div class="card-body text-center">
+        <h2 class="text-primary">Search User</h2>
+        <form class="faq-search-input">
+          <div class="input-group input-group-merge">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i data-feather="search"></i>
+              </div>
+            </div>
+            <input
+              type="text"
+              (input)="searchDeveloper($event)"
+              class="form-control"
+              placeholder="Search User..."
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  
+
+    <div>
+      <ngx-datatable
+        class="bootstrap core-bootstrap"
+        [rows]="filteredDeveloper"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="40"
+        [footerHeight]="50"
+        [rowHeight]="58"
+        [limit]="10"
+        [selected]="selectedItems"
+        [selectionType]="SelectionType.checkbox"
+        [scrollbarH]="true"
+      >
+        <ngx-datatable-column
+          [width]="50"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [draggable]="false"
+          [resizeable]="false"
+        >
+          <ng-template
+            ngx-datatable-header-template
+            let-allRowsSelected="allRowsSelected"
+            let-selectFn="selectFn"
+          >
+            <div class="custom-control custom-control-primary custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                [checked]="allRowsSelected"
+                (change)="selectFn(!allRowsSelected)"
+                id="headerCustomChkbxRef"
+              />
+              <label class="custom-control-label" for="headerCustomChkbxRef"></label>
+            </div>
+          </ng-template>
+          <ng-template
+            ngx-datatable-cell-template
+            let-rowIndex="rowIndex"
+            let-row="row"
+            let-onCheckboxChangeFn="onCheckboxChangeFn"
+          >
+            <div class="custom-control custom-control-primary custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                [checked]="selectedItems.includes(row)"
+                (change)="toggleRowSelection(row)"
+                id="rowCustomChkbxRef{{ rowIndex }}"
+              />
+              <label class="custom-control-label" for="rowCustomChkbxRef{{ rowIndex }}"></label>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Name" prop="nom_user" [width]="280">
+          <ng-template let-name="value" ngx-datatable-cell-template>
+            <p class="font-medium-1 line-height-1 mb-0">{{ name }}</p>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Prénom" prop="prenom_user" [width]="280"></ngx-datatable-column>
+        <ngx-datatable-column name="Email" prop="email_user" [width]="250"></ngx-datatable-column>
+      </ngx-datatable>
+      <button (click)="sendInvitations()">Inviter</button>
+    </div>
+  </div>
+
+
+<button class="start-session" routerLink="/Session/pagevote">Select UserStory</button>

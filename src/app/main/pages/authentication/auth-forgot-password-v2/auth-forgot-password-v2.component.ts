@@ -2,9 +2,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { CoreConfigService } from '@core/services/config.service';
+import { UserService } from 'app/auth/service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-auth-forgot-password-v2',
@@ -15,6 +18,8 @@ import { CoreConfigService } from '@core/services/config.service';
 export class AuthForgotPasswordV2Component implements OnInit {
   // Public
   public emailVar;
+  email: string;
+
   public coreConfig: any;
   public forgotPasswordForm: UntypedFormGroup;
   public submitted = false;
@@ -29,7 +34,7 @@ export class AuthForgotPasswordV2Component implements OnInit {
    * @param {FormBuilder} _formBuilder
    *
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
+  constructor(private _http: HttpClient,private _userService:UserService,private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -49,23 +54,30 @@ export class AuthForgotPasswordV2Component implements OnInit {
       }
     };
   }
+  resetPassword(email: string): Observable<void> {
+    return this._http.post<void>(`${environment.apiUrl1}/User/reset-password`, { email });
+  }
 
-  // convenience getter for easy access to form fields
+  submitForm(email: string): void {
+    this.resetPassword(email)
+      .subscribe(
+        () => {
+          // Reset successful, handle success behavior
+          console.log('Password reset successful!');
+        },
+        (error) => {
+          // Handle error
+          console.error('Password reset failed:', error);
+        }
+      );
+  }
   get f() {
     return this.forgotPasswordForm.controls;
   }
 
   /**
    * On Submit
-   */
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.forgotPasswordForm.invalid) {
-      return;
-    }
-  }
+  
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------

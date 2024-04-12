@@ -1,1 +1,64 @@
-<p>afficher-sprint-backlog works!</p>
+<!-- Formulaire avec Bootstrap classes -->
+<!-- Liens CDN Bootstrap et FontAwesome -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+
+<form [formGroup]="updateForm" class="mt-4">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="startDate">Date de Début</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+        </div>
+        <input type="date" id="startDate" formControlName="dateDebutSprint" class="form-control" (change)="filterSprintBacklogs()" />
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="endDate">Date de Fin</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+        </div>
+        <input type="date" id="endDate" formControlName="dateFinSprint" class="form-control" (change)="filterSprintBacklogs()" />
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Cartes avec Bootstrap et FontAwesome classes -->
+<div class="row mt-4">
+  <div class="col-lg-4 col-md-6 col-12" *ngFor="let sprintBacklog of sprintBacklogs">
+    <div class="card card-sprint-backlog mb-4">
+      <div class="card-header">
+        <div class="button-container mt-3">
+          <span class="delete-icon" (click)="supprimerSprintBacklog(sprintBacklog.idSprintBacklog)"><i class="fas fa-times"></i></span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="sprint-item">
+          <div class="media">
+            <div class="avatar bg-light-primary rounded">
+              <div class="avatar-content">
+                <i data-feather="activity" class="avatar-icon font-medium-3"></i>
+              </div>
+            </div>
+            <div class="media-body">
+              <p class="sprint-description">{{ sprintBacklog.sprint?.objectifSprint }}</p>
+              <p class="sprint-date">Effort Estimation: {{ sprintBacklog.effortEstimation }}</p>
+              <p class="sprint-date">Définition de Terminé: {{ sprintBacklog.definitionOfDone }}</p>
+              <p class="sprint-date">Priorité: {{ sprintBacklog.priorite }}</p>
+              <p class="sprint-date">Est Terminé: {{ sprintBacklog.estTermine ? 'Oui' : 'Non' }}</p>
+              <p class="sprint-date">Date de Début: {{ sprintBacklog.dateDebut | date }}</p>
+              <p class="sprint-date">Date de Fin: {{ sprintBacklog.dateFin | date }}</p>
+            </div>
+          </div>
+          <div class="button-container mt-3">
+            <button class="btn btn-primary" (click)="ouvrirFormulaireUpdate(sprintBacklog.idSprintBacklog)">Modifier</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

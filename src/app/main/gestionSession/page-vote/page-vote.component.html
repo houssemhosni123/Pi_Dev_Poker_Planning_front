@@ -1,0 +1,50 @@
+<section id="ngx-datatable-user-stories">
+  <section id="faq-search-filter">
+      <div class="card faq-search" style="background-image: url('assets/images/banner/banner.png')">
+          <div class="card-body text-center">
+              <h2 class="text-primary">Search User</h2>
+              <form class="faq-search-input">
+                  <div class="input-group input-group-merge">
+                      <div class="input-group-prepend">
+                          <div class="input-group-text">
+                              <i data-feather="search"></i>
+                          </div>
+                      </div>
+                      <input type="text" (input)="searchUserStory($event)" class="form-control"
+                          placeholder="Search User..." />
+                  </div>
+              </form>
+          </div>
+      </div>
+  </section>
+    <core-card-snippet [snippetCode]="_snippetCodeUserStories">
+      <h4 class="card-title">User Stories</h4>
+  
+      <div class="row">
+        <div class="col-12">
+          <ngx-datatable
+            class="bootstrap core-bootstrap"
+            [rows]="userStories"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="40"
+            [footerHeight]="50"
+            [rowHeight]="58"
+            [limit]="10"
+            [scrollbarH]="true"
+          >
+            <ngx-datatable-column name="Nom" prop="titre_US" [width]="280"></ngx-datatable-column>
+            <ngx-datatable-column name="Description" prop="description_US" [width]="280"></ngx-datatable-column>
+            <ngx-datatable-column name="Statut" prop="statut_US" [width]="250"></ngx-datatable-column>
+            <ngx-datatable-column name="Vélocité" prop="velocite_US" [width]="250"></ngx-datatable-column>
+            <!-- Ajoutez une colonne pour les checkboxes -->
+            <ngx-datatable-column [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <input type="checkbox" [checked]="row.checked" (change)="onCheckboxChange(row)" />
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </core-card-snippet>
+  </section>
+  

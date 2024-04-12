@@ -1,1 +1,58 @@
-<p>afficher-iteration works!</p>
+<!-- iteration-list.component.html -->
+<style>.custom-text-size {
+  font-size: 1.2rem; /* Ajustez la taille du texte selon vos besoins */
+}</style>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="py-3 mb-2"><span class="text-muted fw-light">PokerPlannig /</span> Liste des itérations</h4>
+  
+    <div class="app-ecommerce-category">
+      <!-- Tableau de la liste des itérations -->
+      <div class="row">
+        <div class="col-12 mb-50">
+          <div class="d-flex justify-content-end align-items-center">
+            <span class="mr-1 custom-text-size">Filter</span>
+            <input type="date" [(ngModel)]="startDateFilter" class="btn btn-outline-secondary mr-1" rippleEffect (input)="filterByStartDate()">
+            <button class="btn btn-primary ml-1" (click)="toggleSort()">Toggle Sort</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-datatable table-responsive">
+          <table class="datatables-iteration-list table border-top">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Résultat</th>
+                <th>Date Debut</th>
+                <th>Date Fin</th>
+                <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let iteration of iterations | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+                <td>{{iteration.idIteration}}</td>
+                <td>{{ iteration.resultat }}</td>
+                <td>{{ iteration.date_IterationDebut | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{ iteration.date_IterationFin | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>
+                  <!-- Utilisez la classe btn-group pour regrouper les boutons -->
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-primary mr-2" (click)="updateIteration(iteration.idIteration)">Update</button>
+                    <button class="btn btn-sm btn-outline-danger mr-2" (click)="deleteIteration(iteration)">Delete</button>
+                    <button class="btn btn-sm btn-outline-info" (click)="showEstimations(iteration.idIteration)">Show Estimations</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+            
+        </div>
+
+      </div>
+    </div>
+      <div class="d-flex justify-content-center mt-3">
+            <pagination-controls (pageChange)="p = $event" class="pagination"></pagination-controls>
+          </div>
+  </div>
+  

@@ -1,1 +1,18 @@
-<p>ajouter-session works!</p>
+<div class="card-transaction">
+  <h2>All Session</h2>
+  <button class="btn btn-primary" routerLink="/Session/add">Add Session</button>
+  <div class="card-columns">
+    <div class="card" *ngFor="let session of sessions">
+      <div class="card-body" [style.backgroundColor]="session.statut === 'terminé' ? 'green' : session.statut === 'en cours' ? 'orange' : session.statut === 'annulé' ? 'red' : 'inherit'">
+        <h5 class="card-title">{{ session.nomSession }}</h5>
+        <p class="card-text">{{ session.description }}</p>
+        <p class="card-text">Start Date: {{ session.dateEtHeureDebut }}</p>
+        <p class="card-text">End Date: {{ session.dateEtHeureFin }}</p>
+        <p class="card-text">Type of Vote: {{ session.type }}</p>
+        <p class="card-text">Session Status: {{ session.statut }}</p>
+        <button class="btn btn-info" (click)="showInterfaceUpdate(session.idSession)">Update</button>
+        <button class="btn btn-danger" (click)="confirmDeleteSession(session.idSession)" routerLink="/Session/get">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
