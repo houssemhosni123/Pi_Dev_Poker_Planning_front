@@ -29,7 +29,8 @@ export class FrontIterationComponent implements OnInit {
   {
     this.Showvotes();
   }
- /* onSquareClick(value: number): void {
+
+  /* onSquareClick(value: number): void {
     // Get the current user's ID from the authentication service
     const userId = this.authent.currentUserValue.idUser;
     
@@ -57,25 +58,31 @@ export class FrontIterationComponent implements OnInit {
       }
     );
   }
-  */ onSquareClick(value: number): void {
+  */
+
+
+
+
+  newEstimation:Estimation;
+  
+  onSquareClick(value: number): void {
     // Assurez-vous que la valeur sélectionnée n'est pas nulle
+   
     const userId = this.authent.currentUserValue.idUser;
-    const newEstimation: Estimation = {
-      valeur: value,
-      dateVote: new Date(),
-      idUser: userId, // Set the idUser property with the current user's ID
-      // Add other estimation properties as needed
-    };
     if (value !== null && value !== undefined) {
       // Get the current user's ID from the authentication service
      
       
       // Create a new estimation with the selected value and the current date
      
-      console.log(newEstimation.valeur);
-      console.log(newEstimation.dateVote);
+     this.newEstimation={
+      id_Estimation:null,
+      valeur: value,
+      dateVote: new Date(),
+      idUser: this.authent.currentUserValue.idUser,// Set the idUser property with the current user's ID
+}
       // Envoyez la nouvelle estimation au service d'estimation
-      this.estimationService.AddEstimationWithIteration(newEstimation, userId).subscribe(
+      this.estimationService.AddEstimationWithIteration(this.newEstimation,userId).subscribe(
         (response) => {
           console.log('Estimation added successfully:', response);
           // Mettez à jour votre interface utilisateur ou effectuez d'autres actions si nécessaire
