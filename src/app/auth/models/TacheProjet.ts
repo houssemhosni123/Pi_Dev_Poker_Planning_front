@@ -17,7 +17,8 @@ export interface Tache {
   export enum RoleProjet {
     ProductOwner = 'ProductOwner',
     ScrumMaster = 'ScrumMaster',
-    Developer = 'Developer'
+    Developer = 'Developer',
+    
   }
   
   export enum Location {

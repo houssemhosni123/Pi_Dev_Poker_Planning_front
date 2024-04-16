@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ColumnMode, DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
 
 import { CoreTranslationService } from '@core/services/translation.service';
@@ -15,7 +15,23 @@ import * as snippet from 'app/main/GestionTacheProjet/datatables/datatables.snip
 
 import { DatatablesService } from 'app/main/GestionTacheProjet/datatables/datatables.service';
 import { TacheService } from 'app/Services/gestionTacheProjet/tacheProjet';
+import { User } from 'app/auth/models';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { HttpClient } from '@angular/common/http';
 
+// Load font to pdfMake vfs
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+// Add the font definition
+pdfMake.fonts = {
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Medium.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-MediumItalic.ttf'
+  }
+};
 @Component({
   selector: 'app-datatables',
   templateUrl: './datatables.component.html',
@@ -118,6 +134,104 @@ export class DatatablesComponent implements OnInit {
     this.rows[rowIndex][cell] = event.target.value;
     this.rows = [...this.rows];
   }
+  async generatePDF() {
+    // Load the logo image
+    const logoBlob = await this.http.get('assets/images/logo/logo.png', { responseType: 'blob' }).toPromise();
+    const reader = new FileReader();
+    reader.readAsDataURL(logoBlob);
+    
+    let logoBase64 = '';
+    reader.onloadend = () => {
+      logoBase64 = reader.result as string; // Convert to base64
+    };
+  
+    // Load the background image
+    const bgBlob = await this.http.get('assets/images/pages/vuexy-login-bg.jpg', { responseType: 'blob' }).toPromise();
+    reader.readAsDataURL(bgBlob);
+  
+    let bgBase64 = '';
+    reader.onloadend = () => {
+      bgBase64 = reader.result as string; // Convert to base64
+    };
+  
+    // Wait for the images to be loaded
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  
+    // Current local date
+    const currentDate = new Date().toLocaleDateString();
+  
+    const documentDefinition = {
+      background: [
+        { image: bgBase64, width: 595.28, height: 841.89 }, // Background image
+        { image: logoBase64, width: 100, alignment: 'left', margin: [20, 20] } // Logo
+      ],
+      content: [
+        // Header section with title and date
+        {
+          text: 'Tasks List',
+          style: 'header',
+          alignment: 'center',
+          margin: [0, 20] // Margin top for spacing
+        },
+        // Separator line
+        {
+          canvas: [{ type: 'line', x1: 0, y1: 10, x2: 595.28, y2: 10, lineWidth: 1 }]
+        },
+        // Description of the table
+        {
+          text: 'The following table displays the list of tasks:',
+          margin: [0, 20]
+        },
+        // Table section
+        {
+          table: {
+            headerRows: 1,
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+            body: [
+              ['Tache Projet', 'Projet', 'User', 'Remaining Days', 'Start Date', 'End Date'],
+              ...this.rows.map(row => [
+                row.tacheProjet,
+                row.projet.nom_Projet,
+                `${row.user.nom} ${row.user.prenom}`,
+                this.calculateRemainingDays(row.dateFinTache),
+                new Date(row.dateDebutTache).toLocaleDateString(),
+                new Date(row.dateFinTache).toLocaleDateString()
+              ])
+            ]
+          },
+          margin: [0, 20] // Margin top for spacing
+        },
+        // Separator line
+        {
+          canvas: [{ type: 'line', x1: 0, y1: 10, x2: 595.28, y2: 10, lineWidth: 1 }]
+        },
+        // Signature section
+        {
+          text: 'Signature: ________________________',
+          alignment: 'right',
+          margin: [0, 20] // Margin top for spacing
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        }
+      }
+    };
+  
+    pdfMake.createPdf(documentDefinition).download('tasks-list.pdf');
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   
   updateRowLimit(): void {
@@ -195,6 +309,8 @@ export class DatatablesComponent implements OnInit {
     this.selected.push(...selected);
   }
 
+
+
   /**
    * For ref only, log activate events
    *
@@ -222,10 +338,45 @@ export class DatatablesComponent implements OnInit {
    */
   taches: any[] = []; // Initialize taches as an empty array
 
-  constructor(private _TacheService: TacheService,private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService) {
+  constructor(private http: HttpClient,private _TacheService: TacheService,private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService) {
     this._unsubscribeAll = new Subject();
     this._coreTranslationService.translate(english, french, german, portuguese);
   }
+ /* getUserImageUrl(user: User): string {
+    return `http://localhost:8080/downloadFileByName/${user.photo}`;
+  }*/
+
+  getUserBase64Image(user: User): Observable<string> {
+    const imageUrl = `http://localhost:8080/downloadFileByName/${user.photo}`;
+    return this.http.get(imageUrl, { responseType: 'blob' })
+      .pipe(
+        switchMap(blob => this.blobToBase64(blob))
+      );
+  }
+  
+  private blobToBase64(blob: Blob): Observable<string> {
+    return new Observable<string>(observer => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        observer.next(reader.result as string);
+        observer.complete();
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
+  
+  generateQRData(user: any, base64Image: string): string {
+    if (!user) {
+      return '';
+    }
+  
+    // Concatenate user details and base64 image into a single string
+    const data = `${user.nom},${user.prenom}, ${user.email}, ${base64Image}`;
+  
+    return data;
+  }
+  
+  
   fetchData(): void {
     // Fetch your data here, replace this with your actual data fetching logic
     this._TacheService.getAllTaches().subscribe(data => {
@@ -286,6 +437,7 @@ export class DatatablesComponent implements OnInit {
   /**
    * On init
    */
+ 
   ngOnInit() {
 
     this.fetchData();

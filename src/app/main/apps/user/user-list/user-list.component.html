@@ -3,53 +3,10 @@
     <!-- User List -->
     <section class="users-list-wrapper">
       <!-- users filter start -->
-      <div class="card">
-        <h5 class="card-header">Search Filter</h5>
-        <div class="card-body">
-          <div class="users-list-filter">
-            <form>
-              <div class="row">
-                <div class="col-12 col-md-4">
-                  <fieldset class="form-group">
-                    <ng-select
-                      [items]="selectRole"
-                      [(ngModel)]="selectedRole"
-                      name="selectedRole"
-                      bindLabel="name"
-                      placeholder="Select Role"
-                      (change)="filterByRole($event)"
-                    ></ng-select>
-                  </fieldset>
-                </div>
-                <div class="col-12 col-md-4">
-                  <fieldset class="form-group">
-                    <ng-select
-                      [items]="selectPlan"
-                      [(ngModel)]="selectedPlan"
-                      name="selectedPlan"
-                      bindLabel="name"
-                      placeholder="Select Plan"
-                      (change)="filterByPlan($event)"
-                    ></ng-select>
-                  </fieldset>
-                </div>
-                <div class="col-12 col-md-4">
-                  <fieldset class="form-group">
-                    <ng-select
-                      [items]="selectStatus"
-                      [(ngModel)]="selectedStatus"
-                      name="selectedStatus"
-                      bindLabel="name"
-                      placeholder="Select Status"
-                      (change)="filterByStatus($event)"
-                    ></ng-select>
-                  </fieldset>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      <!-- users filter start -->
+
+<!-- users filter end -->
+
       <!-- users filter end -->
 
       <!-- User Data Table -->
@@ -102,39 +59,40 @@
         >
           <!-- User Column -->
           <!-- User Column -->
-<ngx-datatable-column name="User" prop="fullName" [width]="200">
-  <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
-    <div class="d-flex align-items-center">
-      <div *ngIf="row.avatar; else customAvatar">
-        <img
-          class="rounded-circle mr-1"
-          [src]="getUserImageUrl(users)"
-          height="32"
-          width="32"
-          alt="User Avatar"
-        />
-      </div>
-      <ng-template #customAvatar>
-        <div
-          class="avatar mr-1 ml-0"
-          [ngClass]="{
-            'bg-light-success': row.status === 'active',
-            'bg-light-secondary': row.status === 'inactive',
-            'bg-light-warning': row.status === 'pending'
-          }"
-        >
-          <div class="avatar-content">{{ name | initials }}</div>
-        </div>
-      </ng-template>
-      <div class="cell-line-height">
-        <a routerLink="/apps/user/user-view/{{ row.id }}" class="font-medium-1 d-block">
-          <span class="font-weight-bold">{{ row.prenom }}</span>
-        </a>
-        <span class="text-muted font-small-2"> {{ row.nom }}</span>
-      </div>
-    </div>
-  </ng-template>
-</ngx-datatable-column>
+          <ngx-datatable-column name="User" prop="fullName" [width]="200">
+            <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+              <div class="d-flex align-items-center">
+                <div *ngIf="row.photo; else customAvatar">
+                  <img
+                    class="rounded-circle mr-1"
+                    [src]="getUserImageUrl(row)"
+                    height="40"
+                    width="50"
+                    alt="User Avatar"
+                  />
+                </div>
+                <ng-template #customAvatar>
+                  <div
+                    class="avatar mr-1 ml-0"
+                    [ngClass]="{
+                      'bg-light-success': row.statusUser === 'active',
+                      'bg-light-secondary': row.statusUser === 'inactive',
+                      'bg-light-warning': row.statusUser === 'pending'
+                    }"
+                  >
+                    <div class="avatar-content">{{ name | initials }}</div>
+                  </div>
+                </ng-template>
+                <div class="cell-line-height">
+                  <a routerLink="/apps/user/user-view/{{ row.id }}" class="font-medium-1 d-block">
+                    <span class="font-weight-bold">{{ row.prenom }}</span>
+                  </a>
+                  <span class="text-muted font-small-2"> {{ row.nom }}</span>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          
 
 
           <!-- Email Column -->

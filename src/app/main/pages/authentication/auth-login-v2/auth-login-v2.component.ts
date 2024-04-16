@@ -4,7 +4,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { takeUntil, first } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { AuthenticationService } from 'app/auth/service';
+import { AuthenticationService, UserService } from 'app/auth/service';
 import { CoreConfigService } from '@core/services/config.service';
 
 @Component({
@@ -16,6 +16,9 @@ import { CoreConfigService } from '@core/services/config.service';
 export class AuthLoginV2Component implements OnInit {
   //  Public
   public coreConfig: any;
+  
+  email: string;
+  message: string;
   public loginForm: UntypedFormGroup;
   public loading = false;
   public submitted = false;
@@ -36,7 +39,8 @@ export class AuthLoginV2Component implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _authenticationService: AuthenticationService
+    private _authenticationService: AuthenticationService,
+    private _UserService:UserService
   ) {
     // redirect to home if already logged in
     if (this._authenticationService.currentUserValue) {
@@ -74,7 +78,16 @@ export class AuthLoginV2Component implements OnInit {
   togglePasswordTextType() {
     this.passwordTextType = !this.passwordTextType;
   }
-
+  forgetPassword(): void {
+    this._UserService.forgotPassword(this.email).subscribe(
+      () => {
+        this.message = 'Reset password link has been sent to your email.';
+      },
+      (error) => {
+        this.message = 'Failed to send reset password link.';
+      }
+    );
+  }
   onSubmit() {
     this.submitted = true;
   

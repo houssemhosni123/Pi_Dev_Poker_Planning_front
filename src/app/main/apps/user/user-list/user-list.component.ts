@@ -31,33 +31,20 @@ export class UserListComponent implements OnInit {
   public previousPlanFilter = '';
   public previousStatusFilter = '';
 
-  public selectRole: any = [
-    { name: 'All', value: '' },
-    { name: 'Admin', value: 'Admin' },
-    { name: 'Author', value: 'Author' },
-    { name: 'Editor', value: 'Editor' },
-    { name: 'Maintainer', value: 'Maintainer' },
-    { name: 'Subscriber', value: 'Subscriber' }
+  selectRole: any[] = [
+    { name: 'All', value: 'All' },
+    { name: 'Scrum Master', value: 'ScrumMaster' },
+    { name: 'Developer', value: 'Developer' },
+    { name: 'Product Owner', value: 'ProductOwner' },
   ];
-
-  public selectPlan: any = [
-    { name: 'All', value: '' },
-    { name: 'Basic', value: 'Basic' },
-    { name: 'Company', value: 'Company' },
-    { name: 'Enterprise', value: 'Enterprise' },
-    { name: 'Team', value: 'Team' }
-  ];
-
-  public selectStatus: any = [
-    { name: 'All', value: '' },
-    { name: 'Active', value: 'Active' },
-    { name: 'Inactive', value: 'Inactive' }
-  ];
-
-  public selectedRole = [];
-  public selectedPlan = [];
-  public selectedStatus = [];
-  public searchValue = '';
+selectStatus: any[] = [
+  { name: 'All', value: 'All' },
+  { name: 'Active', value: 'active' },
+  { name: 'Inactive', value: 'inactive' }
+];
+selectedRole: string = 'All';
+selectedStatus: string = 'All';
+searchValue: string = '';
 
   // Decorator
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -75,12 +62,14 @@ export class UserListComponent implements OnInit {
    */
   constructor(
     private _userService:UserService,
-    private _userListService: UserListService,
     private _coreSidebarService: CoreSidebarService,
-    private _coreConfigService: CoreConfigService
   ) {
     this._unsubscribeAll = new Subject();
   }
+  getUserImageUrl(user: User): string {
+    return `http://localhost:8080/downloadFileByName/${user.photo}`;
+  }
+  
   ngOnInit(): void {
 this.getUsers();  }
 
@@ -95,7 +84,6 @@ this.getUsers();  }
   filterUpdate(event) {
     // Reset ng-select on search
     this.selectedRole = this.selectRole[0];
-    this.selectedPlan = this.selectPlan[0];
     this.selectedStatus = this.selectStatus[0];
 
     const val = event.target.value.toLowerCase();

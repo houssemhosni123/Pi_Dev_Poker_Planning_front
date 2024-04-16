@@ -34,7 +34,10 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
   
-
+  public getCurrentUserRole(): Role {
+    const currentUser = this.currentUserSubject.value;
+    return currentUser ? currentUser.rolee : null;
+  }
  
 get idUser(){
 
@@ -45,32 +48,21 @@ get idUser(){
    *  Confirms if user is admin
    */
   get isAdmin() {
+    return this.currentUser && this.currentUserSubject.value && this.currentUserSubject.value.rolee === Role.Admin;
+}
 
-    console.log( this.currentUserSubject.value.rolee);
-    return this.currentUser && this.currentUserSubject.value.rolee=== Role.Admin;
-    
-  }
-  
-  /**
-   *  Confirms if user is ProductOwner
-   */
-  get isProductOwner() {
-    
+get isProductOwner() {
+    return this.currentUser && this.currentUserSubject.value && this.currentUserSubject.value.rolee === Role.ProductOwner;
+}
 
-    return this.currentUser && this.currentUserSubject.value.rolee=== Role.ProductOwner;
-  }
-  /**
-   *  Confirms if user is ScrumMaster
-   */
-  get isScrumMaster() {
-    return this.currentUser && this.currentUserSubject.value.rolee=== Role.ScrumMaster;
-  }
-  /**
-   *  Confirms if user developer
-   */
-  get isdeveloper() {
-    return this.currentUser && this.currentUserSubject.value.rolee === Role.Developer;
-  }
+get isScrumMaster() {
+    return this.currentUser && this.currentUserSubject.value && this.currentUserSubject.value.rolee === Role.ScrumMaster;
+}
+
+get isDeveloper() {
+    return this.currentUser && this.currentUserSubject.value && this.currentUserSubject.value.rolee === Role.Developer;
+}
+
 
   /**
    * User login
@@ -79,6 +71,7 @@ get idUser(){
    * @param password
    * @returns user
    */
+
   login(email: string, password: string) {
     return this._http
       .post<any>(`${environment.apiUrl}/authenticate`, { email, password })
@@ -86,33 +79,24 @@ get idUser(){
         map(user => {
           if (user) {
             if (user.status === 'inactive') {
-              // If user status is inactive, handle accordingly
               console.error('Your account is not active. Please contact the administrator.');
               throw new Error('Your account is not active. Please contact the administrator.');
             }
-  
+
             localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+            // Update the code to handle the user object accordingly
             console.log(user);
-  
+
             setTimeout(() => {
-              this._toastrService.success(
-                'You have successfully logged in as an ' + user.rolee + ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.nom + '!',
-                { toastClass: 'toast ngx-toastr', closeButton: true }
-              );
+              // Update toastr message if needed
             }, 2500);
           } else {
-            // If user is null or token is missing, handle the error or unexpected response
-            // You can throw an error, show a notification, or log a message here
             console.error('Unexpected response from login API:', user);
           }
-  
+
           return user;
         }),
         catchError(error => {
-          // Handle HTTP errors here
-          // You can throw an error, show a notification, or log a message here
           console.error('Login failed:', error);
           return throwError(error);
         })

@@ -12,6 +12,11 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { DatatablesComponent } from './datatables.component';
 import { DatatablesService } from './datatables.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { QRCodeModule } from 'angularx-qrcode';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -37,6 +42,7 @@ const routes: Routes = [
     CardSnippetModule,
     NgxDatatableModule,
     CsvModule,
+    QRCodeModule,
     FormsModule,
     ReactiveFormsModule
   ],

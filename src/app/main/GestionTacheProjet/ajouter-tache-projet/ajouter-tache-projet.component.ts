@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'app/auth/models';
 import { UserService } from 'app/auth/service';
 import { TacheService } from 'app/Services/gestionTacheProjet/tacheProjet';
-import { Tache } from 'app/auth/models/TacheProjet';
+import { RoleProjet, Tache } from 'app/auth/models/TacheProjet';
 import { Projet1 } from 'app/auth/models/Projet';
 import { ToastrService } from 'ngx-toastr';
 import { ProjetService } from 'app/Services/gestionProjetServices/ProjetServices';
@@ -49,6 +49,21 @@ export class AjouterTacheProjetComponent implements OnInit {
     this.loadProjets();
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+  getUserImageUrl(user: User): string {
+    return `http://localhost:8080/downloadFileByName/${user.photo}`;
+  }
   getUsers(): void {
     this.userService.getAll().subscribe(
       (users: User[]) => {

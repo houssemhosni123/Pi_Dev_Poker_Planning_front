@@ -11,6 +11,8 @@ import { ChangePasswordRequest } from 'app/main/gestionUser/Requests/ChangePassw
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private baseUrl1 = 'http://localhost:8080/api/v1/auth';
+  private baseUrl2 = 'http://localhost:8080';
+
 
   /**
    *
@@ -21,6 +23,24 @@ export class UserService {
   /**
    * Get all users
    */
+
+
+
+  forgotPassword(email: string): Observable<any> {
+    return this._http.post(`${environment.apiUrl1}/User/forgot-password`, { email });
+  }
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this._http.post(`${environment.apiUrl1}/User/reset-password`, null, {
+      params: {
+        token,
+        newPassword
+      }
+    });
+  }
+
+
+
+
   getUserById(id: number) {
     return this._http.get<User>(`${environment.apiUrl1}/User/GetUser/${id}`);
   }
@@ -35,16 +55,7 @@ export class UserService {
 
     return this._http.post(uploadUrl, formData);
   }
-  downloadFile(fileName: string): Observable<Blob> {
-    const url = `${environment.apiUrl1}/download/${fileName}`;
-    return this._http.get(url, { responseType: 'blob' });
-  }
-
-  getPhoto(photo: string): string{
-    const photoUrl = `${environment.apiUrl1}/download/${photo}`;
-
-    return `${environment.apiUrl1}/download/${photo}`;
-  }
+  
   /**
    * Get user by id
    */
@@ -55,9 +66,28 @@ export class UserService {
     return this._http.put<User>(`${environment.apiUrl1}/User/UpdateUser/${id}`, user);
   }
 
-  register(registerRequest: RegisterRequest) {
+ /* register(registerRequest: RegisterRequest) {
     return this._http.post<AuthenticationResponse>
     (`${this.baseUrl1}/register`, registerRequest);
+  }*/
+  register(registerRequest: RegisterRequest, photo: File): Observable<AuthenticationResponse> {
+    const formData: FormData = new FormData();
+    
+    formData.append('Nom', registerRequest.nom);
+    formData.append('Prenom', registerRequest.prenom);
+    formData.append('email', registerRequest.email);
+    formData.append('password', registerRequest.password);
+    formData.append('role', registerRequest.role);
+    formData.append('photo', photo);
+
+    return this._http.post<AuthenticationResponse>(`${this.baseUrl1}/register`, formData);
+  }
+  downloadFile(fileName: string): Observable<Blob> {
+    return this._http.get(`${this.baseUrl2}/api/downloadFile/${fileName}`, { responseType: 'blob' });
+  }
+
+  getImage(fileName: string): Observable<Blob> {
+    return this._http.get(`${this.baseUrl2}/download/${fileName}`, { responseType: 'blob' });
   }
  activateUser(userId: number): Observable<void> {
     return this._http.put<void>(`${environment.apiUrl1}/User/ActivateUser/${userId}`, null);
@@ -104,8 +134,13 @@ export class UserService {
     // Make the HTTP request with the JWT token in the headers
     return this._http.patch<any>(`${environment.apiUrl1}/User/change-password`, request, { headers });
 }
-resetPassword(email: string): Observable<void> {
+/*resetPassword(email: string): Observable<void> {
   return this._http.post<void>(`${environment.apiUrl1}/User/reset-password`, { email });
-}
+}*/
+
+
+
+
+
 }
  

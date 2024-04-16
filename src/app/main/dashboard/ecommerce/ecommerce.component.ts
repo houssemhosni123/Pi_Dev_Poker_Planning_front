@@ -201,7 +201,7 @@ export class EcommerceComponent implements OnInit {
     this.isAdmin = this._authenticationService.isAdmin;
     this.isProductOwner = this._authenticationService.isProductOwner;
     this.isScrumMaster = this._authenticationService.isScrumMaster;
-    this.isDeveloper = this._authenticationService.isdeveloper;
+    this.isDeveloper = this._authenticationService.isDeveloper;
 
     this._coreTranslationService.translate(english, french, german, portuguese);
   }

@@ -78,7 +78,9 @@ export class ModifierTacheProjetComponent implements OnInit {
     });
     
   }
- 
+  getUserImageUrl(user: User): string {
+    return `http://localhost:8080/downloadFileByName/${user.photo}`;
+  }
   updateTask(): void {
     const id = this.route.snapshot.params.id;
     const updatedTache = this.taskDetailsForm.value as Tache;

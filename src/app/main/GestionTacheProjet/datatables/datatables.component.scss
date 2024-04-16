@@ -3,3 +3,19 @@
 .datatable-scroll {
   width: auto !important;
 }
+qrcode svg,
+qrcode canvas {
+  width: 70px !important;
+  height: 50px !important;
+}
+.qr-code-container qrcode {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+}
+.custom-qr-code {
+  background-color: #ffffff;
+  border: 5px solid #000000;
+  border-radius: 10px;
+  padding: 10px;
+}

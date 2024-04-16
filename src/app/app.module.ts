@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeDbService } from '@fake-db/fake-db.service';
@@ -23,7 +24,6 @@ import { AuthGuard } from 'app/auth/helpers/auth.guards';
 //import { fakeBackendProvider } from 'app/auth/helpers'; // used to create fake backend
 //import { JwtInterceptor, ErrorInterceptor } from 'app/auth/helpers';
 import { AppComponent } from 'app/app.component';
-import { LayoutModule } from 'app/layout/layout.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
 import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-menu.component';
@@ -50,6 +50,8 @@ import { SprintBacklogService } from './Services/gestionSprintBacklogServices/Sp
 import { ModfierReclamationComponent } from './main/gestionReclamation/modfier-reclamation/modfier-reclamation.component';
 import { ModfierReunionComponent } from './main/gestionReunion/modfier-reunion/modfier-reunion.component';
 import { ModfierSessionComponent } from './main/gestionSession/modfier-session/modfier-session.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { LayoutModule } from './layout/layout.module';
 
 const appRoutes: Routes = [
   {
@@ -227,6 +229,7 @@ const appRoutes: Routes = [
         CommonModule,
         AfficherSprintModule,
         ModfierSprintModule,
+
         TacheTechniqueAddModule,
         AfficherTacheTechniqueModule,
         ModifierTacheTechniqueModule,
@@ -254,7 +257,7 @@ const appRoutes: Routes = [
     providers: [
       SprintService,
       SprintBacklogService,
-       
+
     ],
     bootstrap: [AppComponent]
 })

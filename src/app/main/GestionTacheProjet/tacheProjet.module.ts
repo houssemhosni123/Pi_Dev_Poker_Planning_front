@@ -2,16 +2,24 @@ import { NgModule } from "@angular/core";
 import { AjouterTacheProjetModule } from "./ajouter-tache-projet/ajouter-tache-projet.module";
 import { DatatablesModule } from "./datatables/datatables.module";
 import { ModifierTacheProjetModule } from "./modifier-tache-projet/modifier-tache-projet.module";
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { NgxQRCodeModule } from "ngx-qrcode2";
 
 @NgModule({
   declarations: [  
+  
+    UserDetailsComponent
   ],
   imports: [
     ModifierTacheProjetModule,
     AjouterTacheProjetModule,
-    DatatablesModule
+    DatatablesModule,
+    NgxQRCodeModule,
+
   ],
   exports: [
+
     // Add the modules you want to export here
   ]
 })

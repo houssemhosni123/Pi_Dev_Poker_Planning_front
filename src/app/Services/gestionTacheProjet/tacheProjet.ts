@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Tache } from 'app/auth/models/TacheProjet';
+import { RoleProjet, Tache } from 'app/auth/models/TacheProjet';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,11 @@ export class TacheService {
   addTache(tache: Tache): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/ajouterTache`, tache);
   }
+
+
+ 
+  
+
   calculateRemainingDays(id: number): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/calculateRemainingDays/${id}`);
   }

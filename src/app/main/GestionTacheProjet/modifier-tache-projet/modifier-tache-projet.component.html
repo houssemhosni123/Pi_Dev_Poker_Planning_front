@@ -69,7 +69,7 @@
             <div *ngFor="let user of filteredUsers" class="list-group-item" (click)="addUserToTask(user)">
               <div class="media">
                 <!-- User Avatar -->
-                <img [src]="user.avatar" class="rounded-circle mr-2" alt="User Avatar" height="50" width="50" />
+                <img [src]="getUserImageUrl(user)" class="rounded-circle mr-2" alt="User Avatar" height="50" width="50" />
                 <!-- User Details -->
                 <div class="media-body">
                   <h5 class="mt-0">{{ user.nom }} {{ user.prenom }}</h5>

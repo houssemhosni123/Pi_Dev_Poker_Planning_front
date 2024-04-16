@@ -2,12 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { CoreConfigService } from '@core/services/config.service';
 import { UserService } from 'app/auth/service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-auth-forgot-password-v2',
@@ -18,14 +16,16 @@ import { environment } from 'environments/environment';
 export class AuthForgotPasswordV2Component implements OnInit {
   // Public
   public emailVar;
-  email: string;
-
   public coreConfig: any;
   public forgotPasswordForm: UntypedFormGroup;
   public submitted = false;
+  
+  email: string;
+  message: string;
+  private _unsubscribeAll: Subject<any>;
+  successMessage: string;
 
   // Private
-  private _unsubscribeAll: Subject<any>;
 
   /**
    * Constructor
@@ -34,7 +34,7 @@ export class AuthForgotPasswordV2Component implements OnInit {
    * @param {FormBuilder} _formBuilder
    *
    */
-  constructor(private _http: HttpClient,private _userService:UserService,private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
+  constructor(private _userService: UserService,private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -54,30 +54,32 @@ export class AuthForgotPasswordV2Component implements OnInit {
       }
     };
   }
-  resetPassword(email: string): Observable<void> {
-    return this._http.post<void>(`${environment.apiUrl1}/User/reset-password`, { email });
-  }
 
-  submitForm(email: string): void {
-    this.resetPassword(email)
-      .subscribe(
-        () => {
-          // Reset successful, handle success behavior
-          console.log('Password reset successful!');
-        },
-        (error) => {
-          // Handle error
-          console.error('Password reset failed:', error);
-        }
-      );
-  }
+  // convenience getter for easy access to form fields
   get f() {
     return this.forgotPasswordForm.controls;
   }
 
   /**
    * On Submit
-  
+   */
+  onSubmit(): void {
+    if (this.forgotPasswordForm.valid) {
+      this.email = this.forgotPasswordForm.value.email;
+      this._userService.forgotPassword(this.email).subscribe(
+        () => {
+          this.successMessage = 'Reset password link has been sent to your email.';
+        },
+        (error) => {
+          if (error.error && error.error.message) {
+            this.message = error.error.message;
+          } else {
+            this.message = 'Failed to send reset password link.';
+          }
+        }
+      );
+    }
+  }
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------

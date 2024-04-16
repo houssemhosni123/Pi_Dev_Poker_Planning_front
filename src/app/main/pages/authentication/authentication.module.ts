@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RecaptchaModule } from "ng-recaptcha";
 
 import { CoreCommonModule } from '@core/common.module';
 
@@ -66,6 +67,10 @@ const routes: Routes = [
     AuthResetPasswordV1Component,
     AuthResetPasswordV2Component
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, FormsModule, ReactiveFormsModule, CoreCommonModule]
+  imports: [// Import RecaptchaV3Module here
+  // Import RecaptchaFormsModule here // Import RecaptchaV3Module here
+  RecaptchaModule
+  ,CommonModule, RouterModule.forChild(routes), NgbModule, FormsModule, ReactiveFormsModule, CoreCommonModule]
 })
+
 export class AuthenticationModule {}

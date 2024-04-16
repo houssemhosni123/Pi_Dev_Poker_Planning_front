@@ -119,7 +119,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   toggleSidebar(key): void {
     this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
-
+  getUserImageUrl(user: User): string {
+    return `http://localhost:8080/downloadFileByName/${user.photo}`;
+  }
   /**
    * Set the language
    *

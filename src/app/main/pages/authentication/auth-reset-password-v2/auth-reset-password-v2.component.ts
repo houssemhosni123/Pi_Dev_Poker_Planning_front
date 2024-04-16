@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { CoreConfigService } from '@core/services/config.service';
+import { UserService } from 'app/auth/service';
 
 @Component({
   selector: 'app-auth-reset-password-v2',
@@ -19,9 +20,12 @@ export class AuthResetPasswordV2Component implements OnInit {
   public confPasswordTextType: boolean;
   public resetPasswordForm: UntypedFormGroup;
   public submitted = false;
+ 
+  message: string = '';
 
   // Private
   private _unsubscribeAll: Subject<any>;
+  successMessage: string;
 
   /**
    * Constructor
@@ -29,7 +33,7 @@ export class AuthResetPasswordV2Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
+  constructor(private _userService:UserService, private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -72,12 +76,36 @@ export class AuthResetPasswordV2Component implements OnInit {
   /**
    * On Submit
    */
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.resetPasswordForm.invalid) {
-      return;
+    if (this.resetPasswordForm.valid) {
+      const newPassword = this.resetPasswordForm.value.newPassword;
+      const confirmPassword = this.resetPasswordForm.value.confirmPassword;
+
+      if (newPassword !== confirmPassword) {
+        this.message = 'Passwords do not match.';
+        return;
+      }
+
+      // Assuming you will use a token from the URL for password reset
+      const token = new URLSearchParams(window.location.search).get('token');
+
+      if (!token) {
+        this.message = 'Token not found.';
+        return;
+      }
+
+      this._userService.resetPassword(token, newPassword).subscribe(
+        () => {
+          this.successMessage = 'Password reset successfully.';
+
+          this.message = 'Password reset successfully.';
+        },
+        (error) => {
+          this.message = error.error.message || 'Failed to reset password.';
+        }
+      );
     }
   }
 
@@ -98,7 +126,7 @@ export class AuthResetPasswordV2Component implements OnInit {
       this.coreConfig = config;
     });
   }
-
+  
   /**
    * On destroy
    */
