@@ -2,7 +2,7 @@ import { StatutUserStory } from "./statut_us.enum";
 import { Userstory } from "./userstory.model";
 
 /*export interface Projet {
-  Nom_Projet: string;
+  nomProjet: string;
   Client: string;
   Description_Projet: string;
   DateDebut_Projet: string;
@@ -11,7 +11,7 @@ import { Userstory } from "./userstory.model";
 }*/
 
 export interface Projet {
-  nom_Projet: string;
+  nomProjet: string;
   client: string;
   description_Projet: string;
   dateDebut_Projet: string;

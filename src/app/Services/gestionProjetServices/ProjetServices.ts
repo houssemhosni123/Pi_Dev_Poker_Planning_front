@@ -6,36 +6,43 @@ import { ProjetModule } from "app/main/gestionProjet/Projet.module";
 import { Observable } from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
-  })
-  export class ProjetService {
-    private apiUrl = 'http://localhost:8081/pokerplanning/Projet';
-    
+  providedIn: "root",
+})
+export class ProjetService {
+  private apiUrl = "http://localhost:8081/pokerplanning/Projet";
+
   constructor(private httpClient: HttpClient) {}
 
   getProjets(): Observable<Projet[]> {
     return this.httpClient.get<Projet[]>(`${this.apiUrl}/getprojet`);
-}
+  }
 
-getProjetById(id: number): Observable<Projet> {
-  return this.httpClient.get<Projet>(`${this.apiUrl}/getprojets/${id}`);
-}
+  exportExcel(): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/export-excel`, {
+      responseType: "blob",
+    });
+  }
 
-createProjet(projet: Projet): Observable<Projet> {
-  return this.httpClient.post<Projet>(`${this.apiUrl}/createprojet`, projet);
-}
+  search(text: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/search?text=${text}`);
+  }
 
-updateProjet(idProjet: number, projet: Projet): Observable<Projet> {
-  return this.httpClient.put<Projet>(`${this.apiUrl}/updateprojet/${idProjet}`, projet);
-}
+  getProjetById(id: number): Observable<Projet> {
+    return this.httpClient.get<Projet>(`${this.apiUrl}/getprojets/${id}`);
+  }
 
-deleteProjet(idProjet: number): Observable<any> {
-  return this.httpClient.delete(`${this.apiUrl}/deleteprojet/${idProjet}`);
-}
+  createProjet(projet: Projet): Observable<Projet> {
+    return this.httpClient.post<Projet>(`${this.apiUrl}/createprojet`, projet);
+  }
 
-exportExcel(): Observable<any> {
-  return this.httpClient.get(`${this.apiUrl}/export-excel`, {
-    responseType: "blob",
-  });
-}
+  updateProjet(idProjet: number, projet: Projet): Observable<Projet> {
+    return this.httpClient.put<Projet>(
+      `${this.apiUrl}/updateprojet/${idProjet}`,
+      projet
+    );
+  }
+
+  deleteProjet(idProjet: number): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/deleteprojet/${idProjet}`);
+  }
 }

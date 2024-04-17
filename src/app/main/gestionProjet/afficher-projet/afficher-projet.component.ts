@@ -5,7 +5,8 @@ import { Projet } from "Models/projet.model";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
+
 @Component({
   selector: "app-afficher-projet",
   templateUrl: "./afficher-projet.component.html",
@@ -18,6 +19,7 @@ export class AfficherProjetComponent implements OnInit {
   showSucessDelete: boolean = false;
   dropdownStyle: { [key: string]: string } = {};
   isDropdownOpen: boolean = false;
+  searchText: string;
   constructor(
     private projetService: ProjetService,
     private router: Router,
@@ -65,6 +67,19 @@ export class AfficherProjetComponent implements OnInit {
   }
   updateProjet(idProjet: number, projet: Projet): void {
     this.router.navigate(["/edit-projet", idProjet]);
+  }
+
+  exportExcel() {
+    this.projetService.exportExcel().subscribe((file) => {
+      const fileName = "project-list.xlsx";
+      saveAs(file, fileName);
+    });
+  }
+
+  search(event) {
+    this.projetService.search(this.searchText).subscribe((data) => {
+      this.projets = data;
+    });
   }
 
   //suppimer projet avec userstory
@@ -115,11 +130,11 @@ export class AfficherProjetComponent implements OnInit {
       return "assets/images/icons/bootstrap.svg";
     } else if (projectType === "VUEJS") {
       return "assets/images/icons/vuejs.svg";
-    } else if (projectType === "SPRINGBOOT") {
+    } else if (projectType === "SPRING") {
       return "assets/images/icons/spring.svg";
     }
   }
- //background color for table
+  //background color for table
   getBackgroundColor(projet): string {
     let colors = [];
     colors.push("#90CAF9"); // Bleu clair
@@ -137,13 +152,6 @@ export class AfficherProjetComponent implements OnInit {
     colors.push("#81C784"); // Vert d'eau clair
     const randomNumber = Math.floor(Math.random() * colors.length);
     return colors[randomNumber];
-  }
-  //API EXCEL
-  exportExcel() {
-    this.projetService.exportExcel().subscribe((file) => {
-      const fileName = "project-list.xlsx";
-      saveAs(file, fileName);
-    });
   }
   //menu deroulant 
   toggleDropdown(event: MouseEvent, container: HTMLElement) {

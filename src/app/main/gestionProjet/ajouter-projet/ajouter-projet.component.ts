@@ -28,7 +28,7 @@ export class AjouterProjetComponent implements OnInit {
     private projetService: ProjetService
   ) {
     this.projetForm = this.formBuilder.group({
-      Nom_Projet: ["", Validators.required],
+      nomProjet: ["", Validators.required],
       Client: ["", Validators.required],
       Description_Projet: [""],
       type: [null, Validators.required],
@@ -44,7 +44,7 @@ export class AjouterProjetComponent implements OnInit {
 
   ajouterUserStory() {
     const userStoryFormGroup = this.formBuilder.group({
-      titre_US: ["", Validators.required],
+      titreUS: ["", Validators.required],
       description_US: ["", Validators.required],
       statut_US: ["Afaire", Validators.required],
       velocite_US: [0, Validators.required], // Valeur par défaut, ou 0
@@ -61,7 +61,7 @@ export class AjouterProjetComponent implements OnInit {
       const dateFinISO = new Date(formValue.DateFin_Projet).toISOString();
 
       const projet: Projet = {
-        nom_Projet: formValue.Nom_Projet,
+        nomProjet: formValue.nomProjet,
         client: formValue.Client,
         description_Projet: formValue.Description_Projet,
         dateDebut_Projet: dateDebutISO,
