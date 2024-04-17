@@ -1,41 +1,34 @@
 <!-- Vertical Menu -->
-<ng-container *ngIf="layout === 'vertical' && currentUser">
+<ng-container *ngIf="layout === 'vertical'">
   <ng-container *ngFor="let item of menu">
     <!-- section -->
     <li
       core-menu-vertical-section
-      *ngIf="
-        item.type == 'section' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-      "
+      *ngIf="item.type === 'section'"
       [item]="item"
       class="navigation-header"
     ></li>
 
     <!-- sub-menu item/collapsible of sections  -->
-    <ng-container *ngIf="item.type == 'section'">
-      <ng-container *ngFor="let item of item.children">
-        <!-- item | if openInNewTab set routerLink & routerLinkActive blank -->
+    <ng-container *ngIf="item.type === 'section'">
+      <ng-container *ngFor="let childItem of item.children">
+        <!-- item -->
         <li
           core-menu-vertical-item
-          *ngIf="
-            item.type == 'item' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-          "
-          [item]="item"
-          [ngClass]="{ disabled: item.disabled === true }"
-          [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
-          [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
+          *ngIf="childItem.type === 'item'"
+          [item]="childItem"
+          [ngClass]="{ disabled: childItem.disabled === true }"
+          [routerLink]="childItem.url"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: childItem.exactMatch || false }"
         >
-          <!-- Fix: Required routerLink to identify the active -->
-          <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+          <span class="d-none"></span>
         </li>
         <!-- collapsible -->
         <li
           core-menu-vertical-collapsible
-          *ngIf="
-            item.type == 'collapsible' &&
-            (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-          "
-          [item]="item"
+          *ngIf="childItem.type === 'collapsible'"
+          [item]="childItem"
           class="nav-item has-sub"
         ></li>
       </ng-container>
@@ -44,23 +37,19 @@
     <!-- item -->
     <li
       core-menu-vertical-item
-      *ngIf="
-        item.type == 'item' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-      "
+      *ngIf="item.type === 'item'"
       [item]="item"
       [ngClass]="{ disabled: item.disabled === true }"
-      [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
+      [routerLink]="item.url"
+      [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
     >
-      <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+      <span class="d-none"></span>
     </li>
     <!-- collapsible -->
     <li
       core-menu-vertical-collapsible
-      *ngIf="
-        item.type == 'collapsible' &&
-        (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-      "
+      *ngIf="item.type === 'collapsible'"
       [item]="item"
       class="nav-item has-sub"
     ></li>
@@ -74,34 +63,28 @@
     <!-- section -->
     <li
       core-menu-horizontal-collapsible
-      *ngIf="
-        item.type == 'section' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-      "
+      *ngIf="item.type === 'section'"
       [item]="item"
       class="dropdown nav-item"
     ></li>
 
-    <!-- item | if openInNewTab set routerLink & routerLinkActive blank -->
+    <!-- item -->
     <li
       core-menu-horizontal-item
-      *ngIf="
-        item.type == 'item' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-      "
+      *ngIf="item.type === 'item'"
       [item]="item"
       [ngClass]="{ disabled: item.disabled === true }"
-      [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
+      [routerLink]="item.url"
+      [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
     >
-      <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+      <span class="d-none"></span>
     </li>
 
     <!-- collapsible -->
     <li
       core-menu-horizontal-collapsible
-      *ngIf="
-        item.type == 'collapsible' &&
-        (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-      "
+      *ngIf="item.type === 'collapsible'"
       [item]="item"
       class="dropdown dropdown-submenu"
     ></li>

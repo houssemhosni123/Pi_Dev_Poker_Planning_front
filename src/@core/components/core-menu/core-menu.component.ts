@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
+import { AuthenticationService } from 'app/auth/service';
+import { Role } from 'app/auth/models'; // Import the Role enum
 
 @Component({
   selector: '[core-menu]',
@@ -14,44 +16,55 @@ import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
 })
 export class CoreMenuComponent implements OnInit {
   currentUser: any;
+  role: Role = Role.User; // Default role to User
 
-  @Input()
-  layout = 'vertical';
-
-  @Input()
-  menu: any;
+  @Input() layout = 'vertical';
+  @Input() menu: any;
 
   // Private
   private _unsubscribeAll: Subject<any>;
 
-  /**
-   *
-   * @param {ChangeDetectorRef} _changeDetectorRef
-   * @param {CoreMenuService} _coreMenuService
-   */
-  constructor(private _changeDetectorRef: ChangeDetectorRef, private _coreMenuService: CoreMenuService) {
-    // Set the private defaults
+  constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _coreMenuService: CoreMenuService,
+    private _authService: AuthenticationService
+  ) {
     this._unsubscribeAll = new Subject();
   }
 
-  // Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Set the menu either from the input or from the service
     this.menu = this.menu || this._coreMenuService.getCurrentMenu();
-
-    // Subscribe to the current menu changes
+  
+    // Get the current user and role from AuthenticationService
+    const userRole = this._authService.getCurrentUserRole();
+    if (userRole === Role.Admin) {
+      this.role = Role.Admin;
+    } else if (userRole === Role.ProductOwner) {
+      this.role = Role.ProductOwner;
+    } 
+    else if(userRole === Role.ScrumMaster){
+      this.role = Role.ScrumMaster;
+    }
+    else (userRole === Role.Developer)
+      this.role = Role.Developer;
+    
+      
+      
+      // Add other roles as needed
+  
     this._coreMenuService.onMenuChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
-      this.currentUser = this._coreMenuService.currentUser;
-
-      // Load menu
       this.menu = this._coreMenuService.getCurrentMenu();
-
+  
+      // Filter the menu based on the user's role
+      this.menu = this.menu.filter(item => {
+        if (!item.role || item.role.includes(this.role)) {
+          return true;
+        }
+        return false;
+      });
+  
       this._changeDetectorRef.markForCheck();
     });
   }
+  
 }

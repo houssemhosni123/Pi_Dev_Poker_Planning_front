@@ -132,6 +132,7 @@ export const menu: CoreMenu[] = [
     title: 'User Interface',
     translate: 'MENU.UI.SECTION',
     icon: 'layers',
+    role: [Role.Admin], 
     children: [
       {
         id: 'typography',
