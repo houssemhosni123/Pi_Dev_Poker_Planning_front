@@ -19,3 +19,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, FormsModule, CoreCommonModule, NgxDatatableModule]
   })
   export class VoteSessionModule {}
+  

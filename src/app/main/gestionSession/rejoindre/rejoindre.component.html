@@ -1,0 +1,15 @@
+<div>
+    <div *ngIf="validationMessage === 'Code invalide'" class="error-message">
+        Code de session invalide. Veuillez vérifier et réessayer.
+      </div>
+    <label>ID de session:</label>
+    <input type="text" [(ngModel)]="sessionId">
+  </div>
+  <div>
+    <label>Code de session:</label>
+    <input type="text" [(ngModel)]="sessionCode">
+  </div>
+  <div>
+    <button (click)="validateSessionAndNavigate()"  >Valider la session</button>
+  </div>
+  

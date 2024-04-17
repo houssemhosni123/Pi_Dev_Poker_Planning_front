@@ -4,6 +4,7 @@ import { Estimation } from 'app/Model/estimation';
 import { Iteration } from 'app/Model/iteration';
 import { IterationService } from 'app/Services/gestionIterationServices/IterationServices';
 import { EstimationserviceService } from 'app/Services/gestionIterationServices/estimationservice.service';
+import {StartsocketService } from 'app/Services/gestionSessionServices/startchatSocket';
 import { AuthenticationService } from 'app/auth/service';
 
 @Component({
@@ -12,14 +13,19 @@ import { AuthenticationService } from 'app/auth/service';
   styleUrls: ['./front-iteration.component.scss']
 })
 export class FrontIterationComponent implements OnInit {
-
+  selectedUserStoryTitle :any;
   selectedValue: number | undefined;
+  
+  constructor(private authent:AuthenticationService,private estimationService: EstimationserviceService,private iterationService :IterationService,private router: Router,private startsocketservice:StartsocketService ) { }
   ngOnInit(): void {
     this.estimationService.getEstimations().subscribe((estimation: Estimation) => {
       // Mettez à jour votre interface utilisateur avec la nouvelle estimation si nécessaire
     });
+    this.startsocketservice.getUserStory().subscribe((selectedUserStoryTitle: string) => {
+      this.selectedUserStoryTitle = selectedUserStoryTitle;
+    });
   }
-  constructor(private authent:AuthenticationService,private estimationService: EstimationserviceService,private iterationService :IterationService,private router: Router ) { }
+  //selectedUserStoryTitle=this.startsocketservice.getUserStory();
   Showvotes(): void {
     // Utilisez la méthode navigateByUrl pour naviguer vers la route avec l'ID
   

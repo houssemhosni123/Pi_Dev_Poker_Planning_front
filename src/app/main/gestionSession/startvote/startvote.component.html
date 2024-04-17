@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="projectSelect">Sélectionner un projet :</label>
+          <select id="projectSelect" class="form-control" [(ngModel)]="selectedProject" (change)="loadUserStories()">
+            <option value="">-- Sélectionner un projet --</option>
+            <option *ngFor="let project of Listproject" [value]="project.nom_Projet">{{ project.nom_Projet }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3" *ngIf="selectedProject && userStories && userStories.length > 0">
+      <div class="col-md-12">
+        <div class="right-section">
+          <ngx-datatable
+            class="bootstrap core-bootstrap"
+            [rows]="userStories"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="40"
+            [footerHeight]="50"
+            [rowHeight]="58"
+            [limit]="10"
+            [selected]="selectedItems"
+            [selectionType]="SelectionType.checkbox"
+            [scrollbarH]="true"
+          >
+            <ngx-datatable-column name="Select" [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" [checked]="selectedItems.includes(row)" (change)="toggleRowSelection(row)" id="checkbox{{ row.email }}" />
+                  <label class="custom-control-label" for="checkbox{{ row.email }}"></label>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Titre" prop="titre_US" [width]="280"></ngx-datatable-column>
+            <ngx-datatable-column name="Description" prop="description_US" [width]="280"></ngx-datatable-column>
+            <ngx-datatable-column name="Statut" prop="statut_US" [width]="280"></ngx-datatable-column>
+            <ngx-datatable-column name="Vélocité" prop="velocite_US" [width]="280"></ngx-datatable-column>
+            <!-- Ajoutez d'autres colonnes selon les champs de votre user story -->
+          </ngx-datatable>
+          <div class="btn btn-primary me-sm-3 me-1" (click)="lancerIteration()">Lanch Iteration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

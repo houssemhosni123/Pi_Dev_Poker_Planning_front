@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { sessionservice } from 'app/Services/gestionSessionServices/SessionService';
 import { addSession } from '../model/addSession';
 import { customBadWordValidator } from './customBadWordValidator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-afficher-session',
@@ -15,9 +16,10 @@ export class AfficherSessionComponent implements OnInit {
   sessionss: any[] = [];
   p: number = 1;
 
+
   constructor(
     private SessionService:sessionservice,
-    private fb:FormBuilder) { }
+    private fb:FormBuilder,private router: Router) { }
 
   ngOnInit(): void {
     this.validationForm = this.fb.group({
@@ -27,18 +29,26 @@ export class AfficherSessionComponent implements OnInit {
       dateEtHeureFin: ["",Validators.required],
       type: ["",Validators.required],
       statut:["",Validators.required]
+      
     });
+    
   }
   
 
 
   public addSession(){
     console.log(this.validationForm.value);
-
+    
     this.SessionService.postSession(this.validationForm.value).subscribe(res =>{
 
       console.log(res)
+      this.refreshPage();
 
     })
+  }
+  refreshPage() {
+    this.router.navigateByUrl('/Session/get', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/Session/get']);
+    });
   }
 }

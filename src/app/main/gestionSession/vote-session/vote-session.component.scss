@@ -1,16 +1,4 @@
-.container {
-    display: flex;
-  }
-  
-  .left-section, .right-section {
-    flex: 1;
-  }
-  
-  .left-section {
-    margin-right: 20px; /* Espace entre les deux sections */
-  }
-  
-  .start-session {
-    margin-top: 20px; /* Espace entre les deux sections et le bouton "Start Session" */
-  }
-  
+@import '@core/scss/base/pages/page-blog';
+
+@import '@core/scss/angular/libs/quill-editor.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';

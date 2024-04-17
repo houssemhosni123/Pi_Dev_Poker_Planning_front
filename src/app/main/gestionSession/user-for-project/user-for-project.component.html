@@ -1,0 +1,42 @@
+<div class="right-section">
+    <section id="faq-search-filter">
+      <div class="card faq-search" style="background-image: url('assets/images/banner/banner.png')">
+        <div class="card-body text-center">
+          <h2 class="text-primary">Search User</h2>
+          
+        </div>
+      </div>
+    </section>
+  
+    <ngx-datatable
+      class="bootstrap core-bootstrap"
+      [rows]="usersAndRoles"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="40"
+      [footerHeight]="50"
+      [rowHeight]="58"
+      [limit]="10"
+      [selected]="selectedItems"
+      [selectionType]="SelectionType.checkbox"
+      [scrollbarH]="true"
+    >
+      <ngx-datatable-column name="Select" [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [checked]="selectedItems.includes(row)" (change)="toggleRowSelection(row)" id="checkbox{{ row.email }}" />
+            <label class="custom-control-label" for="checkbox{{ row.email }}"></label>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Email" prop="email" [width]="280"></ngx-datatable-column>
+      <ngx-datatable-column name="Role" prop="role" [width]="280"></ngx-datatable-column>
+    </ngx-datatable>
+  
+    <div class="form-group row">
+      <div class="col-sm-9 offset-sm-3">
+        <button (click)="sendInvitations()" class="btn btn-primary mr-1" rippleEffect routerLink="/Session/startvote">Inviter</button>
+        <button routerLink="/Session/pagevote" class="btn btn-primary mr-1" rippleEffect>Select UserStory</button>
+      </div>
+    </div>
+  </div>
+  
