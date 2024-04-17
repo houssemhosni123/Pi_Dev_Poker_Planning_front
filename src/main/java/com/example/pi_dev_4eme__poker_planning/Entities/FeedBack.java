@@ -32,7 +32,7 @@ public class FeedBack implements Serializable {
     private String role_feedback;
 
     private Boolean anonyme;
-
+    private String hhvh;
     @OneToOne
     @JoinColumn(name = "survey_id", referencedColumnName = "idsurvey")
     private Survey survey;

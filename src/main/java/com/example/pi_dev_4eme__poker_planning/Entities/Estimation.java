@@ -1,6 +1,7 @@
 package com.example.pi_dev_4eme__poker_planning.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -22,19 +24,21 @@ public class Estimation implements Serializable {
     private Long id_Estimation;
 
     private int valeur;
-
+    private Date dateVote;
 
 
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="idIteration",referencedColumnName = "idIteration",
-            insertable = false,updatable = false)
+            insertable = true,updatable = true)
     private Iteration iteration;
 
 
-    @ManyToOne
+    @OneToOne
+    @JsonIgnore
     @JoinColumn(name="idUser",referencedColumnName = "idUser",
-            insertable = false,updatable = false)
+            insertable = true,updatable = true  )
 
     private User user;
 }

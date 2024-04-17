@@ -1,5 +1,6 @@
 package com.example.pi_dev_4eme__poker_planning.Services;
 
+import com.example.pi_dev_4eme__poker_planning.Api.sendRegistrationEmail;
 import com.example.pi_dev_4eme__poker_planning.Controllers.ChangePasswordRequest;
 import com.example.pi_dev_4eme__poker_planning.Entities.Role;
 import com.example.pi_dev_4eme__poker_planning.Entities.StatusUser;
@@ -12,16 +13,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+
 @RequiredArgsConstructor
 @Service
 public class UserServices implements IUserServices{
+
+    private final sendRegistrationEmail sE;
+
     @Autowired
     UserRepository userRepositories;
     private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public User addUser(User user) {
+        return userRepositories.save(user);
+    }
+
     @Override
     public List<User> ShowAllUsers() {
         return userRepositories.findAll() ;
@@ -75,6 +83,12 @@ public class UserServices implements IUserServices{
         });
     }
 
+    @Override
+    public List<String> getAllTitreUser() {
+        return userRepositories.findAllNOM();
+
+    }
+
     public int countScrumMasters() {
         return userRepositories.countUsersByRole(Role.ScrumMaster);
     }
@@ -113,4 +127,19 @@ public class UserServices implements IUserServices{
         // save the new password
         userRepositories.save(user);
     }
+
+    private String generateResetToken() {
+        // Generate a random token using UUID or any other method
+        return UUID.randomUUID().toString();
+    }
+
+
+
+
+
+
+
+
+
+
 }

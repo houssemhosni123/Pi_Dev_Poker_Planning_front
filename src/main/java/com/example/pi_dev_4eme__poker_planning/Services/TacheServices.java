@@ -1,27 +1,20 @@
 package com.example.pi_dev_4eme__poker_planning.Services;
 
-import com.example.pi_dev_4eme__poker_planning.Entities.Projet;
-import com.example.pi_dev_4eme__poker_planning.Entities.Tache;
-import com.example.pi_dev_4eme__poker_planning.Entities.User;
-import com.example.pi_dev_4eme__poker_planning.Repositories.IProjetRepository;
 import com.example.pi_dev_4eme__poker_planning.Repositories.ITacheRepository;
 import com.example.pi_dev_4eme__poker_planning.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 
 @Service
-public class TacheServices implements ITacheServices {
+public class TacheServices  {
     @Autowired
     ITacheRepository TRepository;
     @Autowired
     UserRepository userRepositories;
-    @Autowired
-    IProjetRepository projetRepositories;
 
-    @Override
+
+   /* @Override
     public void addTache(Tache tache, Long idUser, int idprojet) {
         User user = userRepositories.findById(idUser).orElse(null);
         Projet projet = projetRepositories.findById(idprojet).orElse(null);
@@ -46,5 +39,5 @@ public class TacheServices implements ITacheServices {
         tache =TRepository.findTachesByIdTache(idtache);
         TRepository.delete(tache);
 
-    }
+    }*/
 }

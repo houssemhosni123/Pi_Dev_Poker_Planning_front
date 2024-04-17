@@ -1,5 +1,6 @@
 package com.example.pi_dev_4eme__poker_planning.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +25,9 @@ public class Sprint implements Serializable {
     private Date dateFinSprint;
     @Enumerated(EnumType.STRING)
     private EtatSprint etatSprint;
+    @JsonIgnore
     @OneToMany(mappedBy = "sprint", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SprintBacklog> sprintBacklogs;
 
-    // Autres attributs et méthodes...
+
 }

@@ -4,6 +4,7 @@ package com.example.pi_dev_4eme__poker_planning.Entities;
 import com.example.pi_dev_4eme__poker_planning.Configurations.GrantedAuthorityDeserializer;
 import com.example.pi_dev_4eme__poker_planning.Configurations.GrantedAuthoritySerializer;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
@@ -40,8 +41,6 @@ public class User implements UserDetails ,Serializable
     @Enumerated(EnumType.STRING)
     private StatusUser Status;
     private String Tel;
-    private String tt;
-
 
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
@@ -59,8 +58,9 @@ public class User implements UserDetails ,Serializable
     /*@ManyToMany (cascade = CascadeType.ALL)
     Set<Projet>Projets;*/
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Estimation> estimations;
+    @JsonIgnore
+    @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private Estimation estimation;
 
     @JsonSerialize(contentUsing = GrantedAuthoritySerializer.class)
     @JsonDeserialize(contentUsing = GrantedAuthorityDeserializer.class)

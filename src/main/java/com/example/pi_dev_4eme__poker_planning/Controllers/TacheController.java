@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/Tache")
 public class TacheController
 {
-    @Autowired
+  /*  @Autowired
     TacheServices Tservice;
     @PutMapping("/ajouterTache/{idU}/{idP}")
     public void  addReclamtion(@RequestBody Tache tache,@PathVariable("idU") Long idUser,@PathVariable("idP") int idprojet) {
@@ -35,5 +35,5 @@ public class TacheController
     {
         Tservice.DeleteTache(tache, idtache);
 
-    }
+    }*/
 }

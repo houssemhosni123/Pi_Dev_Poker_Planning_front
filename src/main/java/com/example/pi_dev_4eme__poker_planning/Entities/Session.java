@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -28,9 +29,14 @@ public class Session implements Serializable {
     private String Description;
     private Date DateEtHeureDebut ;
     private Date DateEtHeureFin ;
-    private String type;
+    private String codeSession;
+    public String LinkSession;
+
     @Enumerated(EnumType.STRING)
     private StatutDeSession statut;
+
+    @Enumerated(EnumType.STRING)
+    private TypeDeVote vote;
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "session")
@@ -45,8 +51,13 @@ public class Session implements Serializable {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "session")
-    private Set<UserStory> UserStory;
+    //@OneToMany(cascade = CascadeType.ALL,mappedBy = "session")
+    //private Set<UserStory> UserStory;
 
-
+    /*@ManyToMany
+    @JoinTable(name = "session_user",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
+    */
 }

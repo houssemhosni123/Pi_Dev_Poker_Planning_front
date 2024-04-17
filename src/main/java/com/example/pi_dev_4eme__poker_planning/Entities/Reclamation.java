@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -20,14 +22,16 @@ public class Reclamation implements Serializable {
     Long idReclamation;
     String titre_Reclamation;
     String contenu_Reclamation;
-    Date dateSoumission;
+    LocalDateTime dateSoumission;
+    //yasssin
     @ManyToOne
     @JoinColumn(name = "idUser",referencedColumnName = "idUser",
-            insertable = false,updatable = false)
+            insertable = true,updatable = false)
     User userReclamer;
 
     @ManyToOne
     @JoinColumn(name = "idReunion" ,referencedColumnName = "idReunion",
-            insertable = false,updatable = false)
+            insertable = true,updatable = false)
     Reunion reunionReclamer;
+
 }

@@ -1,5 +1,6 @@
 package com.example.pi_dev_4eme__poker_planning.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,18 +21,19 @@ public class SprintBacklog implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSprintBacklog;
-    private String userStory;
     private int effortEstimation;
     private String definitionOfDone;
     private int priorite;
     private boolean estTermine;
     private Date dateDebut;
     private Date dateFin;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "sprint_id")
     private Sprint sprint;
+    @JsonIgnore
+    @OneToMany(mappedBy = "sprintBacklog",cascade = CascadeType.ALL)
+    private List<UserStory> userStories;
 
-   @OneToMany(mappedBy = "sprintBacklog",cascade = CascadeType.ALL)
-    private List<UserStory> UserStorys;
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.pi_dev_4eme__poker_planning.Entities;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,3 +26,6 @@ public class Question {
     private Survey survey;
 
 }
+
+
+

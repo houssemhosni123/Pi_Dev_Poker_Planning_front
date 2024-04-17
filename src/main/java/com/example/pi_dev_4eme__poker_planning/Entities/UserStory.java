@@ -1,5 +1,6 @@
 package com.example.pi_dev_4eme__poker_planning.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,13 +18,13 @@ import java.util.List;
 public class UserStory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int IdUserStory;
+    Long IdUserStory;
     String Titre_US;
     String Description_US;
     @Enumerated(EnumType.STRING)
     StatutUserStory Statut_US;
     int Velocite_US;
-
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     Projet projet;
     @ManyToOne
@@ -32,7 +33,8 @@ public class UserStory implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     List<TacheTechnique> tacheTechniques;
 
-   //hethy fil entites UserStory
+    //hethy fil entites UserStory
+    @JsonIgnore
     @ManyToOne
     Session session;
 

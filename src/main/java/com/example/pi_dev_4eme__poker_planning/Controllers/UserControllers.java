@@ -6,6 +6,8 @@ import com.example.pi_dev_4eme__poker_planning.Entities.Tache;
 import com.example.pi_dev_4eme__poker_planning.Entities.User;
 import com.example.pi_dev_4eme__poker_planning.Services.TacheServices;
 import com.example.pi_dev_4eme__poker_planning.Services.UserServices;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,23 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/User")
 public class UserControllers {
     @Autowired
     UserServices Uservice;
+    private static final Logger logger = LoggerFactory.getLogger(UserControllers.class);
 
-    @GetMapping("/GetUser/{userId}")
+    @PostMapping("/adduser")
+    public User addUser(User user) {
+      return Uservice.addUser(user);
+    }
+
+
+
+        @GetMapping("/GetUser/{userId}")
     User getUserById(@PathVariable Long userId) {
         return Uservice.getUserById(userId);
     }
@@ -72,4 +83,9 @@ public class UserControllers {
         Uservice.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/getNomUser")
+    public List<String> getAllTitreUser(){
+        return Uservice.getAllTitreUser();
+    }
+
 }

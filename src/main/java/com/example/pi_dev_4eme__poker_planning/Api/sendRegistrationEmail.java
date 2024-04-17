@@ -70,4 +70,57 @@ public class sendRegistrationEmail {
             e.printStackTrace();
         }
     }
+    public void sendResetEmail(String email, String resetToken) {
+        // Sender's email and password
+        final String senderEmail = "houssenhosni@gmail.com";
+        final String senderPassword = "lsxkucgmnacvkuad";
+
+        // Email properties
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com"); // Specify your SMTP server
+        properties.put("mail.smtp.port", "587"); // Specify your SMTP port
+
+        // Session
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+
+        try {
+            // Create a MimeMessage object
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field
+            message.setFrom(new InternetAddress(senderEmail));
+
+            // Set To: header field
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+            // Set Subject: header field
+            message.setSubject("Password Reset Request");
+
+            // Set email content
+            String resetLink = "http://yourwebsite.com/reset-password?token=" + resetToken;
+            String emailContent = "Dear User,\n\n" +
+                    "You have requested to reset your password. Please click on the link below to reset your password:\n\n" +
+                    resetLink + "\n\n" +
+                    "If you didn't request this, please ignore this email.\n\n" +
+                    "Regards,\n" +
+                    "Your Application Team";
+
+            // Set email content
+            message.setText(emailContent);
+
+            // Send message
+            Transport.send(message);
+
+            System.out.println("Reset email sent successfully to " + email);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
 }
