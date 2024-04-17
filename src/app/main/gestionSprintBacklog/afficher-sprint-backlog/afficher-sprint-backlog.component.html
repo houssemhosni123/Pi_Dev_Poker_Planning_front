@@ -7,7 +7,7 @@
 <form [formGroup]="updateForm" class="mt-4">
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="startDate">Date de Début</label>
+      <label for="startDate" class="dates-label"class="dates-label">Dates de début après cette date:</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text"><i class="fas fa-calendar"></i></div>
@@ -16,7 +16,8 @@
       </div>
     </div>
     <div class="form-group col-md-6">
-      <label for="endDate">Date de Fin</label>
+      <label for="startDate" class="dates-label">Dates de début après cette date:</label>
+
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text"><i class="fas fa-calendar"></i></div>
@@ -49,8 +50,9 @@
               <p class="sprint-date">Effort Estimation: {{ sprintBacklog.effortEstimation }}</p>
               <p class="sprint-date">Définition de Terminé: {{ sprintBacklog.definitionOfDone }}</p>
               <p class="sprint-date">Priorité: {{ sprintBacklog.priorite }}</p>
-              <p class="sprint-date">Est Terminé: {{ sprintBacklog.estTermine ? 'Oui' : 'Non' }}</p>
-              <p class="sprint-date">Date de Début: {{ sprintBacklog.dateDebut | date }}</p>
+              <p class="sprint-date" [style.color]="sprintBacklog.estTermine ? 'black' : 'red'" [style.font-weight]="sprintBacklog.estTermine ? 'bold' : 'normal'">
+                Est Terminé: {{ sprintBacklog.estTermine ? 'Oui' : 'Non' }}
+              </p>              <p class="sprint-date">Date de Début: {{ sprintBacklog.dateDebut | date }}</p>
               <p class="sprint-date">Date de Fin: {{ sprintBacklog.dateFin | date }}</p>
             </div>
           </div>

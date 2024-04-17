@@ -40,9 +40,9 @@ export class ModfierSprintBacklogComponent implements OnInit {
       definitionOfDone: [''],
       priorite: [''],
       estTermine: [false],
-      dateDebut: [null],
-      dateFin: [null],
-      sprintId: [null],
+      dateDebut: [''],
+      dateFin: [''],
+      sprintId: [''],
     });
   }
 

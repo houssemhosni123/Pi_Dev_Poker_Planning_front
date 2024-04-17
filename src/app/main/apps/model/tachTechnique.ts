@@ -16,5 +16,5 @@ export interface TacheTechnique {
 export enum StatutTacheTechnique {
   Encours = 'Encours',
   Afaire = 'Afaire',
-  Terminee = 'Terminee'
+//  Terminee = 'Terminee'
 }

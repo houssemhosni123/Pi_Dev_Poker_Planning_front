@@ -35,9 +35,6 @@ export class TacheTechniqueService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  unassignTacheTechnique(tacheTechniqueId: number): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/${tacheTechniqueId}/unassign`, {});
-  }
   
   searchTachesTechniques(query: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/searchAdvanced?query=${query}`);
