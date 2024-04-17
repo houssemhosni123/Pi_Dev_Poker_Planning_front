@@ -71,8 +71,11 @@ const appRoutes: Routes = [
       ),
   },
   { path: "projets", component: AfficherProjetComponent },
+  { path: 'userstorys', component: AfficherUserstoryComponent },
   { path: "create-projet", component: AjouterProjetComponent },
   { path: "edit-projet/:idProjet", component: ModfierProjetComponent },
+  { path: 'projet/:idProjet', component: AjouterUserstoryComponent },
+  { path: 'edit-userstory/:IdUserStory', component: ModfierUserstoryComponent },
   {
     path: "edit-user-story/:IdUserStory",
     component: ModfierUserstoryComponent,

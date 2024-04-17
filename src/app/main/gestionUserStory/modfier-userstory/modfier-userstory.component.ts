@@ -11,7 +11,7 @@ import { data } from 'autoprefixer';
 })
 export class ModfierUserstoryComponent implements OnInit {
   userstory: Userstory;
-  IdUserStory: number;
+  idUserStory: number;
   successMessage: string='';
 
   constructor(
@@ -22,10 +22,10 @@ export class ModfierUserstoryComponent implements OnInit {
 
   ngOnInit(): void {
     // Extraire IdUserStory de la route
-    this.IdUserStory = +this.route.snapshot.paramMap.get('IdUserStory');
+    this.idUserStory = +this.route.snapshot.paramMap.get('IdUserStory');
     
     // Charger les détails de l'User Story à modifier
-    this.userStoryService.getUserStoryById(this.IdUserStory).subscribe(
+    this.userStoryService.getUserStoryById(this.idUserStory).subscribe(
       (data:Userstory) =>{
         this.userstory= data;
       },
@@ -36,10 +36,8 @@ export class ModfierUserstoryComponent implements OnInit {
     
   }
 
-
-
   saveChanges(): void {
-    this.userStoryService.updateUserStory(this.IdUserStory, this.userstory).subscribe(
+    this.userStoryService.updateUserStory(this.idUserStory, this.userstory).subscribe(
       (updatedUserStory: Userstory) => {
         console.log('User Story mise à jour avec succès :', updatedUserStory);
         this.successMessage = 'User Story modifiée avec succès.';
@@ -47,7 +45,7 @@ export class ModfierUserstoryComponent implements OnInit {
         // Rediriger vers la page des User Stories ou toute autre page nécessaire
         setTimeout(() => {
           this.successMessage = '';
-          this.router.navigate(['/user-stories']);
+          this.router.navigate(['/userstorys']);
         }, 2000); // Afficher le message pendant 2 secondes
       },
       (error: any) => {
@@ -56,3 +54,4 @@ export class ModfierUserstoryComponent implements OnInit {
     );
   }
 }
+

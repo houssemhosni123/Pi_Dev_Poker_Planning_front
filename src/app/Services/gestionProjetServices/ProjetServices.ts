@@ -32,4 +32,10 @@ updateProjet(idProjet: number, projet: Projet): Observable<Projet> {
 deleteProjet(idProjet: number): Observable<any> {
   return this.httpClient.delete(`${this.apiUrl}/deleteprojet/${idProjet}`);
 }
+
+exportExcel(): Observable<any> {
+  return this.httpClient.get(`${this.apiUrl}/export-excel`, {
+    responseType: "blob",
+  });
+}
 }

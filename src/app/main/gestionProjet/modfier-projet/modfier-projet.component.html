@@ -1,22 +1,22 @@
 <form (ngSubmit)="saveChanges()">
     <div class="form-group">
-      <label for="nomProjet">Nom du Projet:</label>
+      <h5 for="nomProjet">Nom du Projet:</h5>
       <input type="text" id="nomProjet" class="form-control" [(ngModel)]="projet.nom_Projet" name="nomProjet" required>
     </div>
     <div class="form-group">
-      <label for="client">Client:</label>
+      <h5 for="client">Client:</h5>
       <input type="text" id="client" class="form-control" [(ngModel)]="projet.client" name="client" required>
     </div>
     <div class="form-group">
-      <label for="description">Description:</label>
+      <h5 for="description">Description:</h5>
       <textarea id="description" class="form-control" [(ngModel)]="projet.description_Projet" name="description"></textarea>
     </div>
     <div class="form-group">
-      <label for="dateDebut">Date de Début:</label>
+      <h5 for="dateDebut">Date de Début:</h5>
       <input type="date" id="dateDebut" class="form-control" [(ngModel)]="projet.dateDebut_Projet" name="dateDebut" required>
     </div>
     <div class="form-group">
-      <label for="dateFin">Date de Fin:</label>
+      <h5 for="dateFin">Date de Fin:</h5>
       <input type="date" id="dateFin" class="form-control" [(ngModel)]="projet.dateFin_Projet" name="dateFin" required>
     </div>
     <button type="submit" class="btn btn-primary">Enregistrer</button>

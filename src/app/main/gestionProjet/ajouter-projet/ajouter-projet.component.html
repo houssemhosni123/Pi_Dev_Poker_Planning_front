@@ -1,200 +1,84 @@
-<form (ngSubmit)="saveProjet()" [formGroup]="projetForm">
-  <label for="nomProjet">Nom du Projet:</label>
-  <input type="text" id="nomProjet" formControlName="Nom_Projet" />
+<h2 class="purple-text">Projets</h2>
+<form (ngSubmit)="saveProjet()" [formGroup]="projetForm" class="mt-2">
+  <style>
+    .purple-text {
+      color: #8a2be2; /* Couleur mauve */
+    }
+  </style>
+  <div class="form-group">
+    <h6 for="nomProjet">Nom du Projet:</h6>
+    <input type="text" id="nomProjet" formControlName="Nom_Projet" class="form-control" />
+  </div>
 
-  <label for="client">Client:</label>
-  <input type="text" id="client" formControlName="Client" />
+  <div class="form-group">
+    <h6 for="client">Client:</h6>
+    <input type="text" id="client" formControlName="Client" class="form-control" />
+  </div>
 
-  <label for="description">Description:</label>
-  <textarea id="description" formControlName="Description_Projet"></textarea>
+  <div class="form-group">
+    <h6 for="description">Description:</h6>
+    <textarea id="description" formControlName="Description_Projet" class="form-control"></textarea>
+  </div>
 
-  <label for="type">Type:</label>
-  <select id="type" formControlName="type">
-    <option value="ANGULAR">Angular</option>
-    <option value="FIGMA">Figma</option>
-    <option value="REACT">React</option>
-    <option value="BOOTSTRAP">Bootstrap</option>
-    <option value="VUEJS">Vue js</option>
-  </select>
+  <div class="form-group">
+    <h6 for="type">Type:</h6>
+    <select id="type" formControlName="type" class="form-control">
+      <option value="ANGULAR">Angular</option>
+      <option value="FIGMA">Figma</option>
+      <option value="REACT">React</option>
+      <option value="BOOTSTRAP">Bootstrap</option>
+      <option value="VUEJS">Vue js</option>
+      <option value="SPRINGBOOT">Spring boot</option>
+    </select>
+  </div>
 
-  <label for="dateDebut">Date de Début:</label>
-  <input type="date" id="dateDebut" formControlName="DateDebut_Projet" />
+  <div class="form-group">
+    <h6 for="dateDebut">Date de Début:</h6>
+    <input type="date" id="dateDebut" formControlName="DateDebut_Projet" class="form-control" />
+  </div>
 
-  <label for="dateFin">Date de Fin:</label>
-  <input type="date" id="dateFin" formControlName="DateFin_Projet" />
+  <div class="form-group">
+    <h6 for="dateFin">Date de Fin:</h6>
+    <input type="date" id="dateFin" formControlName="DateFin_Projet" class="form-control" />
+  </div>
 
   <hr />
 
-  <h4>User Stories:</h4>
+  <h2 class="purple-text">User Storys</h2>
   <div formArrayName="userStory">
-    <div
-      *ngFor="let userStory of userStoryControls.controls; let i = index"
-      [formGroupName]="i"
-    >
-      <label for="titreUS{{ i }}">Titre:</label>
-      <input type="text" id="titreUS{{ i }}" formControlName="titre_US" />
+    <div *ngFor="let userStory of userStoryControls.controls; let i = index" [formGroupName]="i">
+      <div class="form-group">
+        <h6 for="titreUS{{ i }}">Titre:</h6>
+        <input type="text" id="titreUS{{ i }}" formControlName="titre_US" class="form-control" />
+      </div>
 
-      <label for="descriptionUS{{ i }}">Description:</label>
-      <textarea
-        id="descriptionUS{{ i }}"
-        formControlName="description_US"
-      ></textarea>
+      <div class="form-group">
+        <h6 for="descriptionUS{{ i }}">Description:</h6>
+        <textarea id="descriptionUS{{ i }}" formControlName="description_US" class="form-control"></textarea>
+      </div>
 
-      <label for="statutUS{{ i }}">Statut:</label>
-      <select id="statutUS{{ i }}" formControlName="statut_US">
-        <option value="Afaire">A faire</option>
-        <option value="Encours">En cours</option>
-        <option value="Terminee">Terminée</option>
-      </select>
+      <div class="form-group">
+        <h6 for="statutUS{{ i }}">Statut:</h6>
+        <select id="statutUS{{ i }}" formControlName="statut_US" class="form-control">
+          <option value="Afaire">A faire</option>
+          <option value="Encours">En cours</option>
+          <option value="Terminée">Terminée</option>
+        </select>
+      </div>
 
-      <label for="velociteUS{{ i }}">Vélocité:</label>
-      <input
-        type="number"
-        id="velociteUS{{ i }}"
-        formControlName="velocite_US"
-      />
+      <div class="form-group">
+        <h6 for="velociteUS{{ i }}">Vélocité:</h6>
+        <input type="number" id="velociteUS{{ i }}" formControlName="velocite_US" class="form-control" />
+      </div>
     </div>
   </div>
 
-  <button type="button" (click)="ajouterUserStory()">Ajouter User Story</button>
-  <hr />
-
-  <button type="submit" [disabled]="projetForm.invalid">
+  <button type="button" (click)="ajouterUserStory()" class="btn btn-primary mb-3">
+    Ajouter User Story
+  </button>
+  <hr/>
+  <button type="submit" [disabled]="projetForm.invalid" class="btn btn-success">
     Enregistrer Projet
   </button>
 </form>
 
-<!--form id="basic-horizontal-layouts" (ngSubmit)="saveProjet()" [formGroup]="projetForm" >
-  <div class="row match-height">
-    <div class="col-md-6 col-12">
-      <core-card-snippet [snippetCode]="_snippetCodeHorizontal">
-        <h4 class="card-title">Créer Projet</h4>
-
-        <div class="card-body">
-          <form class="form form-horizontal">
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group row">
-                  <div class="col-sm-3 col-form-label">
-                    <label for="nomProjet">Nom du Projet</label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="text" id="nomProjet" class="form-control" formControlName="Nom_Projet" placeholder="Nom du Projet" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group row">
-                  <div class="col-sm-3 col-form-label">
-                    <label for="client">Client</label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="text" id="client" class="form-control" formControlName="Client" placeholder="Client" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group row">
-                  <div class="col-sm-3 col-form-label">
-                    <label for="description">Description Projet</label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="text" id="description" class="form-control" formControlName="Description_Projet" placeholder="Description Projet" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group row">
-                  <div class="col-sm-3 col-form-label">
-                    <label for="dateDebut">Date de Début</label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="date" id="dateDebut" class="form-control" formControlName="DateDebut_Projet" placeholder="Date de Début" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group row">
-                  <div class="col-sm-3 col-form-label">
-                    <label for="dateFin">Date Fin</label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="date" id="dateFin" class="form-control" formControlName="DateFin_Projet" placeholder="Date Fin" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-9 offset-sm-3">
-                <button type="button" (click)="ajouterUserStory()" rippleEffect class="btn btn-primary mr-1">Ajouter UserStorys</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </core-card-snippet>
-    </div>
-  </div>
-
-  <form formArrayName="userStory">
-    <div class="row match-height">
-      <div class="col-md-6 col-12">
-        <core-card-snippet [snippetCode]="_snippetCodeHorizontal">
-          <h4 class="card-title">Créer userStory</h4>
-          <div *ngFor="let userStory of userStoryControls.controls; let i = index" [formGroupName]="i">
-            <div class="card-body">
-              <form class="form form-horizontal" [formGroup]="userStory">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-sm-3 col-form-label">
-                        <label for="titreUS{{i}}">Titre UserStory</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <input type="text" id="titreUS{{i}}" class="form-control" formControlName="titre_US" placeholder="Titre UserStory" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-sm-3 col-form-label">
-                        <label for="descriptionUS{{i}}">Description UserStory</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <input type="text" id="descriptionUS{{i}}" class="form-control" formControlName="description_US" placeholder="Description UserStory" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-sm-3 col-form-label">
-                        <label for="statutUS{{i}}">Statut UserStory</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <select id="statutUS{{i}}" class="form-control" formControlName="statut_US">
-                          <option value="Afaire">A faire</option>
-                          <option value="Encours">En cours</option>
-                          <option value="Terminee">Terminée</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-sm-3 col-form-label">
-                        <label for="velociteUS{{i}}">Vélocité</label>
-                      </div>
-                      <div class="col-sm-9">
-                        <input type="number" id="velociteUS{{i}}" class="form-control" formControlName="velocite_US" placeholder="Vélocité" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-9 offset-sm-3">
-                    <button type="submit" [disabled]="projetForm.invalid" rippleEffect class="btn btn-primary mr-1">Enregistrer</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </core-card-snippet>
-      </div>
-    </div>
-  </form>
-</form-->
