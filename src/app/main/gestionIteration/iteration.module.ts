@@ -9,6 +9,7 @@ import { EstimationShowComponent } from './estimation-show/estimation-show.compo
 import { EstimationShowModule } from "./estimation-show/estimation-show.module";
 import { VoteEstimationsComponent } from './vote-estimations/vote-estimations.component';
 import { VoteEstimationsModule } from "./vote-estimations/vote-estimations.module";
+import { ChatIterationModule } from "./chat-iteration/chat-iteration.module";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { VoteEstimationsModule } from "./vote-estimations/vote-estimations.modul
         ModifierIterationModule,
         FrontModuleModule,
         EstimationShowModule,
-        VoteEstimationsModule
+        VoteEstimationsModule,
+        ChatIterationModule
       ]
   })
   export class IterationModule {}

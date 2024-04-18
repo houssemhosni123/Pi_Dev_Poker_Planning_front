@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div *ngIf="validationMessage === 'Code invalide'" class="alert alert-danger">
+        Code de session invalide. Veuillez vérifier et réessayer.
+      </div>
+      <div>
+        <label for="sessionId">ID de session:</label>
+        <input type="text" class="form-control" id="sessionId" [(ngModel)]="sessionId">
+      </div>
+      <div>
+        <label for="sessionCode">Code de session:</label>
+        <input type="text" class="form-control" id="sessionCode" [(ngModel)]="sessionCode">
+      </div>
+      <div>
+        <button class="btn btn-primary mt-3" (click)="validateSessionAndNavigate()">Valider la session</button>
+      </div>
+    </div>
+  </div>
+</div>

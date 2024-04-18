@@ -26,10 +26,10 @@
       </div>
   
   
-    <div class="form-group row">
+      <div class="form-group row">
         <label for="type" class="col-sm-3 col-form-label">Type De Vote:</label>
         <div class="col-sm-9">
-          <select formControlName ="vote" class="form-control" id="type" name="type">
+          <select formControlName="type" class="form-control" id="type" name="type">
             <option value="Fibonacci">Fibonacci</option>
             <option value="t_shirt">t_shirt</option>
           </select>
@@ -52,7 +52,7 @@
     </div>
     <div class="form-group row">
       <div class="col-sm-9 offset-sm-3">
-        <button (click)="updateSession()" type="submit" rippleEffect class="btn btn-primary mr-1" >Update Session!</button>
+        <button (click)="updateSession()" type="submit" rippleEffect class="btn btn-primary mr-1"  routerLink="/Session/get" >Update Session!</button>
       </div>
     </div>
   </form>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { sessionservice } from 'app/Services/gestionSessionServices/SessionService';
 
 @Component({
@@ -10,27 +10,43 @@ import { sessionservice } from 'app/Services/gestionSessionServices/SessionServi
 })
 export class ModfierSessionComponent implements OnInit {
   validationForm!: FormGroup;
-  idSession: any = this.activatedRoute.snapshot.params['idSession']
+  idSession: any;
+  sessionData: any;
 
-  constructor(private SessionService:sessionservice,
-    private fb:FormBuilder,private activatedRoute: ActivatedRoute) { }
+  constructor(private SessionService: sessionservice,
+    private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-     this.validationForm = this.fb.group({
-      nomSession: ["",Validators.required],
-      description: ["",Validators.required],
-      dateEtHeureDebut:["",Validators.required],
-      dateEtHeureFin: ["",Validators.required],
-      type: ["",Validators.required],
-      statut:["",Validators.required]
-    });
-
+    this.idSession = this.activatedRoute.snapshot.params['idSession'];
+    // Vérifiez s'il y a des données de session passées en tant qu'état
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras.state) {
+      this.sessionData = navigation.extras.state.sessionData;
+      this.initForm();
+    } else {
+      // Si aucune donnée n'est passée, récupérez les données de la session normalement
+      this.SessionService.getSessionbyId(this.idSession).subscribe((data) => {
+        this.sessionData = data;
+        this.initForm();
+      });
+    }
   }
-  updateSession(){
-    this.SessionService.updateSession(this.idSession,this.validationForm.value).subscribe(res =>{
-      console.log(res)
+
+  initForm() {
+    this.validationForm = this.fb.group({
+      nomSession: [this.sessionData.nomSession, Validators.required],
+      description: [this.sessionData.description, Validators.required],
+      dateEtHeureDebut: [this.sessionData.dateEtHeureDebut, Validators.required],
+      dateEtHeureFin: [this.sessionData.dateEtHeureFin, Validators.required],
+      type: [this.sessionData.type, Validators.required],
+      statut: [this.sessionData.statut, Validators.required],
+    });
+  }
+
+  updateSession() {
+    this.SessionService.updateSession(this.idSession, this.validationForm.value).subscribe(res => {
+      console.log(res);
+      this.router.navigate(['/Session']);
     })
   }
-
-
 }

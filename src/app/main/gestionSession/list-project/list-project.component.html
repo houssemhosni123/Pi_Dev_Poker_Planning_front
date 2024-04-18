@@ -1,0 +1,33 @@
+<div class="card-transaction">
+  <div class="card-columns">
+    <div class="card" *ngFor="let project of Listproject" style="transition: transform 0.3s ease;">
+      <div class="card-header">
+        <i data-feather="more-vertical" class="font-medium-3 cursor-pointer d-none"></i>
+      </div>
+      <div class="card-body">
+        <div class="media">
+          <div class="avatar bg-light-primary rounded"></div>
+          <div class="media-body">
+            <h5 class="card-title">{{ project.nom_Projet }}</h5>
+            <p class="card-text">{{ project.description_Projet }}</p>
+            <p class="card-text">
+              <strong>Start Date:</strong> {{ project.dateDebut_Projet | date: 'dd/MM/yyyy' }}
+            </p>
+            <p class="card-text">
+              <strong>End Date:</strong> {{ project.dateFin_Projet | date: 'dd/MM/yyyy' }}
+            </p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+          <button class="btn btn-info" style="color: #fff; padding: 6px 10px; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;" (mouseenter)="project.buttonHovered = true" (mouseleave)="project.buttonHovered = false" [style.backgroundColor]="project.buttonHovered ? '#574feb' : '#7367f0'">
+            User for project
+          </button>
+          
+          <button class="btn btn-danger" (click)="showUsersForProject(project.nom_Projet)">
+  <i class="feather icon-arrow-right"></i> <!-- Icône pour suivant -->
+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

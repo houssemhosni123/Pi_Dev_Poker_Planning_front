@@ -12,6 +12,7 @@ import { Observable, throwError } from "rxjs";
 
 export class sessionservice{
    private apiurl = 'http://localhost:8080/Session'
+   private apiurl2 = 'http://localhost:8080/Projet'
     constructor(private http:HttpClient){
     }
     postSession(session:addSession):Observable<any>{
@@ -37,6 +38,11 @@ export class sessionservice{
       );
     
     }
+    
+    getListProject(): Observable<any>{
+      return this.http.get<any>(this.apiurl2+'/getprojet')
+    }
+
     deleteSession(idSession: any): Observable<any> {
       return this.http.delete(`${this.apiurl}/delete/${idSession}`);
     }
@@ -44,23 +50,35 @@ export class sessionservice{
     updateSession(idSession:number, session:any):Observable<any>{
       return this.http.put(this.apiurl+ `/update/${idSession}`,session);
     }
-    getSessionbyId(idSession:number, session:any){
-      return this.http.get(this.apiurl+`/get/${idSession}`,session)
+    getSessionbyId(idSession:number): Observable<any>{
+      return this.http.get(this.apiurl+`/get/${idSession}`)
     }
     getDev(): Observable<any> {
       return this.http.get(this.apiurl+'/getUser')
     }
 
-    getUserStory(idProjet:number): Observable<any>{
-      return this.http.get(`${this.apiurl}/${idProjet}/userStories`)
+    getUserStory(nom_Projet:string): Observable<any>{
+      return this.http.get(`${this.apiurl}/userStories/${nom_Projet}`)
       
     }
 
-    sendEmail(emails: string[]) {
-      const idSession = 1; // Vous pouvez le modifier selon vos besoins
+    getUserForProject(nom_Projet:string){
+      return this.http.get(this.apiurl+`/usersAndRoles/${nom_Projet}`)
+
+    }
+
+    sendEmail(emails: string[], idSession: number) {
       const url = `${this.apiurl}/send/${idSession}`;
+     
       return this.http.post(url, { mails: emails });
     }
+
+    validateSessionCode(idSession: number, code: string): Observable<string> {
+      return this.http.get<string>(`${this.apiurl}/validate?idSession=${idSession}&code=${code}`);
+    }
+
+
+
 
     
 

@@ -52,6 +52,15 @@ import { ModfierReunionComponent } from './main/gestionReunion/modfier-reunion/m
 import { ModfierSessionComponent } from './main/gestionSession/modfier-session/modfier-session.component';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { LayoutModule } from './layout/layout.module';
+import { ReunionDetailComponent } from './reunion-detail/reunion-detail.component';
+import { RejoindreComponent } from './main/gestionSession/rejoindre/rejoindre.component';
+/*import { AfficherProjetComponent } from './main/gestionProjet/afficher-projet/afficher-projet.component';
+import { AjouterProjetComponent } from './main/gestionProjet/ajouter-projet/ajouter-projet.component';
+import { ModfierProjetComponent } from './main/gestionProjet/modfier-projet/modfier-projet.component';
+import { AfficherUserstoryComponent } from './main/gestionUserStory/afficher-userstory/afficher-userstory.component';
+import { AjouterUserstoryComponent } from './main/gestionUserStory/ajouter-userstory/ajouter-userstory.component';
+import { ModfierUserstoryComponent } from './main/gestionUserStory/modfier-userstory/modfier-userstory.component';
+import { StatistiquesComponent } from './main/statistiques/statistiques.component';*/
 
 const appRoutes: Routes = [
   {
@@ -73,6 +82,12 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'Feedback',
+    loadChildren: () => import('./main/gestionFeedback/feed-back.module').then(m => m.FeedBackModule),
+    canActivate: [AuthGuard]
+  },
+  {
+
     path: 'components',
     loadChildren: () => import('./main/components/components.module').then(m => m.ComponentsModule),
     canActivate: [AuthGuard]
@@ -93,7 +108,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   
-  {
+  /*{
     path: 'Projet',
     loadChildren: () => import('./main/gestionProjet/Projet.module').then(m => m.ProjetModule),
     canActivate: [AuthGuard],
@@ -104,7 +119,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/gestionUserStory/UserStory.module').then(m => m.UserStoryModule),
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] } // Only ProductOwner role allowed
-  },
+  },*/
   {
     path: 'Sprint',
     loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
@@ -123,12 +138,16 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ScrumMaster] } // Only ProductOwner role allowed
   },
+  
   {
     path: 'Session',
     loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] } // Only ScrumMaster role allowed
+    data: { roles: [Role.ScrumMaster] } // Only ScrumMaster role allowed
   },
+{ path: 'Rejoindre', component: RejoindreComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.developer] }  },
   {path: 'Session/:idSession/update',component:ModfierSessionComponent},
   {
     path: 'Reclamation',
@@ -148,9 +167,9 @@ const appRoutes: Routes = [
     path: 'Iteration',
     loadChildren: () => import('./main/gestionIteration/iteration.module').then(m => m.IterationModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] } // Only Developer role allowed
+    // Only Developer role allowed
   },
-  
+  { path: 'reunion-detail/:id', component: ReunionDetailComponent },
   {
     path: 'tables',
     loadChildren: () => import('./main/tables/tables.module').then(m => m.TablesModule),
@@ -189,7 +208,17 @@ const appRoutes: Routes = [
   { path: 'AjouterTacheTechnique', component: TacheTechniqueAddComponent ,
   canActivate: [AuthGuard],
   data: { roles: [Role.ScrumMaster] }  },
-  
+  /*{ path: "projets", component: AfficherProjetComponent },
+  { path: 'userstorys', component: AfficherUserstoryComponent },
+  { path: "create-projet", component: AjouterProjetComponent },
+  { path: "edit-projet/:idProjet", component: ModfierProjetComponent },
+  { path: 'projet/:idProjet', component: AjouterUserstoryComponent },
+  { path: 'edit-userstory/:IdUserStory', component: ModfierUserstoryComponent },
+  {
+    path: "edit-user-story/:IdUserStory",
+    component: ModfierUserstoryComponent,
+  },
+  { path: "statistiques", component: StatistiquesComponent },*/
   {
     path: '',
     redirectTo: '/dashboard/ecommerce',
@@ -229,7 +258,6 @@ const appRoutes: Routes = [
         CommonModule,
         AfficherSprintModule,
         ModfierSprintModule,
-
         TacheTechniqueAddModule,
         AfficherTacheTechniqueModule,
         ModifierTacheTechniqueModule,

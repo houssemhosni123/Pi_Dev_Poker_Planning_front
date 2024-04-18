@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="projectSelect">Sélectionner un projet :</label>
+        <select id="projectSelect" class="form-control" [(ngModel)]="selectedProject" (change)="loadUserStories()">
+          <option value="">-- Sélectionner un projet --</option>
+          <option *ngFor="let project of Listproject" [value]="project.nom_Projet">{{ project.nom_Projet }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center mt-3" *ngIf="selectedProject && userStories && userStories.length > 0">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th> <!-- Colonne de sélection -->
+              <th>Titre</th>
+              <th>Description</th>
+              <th>Statut</th>
+              <th>Vélocité</th>
+              <!-- Ajoutez d'autres colonnes selon les champs de votre user story -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let story of userStories" (mouseenter)="onMouseEnter(story)" (mouseleave)="onMouseLeave(story)" [class.hovered]="story.hovered">
+              <td>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" [checked]="selectedItems.includes(story)" (change)="toggleRowSelection(story)" id="checkbox{{ story.id }}" />
+                  <label class="custom-control-label" for="checkbox{{ story.id }}"></label>
+                </div>
+              </td>
+              <td>{{ story.titre_US }}</td>
+              <td>{{ story.description_US }}</td>
+              <td>{{ story.statut_US }}</td>
+              <td [ngStyle]="{ 'color': getVelociteColor(story.velocite_US) }">{{ story.velocite_US }}</td>
+              <!-- Ajoutez d'autres colonnes selon les champs de votre user story -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn btn-primary me-sm-3 me-1" (click)="lancerIteration()">Lancer l'itération</div>
+    </div>
+  </div>
+</div>

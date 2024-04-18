@@ -7,6 +7,7 @@ import { RoleProjet, Tache } from 'app/auth/models/TacheProjet';
 import { Projet1 } from 'app/auth/models/Projet';
 import { ToastrService } from 'ngx-toastr';
 import { ProjetService } from 'app/Services/gestionProjetServices/ProjetServices';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ajouter-tache-projet',
@@ -24,6 +25,7 @@ export class AjouterTacheProjetComponent implements OnInit {
   showProjectCard: boolean = false;
 
   constructor(
+    private router: Router ,
     private _projetService: ProjetService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
@@ -139,6 +141,8 @@ export class AjouterTacheProjetComponent implements OnInit {
             'Success',
             { closeButton: true }
           );
+          // Navigate to the desired route after task added successfully
+          this.router.navigate(['/TacheProjet/AfficherTacheProjet']);
         }, 2500);
       },
       (error) => {
@@ -151,7 +155,6 @@ export class AjouterTacheProjetComponent implements OnInit {
       }
     );
   }
-
   showUserList() {
     this.showUserCard = true;
     this.showProjectCard = false;

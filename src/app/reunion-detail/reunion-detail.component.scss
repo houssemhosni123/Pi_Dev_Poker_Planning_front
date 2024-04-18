@@ -1,0 +1,50 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Augmentez la taille du rembourrage pour espacer le contenu */
+    font-size: 16px; /* Augmentez la taille de la police */
+  }
+  
+  .table th {
+    text-align: left;
+    background-color: #f2f2f2;
+  }
+  /* Other styles omitted for brevity */
+
+.countdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; // Add space above the countdown
+  }
+  
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+  }
+  
+  .countdown-time {
+    font-size: 8em; // Increased size
+    background-color: #c5c1c5; // Purple color
+    color: #fff;
+    padding: 10px 20px; // Adjust padding as needed
+    border-radius: 10px; // Rounded corners
+    // Add any additional styling as per design requirements
+  }
+  
+  .countdown-label {
+    margin-top: 5px;
+    color: #3b3737; // Lighter text color
+    font-size: 1em; // Adjust label font size if needed
+    // Add any additional styling as per design requirements
+  }
+  
+  /* Adjust the table styles if necessary */
+  
+  

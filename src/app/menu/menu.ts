@@ -1,61 +1,86 @@
 import { CoreMenu } from '@core/types';
 import { Role } from 'app/auth/models';
 
-//? DOC: http://localhost:7777/demo/vuexy-angular-admin-dashboard-template/documentation/guide/development/navigation-menus.html#interface
+
 
 export const menu: CoreMenu[] = [
-  // Dashboard
-  {
-    id: 'dashboard',
-    title: 'Dashboard',
-    translate: 'MENU.DASHBOARD.COLLAPSIBLE',
-    type: 'collapsible',
-    role: [Role.Admin], //? To hide collapsible based on user role
-    icon: 'home',
-    badge: {
-      title: '2',
-      translate: 'MENU.DASHBOARD.BADGE',
-      classes: 'badge-light-warning badge-pill'
-    },
-    children: [
-      /*{
-        id: 'analytics',
-        title: 'Analytics',
-        translate: 'MENU.DASHBOARD.ANALYTICS',
-        type: 'item',
-        role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
-        icon: 'circle',
-        url: 'dashboard/analytics'
-      },*/
-      {
-        // If role is not assigned will be display to all
-        id: 'ecommerce',
-        title: 'eCommerce',
-        translate: 'MENU.DASHBOARD.ECOMMERCE',
-        type: 'item',
-        role:['Admin'],
-        icon: 'circle',
-        url: 'dashboard/ecommerce'
-      }
-    ]
-  },
-  // Apps & Pages
+  // Dashboard Admin
   {
     id: 'apps',
     type: 'section',
-    title: 'Apps & Pages',
+    title: 'Admin & Pages',
     translate: 'MENU.APPS.SECTION',
     icon: 'package',
-    role: [Role.Admin], //? To hide collapsible based on user role
+    role: [Role.Admin], 
+
+    children: [
+      {
+        id: 'list',
+        title: 'List Users',
+        translate: 'MENU.APPS.USER.LIST',
+        type: 'item',
+        icon: 'user',
+        url: 'apps/user/user-list'
+      },
+      
+      {
+        id: 'list',
+        title: 'RoleProjets',
+        translate: 'MENU.APPS.USER.LIST',
+        type: 'item',
+        icon: 'user',
+        url: 'TacheProjet/AjouterTacheProjet'
+      },
+    ]
+  },
+  //Dashbord Product owner
+  {
+    id: 'apps',
+    type: 'section',
+    title: 'ProductOwner & Pages',
+    translate: 'MENU.APPS.SECTION',
+    icon: 'package',
+    role: [Role.ProductOwner], 
+
+    children: [
+      {
+        id: 'list',
+        title: 'List Users',
+        translate: 'MENU.APPS.USER.LIST',
+        type: 'item',
+        icon: 'user',
+        url: 'apps/user/user-list'
+      },
+      
+      
+    ]
+  },
+  //Dashbord  ScrumMaster 
+  {
+    id: 'apps',
+    type: 'section',
+    title: 'Scrum Master & Pages',
+    translate: 'MENU.APPS.SECTION',
+    icon: 'package',
+    role: [Role.ScrumMaster], 
 
     children: [
       {
         id: 'email',
-        title: 'TacheTechnique',
+        title: 'Dashbord Scrum Master',
         translate: 'MENU.APPS.EMAIL',
         type: 'item',
         icon: 'briefcase',
-        url: 'AjouterTacheTechnique'
+        url: 'Reclamation/AfficherChartsPie'
+
+      },
+      {
+        id: 'email',
+        title: ' Crée Session',
+        translate: 'MENU.APPS.EMAIL',
+        type: 'item',
+        icon: 'briefcase',
+        url: 'Session/add'
 
       },
       {
@@ -64,10 +89,19 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CHAT',
         type: 'item',
         icon: 'book',
-        url: 'UserStory/AfficherUserStroy'
+        url: ''
       },
       {
-        id: 'todo',
+        id: 'email',
+        title: 'Iteration',
+        translate: 'MENU.APPS.EMAIL',
+        type: 'item',
+        icon: 'briefcase',
+        url: 'Iteration/AfficherIteration'
+
+      },
+      {
+        id: 'Reunion',
         title: 'Reunion',
         translate: 'MENU.APPS.TODO',
         type: 'item',
@@ -88,70 +122,47 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CALENDAR',
         type: 'item',
         icon: 'alert-triangle',
-        url: 'Reclamation/ajouterReclamation'
+        url: 'Reclamation/AfficherReclamation'
       },
-      {
-        id: 'users',
-        title: 'User',
-        translate: 'MENU.APPS.USER.COLLAPSIBLE',
-        type: 'collapsible',
-        icon: 'user',
-        children: [
-          {
-            id: 'list',
-            title: 'List',
-            translate: 'MENU.APPS.USER.LIST',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/user/user-list'
-          },
-          {
-            id: 'view',
-            title: 'View',
-            translate: 'MENU.APPS.USER.VIEW',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/user/user-view'
-          },
-          {
-            id: 'edit',
-            title: 'Edit',
-            translate: 'MENU.APPS.USER.EDIT',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/user/user-edit'
-          }
-        ]
-      }
+      
     ]
   },
-  // User Interface
+  // Dashbord developer 
   {
     id: 'user-interface',
     type: 'section',
-    title: 'User Interface',
+    title: 'Devoloper Interface',
     translate: 'MENU.UI.SECTION',
     icon: 'layers',
-    role: [Role.Admin], 
+    role: [Role.developer], 
     children: [
       {
-        id: 'typography',
-        title: 'Iterations',
-        translate: 'MENU.UI.TYPOGRAPHY',
+        id: 'calendar',
+        title: 'Calendar',
+        translate: 'MENU.APPS.CALENDAR',
         type: 'item',
-        icon: 'clock',
-        url: 'Iteration/AfficherIteration'
+        icon: 'calendar',
+        url: 'Reunion/AfficherCalendar'
       },
       {
         id: 'colors',
-        title: 'Sprint',
+        title: 'Reclamation',
         translate: 'MENU.UI.COLORS',
         type: 'item',
         icon: 'activity',
-        url: 'AjouterSprint'
+        url: 'Reclamation/ajouterReclamation'
+      },
+      {
+        id: 'colors',
+        title: 'Vote',
+        translate: 'MENU.UI.COLORS',
+        type: 'item',
+        icon: 'activity',
+        url: '/Iteration/FrontIteration'
       },
       
-      {
+      
+      /*{
         id: 'cards',
         title: 'SprintBacklog',
         translate: 'MENU.UI.CARDS.COLLAPSIBLE',
@@ -204,8 +215,8 @@ export const menu: CoreMenu[] = [
             url: 'ui/card/actions'
           }
         ]
-      },
-      {
+      },*/
+     /* {
         id: 'components',
         title: 'Components',
         translate: 'MENU.UI.COMPONENTS.COLLAPSIBLE',
@@ -510,8 +521,8 @@ export const menu: CoreMenu[] = [
             url: '/extensions/i18n'
           }
         ]
-      },
-      {
+      },*/
+     /* {
         id: 'page-layouts',
         title: 'Page Layouts',
         translate: 'MENU.UI.LAYOUTS.COLLAPSIBLE',
@@ -559,7 +570,7 @@ export const menu: CoreMenu[] = [
             url: 'ui/page-layouts/layout-blank'
           }
         ]
-      }
+      }*/
     ]
   },
   

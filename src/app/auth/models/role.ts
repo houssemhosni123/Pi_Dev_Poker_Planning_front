@@ -2,6 +2,6 @@
   Admin = 'Admin',
   ProductOwner = 'ProductOwner',
   ScrumMaster = 'ScrumMaster',
-  Developer = 'Developer',
+  developer = 'developer',
   User = "User"
 }

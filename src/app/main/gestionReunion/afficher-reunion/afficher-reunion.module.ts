@@ -5,6 +5,8 @@ import { CoreCommonModule } from "@core/common.module";
 import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.module";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 import { AfficherReunionComponent } from "./afficher-reunion.component";
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 
 const routes: Routes = [
     {path: 'AfficherReunions',component: AfficherReunionComponent,data: { animation: 'layout' }}
@@ -12,6 +14,6 @@ const routes: Routes = [
   
   @NgModule({
     declarations: [AfficherReunionComponent],
-    imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, FormsModule, CoreCommonModule]
+    imports: [RouterModule.forChild(routes), ContentHeaderModule, NgxPaginationModule,CardSnippetModule, FormsModule, CoreCommonModule]
   })
   export class AfficherReunionModule {}

@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./afficher-reunion.component.scss']
 })
 export class AfficherReunionComponent implements OnInit {
+  p: number = 4; // Add this line
+
   events : EventReff [];
   
 

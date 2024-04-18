@@ -18,19 +18,19 @@ export class PageVoteComponent implements OnInit {
     constructor(private sessionService: sessionservice) { }
 
     ngOnInit(): void {
-        this.getUserStories();
+        //this.getUserStories();
     }
 
-    getUserStories() {
-        this.sessionService.getUserStory(this.idProjet).subscribe(
-          (data: any) => {
-            this.userStories = data;
-          },
-          (error: any) => {
-            console.error('Erreur lors de la récupération des user stories :', error);
-          }
-        );
-      }
+    //getUserStories() {
+      //  this.sessionService.getUserStory(this.idProjet).subscribe(
+          //(data: any) => {
+            //this.userStories = data;
+          //},
+          //(error: any) => {
+            //console.error('Erreur lors de la récupération des user stories :', error);
+          //}
+        //);
+     // }
       onCheckboxChange(row: any) {
         row.checked = !row.checked;
       }

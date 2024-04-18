@@ -10,6 +10,8 @@ import { FlatpickrComponent } from "app/main/forms/form-elements/flatpickr/flatp
 import { FlatpickrModule } from "app/main/forms/form-elements/flatpickr/flatpickr.module";
 import { Ng2FlatpickrModule } from "ng2-flatpickr";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgSelectModule } from "@ng-select/ng-select";
+
 
 const routes: Routes = [
    {path: 'AjouterReunion',component: AjouterReunionComponent,data: { animation: 'layout' }}
@@ -21,6 +23,6 @@ const routes: Routes = [
   })*/
   @NgModule({
     declarations: [AjouterReunionComponent],
-    imports: [RouterModule.forChild(routes), NgbModule, ContentHeaderModule, CardSnippetModule, Ng2FlatpickrModule,FlatpickrModule,CoreCommonModule]
+    imports: [RouterModule.forChild(routes), NgbModule,NgSelectModule,ContentHeaderModule,NgSelectModule, CardSnippetModule, Ng2FlatpickrModule,FlatpickrModule,CoreCommonModule]
   })
   export class AjouterReunionModule {}

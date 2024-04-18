@@ -5,6 +5,7 @@ import { CoreCommonModule } from "@core/common.module";
 import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.module";
 import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
 import { CalendarComponentNew } from "./calendar.component";
+import { FullCalendarModule } from "@fullcalendar/angular";
 
 const routes: Routes = [
     {path: 'AfficherCalendar',component: CalendarComponentNew,data: { animation: 'layout' }}
@@ -12,7 +13,7 @@ const routes: Routes = [
   
   @NgModule({
     declarations: [CalendarComponentNew],
-    imports: [RouterModule.forChild(routes), ContentHeaderModule, CardSnippetModule, FormsModule, CoreCommonModule]
+    imports: [RouterModule.forChild(routes), ContentHeaderModule, FullCalendarModule,CardSnippetModule, FormsModule, CoreCommonModule]
   })
   export class calendarModuleNew {
     

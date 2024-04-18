@@ -36,8 +36,10 @@ export class AuthenticationService {
   
    // Public method to get the current user's role
    public getCurrentUserRole(): Role {
+    // Your implementation to get the current user's role
+    // For example:
     const currentUser = this.currentUserSubject.value;
-    return currentUser ? currentUser.rolee : null;
+    return currentUser.rolee;
   }
  
 get idUser(){
@@ -61,7 +63,7 @@ get isScrumMaster() {
 }
 
 get isDeveloper() {
-    return this.currentUser && this.currentUserSubject.value && this.currentUserSubject.value.rolee === Role.Developer;
+    return this.currentUser && this.currentUserSubject.value && this.currentUserSubject.value.rolee === Role.developer;
 }
 
 

@@ -5,6 +5,7 @@ import { ModifiReclamationModule } from "./modfier-reclamation/modfier-reclamati
 import { AjouterReclamationComponent } from "./ajouter-reclamation/ajouter-reclamation.component";
 import { AfficherReclamationComponent } from "./afficher-reclamation/afficher-reclamation.component";
 import { reclamationStatModule } from "app/reclamation-stats-component/reclamationStat.module";
+import { StatByUserModule } from "app/stat-by-user/stat-by-user.module";
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { reclamationStatModule } from "app/reclamation-stats-component/reclamati
       AfficherReclamationModule,
         AjouterReclamationModule,
         ModifiReclamationModule,
-        reclamationStatModule
+        reclamationStatModule ,        StatByUserModule,
         
 
        

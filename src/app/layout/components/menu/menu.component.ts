@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { CoreMenu } from '@core/types';
 import { Role } from 'app/auth/models';
+import { AuthenticationService } from 'app/auth/service';
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +20,8 @@ export class MenuComponent implements OnInit {
    * @param {ElementRef} _elementRef
    * @param {Renderer2} _renderer
    */
-  constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
+  constructor(    private authService: AuthenticationService,  // Inject AuthenticationService
+  private _elementRef: ElementRef, private _renderer: Renderer2) {
     // Set the default menu
     this._menuType = 'vertical-menu';
   }
@@ -45,6 +47,7 @@ export class MenuComponent implements OnInit {
     this._renderer.addClass(this._elementRef.nativeElement, value);
   }
   ngOnInit(): void {
+    
     // Logic to fetch or load the menu items
     // For demonstration purposes, let's assume you already have the menu items in the `menu` array
 

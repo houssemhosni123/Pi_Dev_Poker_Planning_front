@@ -16,7 +16,7 @@ import { Role } from 'app/auth/models'; // Import the Role enum
 })
 export class CoreMenuComponent implements OnInit {
   currentUser: any;
-  role: Role = Role.User; // Default role to User
+  role: Role; // Default role to User
 
   @Input() layout = 'vertical';
   @Input() menu: any;
@@ -34,27 +34,26 @@ export class CoreMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.menu = this.menu || this._coreMenuService.getCurrentMenu();
-  
+
     // Get the current user and role from AuthenticationService
     const userRole = this._authService.getCurrentUserRole();
+
     if (userRole === Role.Admin) {
       this.role = Role.Admin;
     } else if (userRole === Role.ProductOwner) {
       this.role = Role.ProductOwner;
-    } 
-    else if(userRole === Role.ScrumMaster){
+    } else if (userRole === Role.ScrumMaster) {
       this.role = Role.ScrumMaster;
+    } else if (userRole === Role.developer) {
+      this.role = Role.developer;
+    } else {
+      // Handle unknown roles or default role assignment
     }
-    else (userRole === Role.Developer)
-      this.role = Role.Developer;
-    
-      
-      
-      // Add other roles as needed
-  
+    // Add other roles as needed
+
     this._coreMenuService.onMenuChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
       this.menu = this._coreMenuService.getCurrentMenu();
-  
+
       // Filter the menu based on the user's role
       this.menu = this.menu.filter(item => {
         if (!item.role || item.role.includes(this.role)) {
@@ -62,9 +61,8 @@ export class CoreMenuComponent implements OnInit {
         }
         return false;
       });
-  
+
       this._changeDetectorRef.markForCheck();
     });
   }
-  
 }

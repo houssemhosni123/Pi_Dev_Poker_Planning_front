@@ -48,7 +48,11 @@ import { Observable } from "rxjs";
       }
       getReclamationById(id: number): Observable<Reclam> {
         return this.http.get<Reclam>(`${this.api}/getRec/${id}`);
-      }  
+      } 
+      getReclamationCountByUser(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.api}/reclamations-par-utilisateur`);
+      }
+      
     }
   
     

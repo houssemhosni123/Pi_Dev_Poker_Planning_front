@@ -1,0 +1,45 @@
+<div class="right-section">
+  <section id="faq-search-filter">
+    <div class="card faq-search" style="background-image: url('assets/images/banner/banner.png')">
+      <div class="card-body text-center">
+        <h2 class="text-primary">Search User</h2>
+        <!-- Champ de recherche -->
+        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" (input)="filterUsers()">
+      </div>
+    </div>
+  </section>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th> <!-- Colonne de sélection -->
+          <th>Email</th>
+          <th>Role</th>
+          <th>Avatar</th> <!-- Nouvelle colonne pour l'image de l'utilisateur -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsersAndRoles">
+          <td>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [checked]="selectedItems.includes(user)" (change)="toggleRowSelection(user)" id="checkbox{{ user.email }}" />
+              <label class="custom-control-label" for="checkbox{{ user.email }}"></label>
+            </div>
+          </td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <img [src]="getUserImageUrl(user)" class="rounded-circle mr-2" alt="User Avatar" height="50" width="50" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-9 offset-sm-3">
+      <button (click)="sendInvitations()" class="btn btn-primary mr-1" rippleEffect>Inviter</button>
+    </div>
+  </div>
+</div>

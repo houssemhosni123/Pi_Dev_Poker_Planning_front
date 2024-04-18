@@ -19,7 +19,6 @@ export class AfficherReclamationComponent implements OnInit {
     this.serviceReclamation.getAllReclamation().subscribe(
       (data) => {
         this.reclamation = data;
-        console.log(this.reclamation);
       },
       (error) => {
         console.error('Erreur lors de la récupération des Sprints :', error);

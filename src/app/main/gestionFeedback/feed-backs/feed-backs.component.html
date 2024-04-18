@@ -1,0 +1,133 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <!-- Invoice List -->
+      <section class="invoice-list-wrapper">
+        <div class="card">
+          <!-- Invoice List Header -->
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <div class="d-flex align-items-center">
+                  
+                </div>
+              </div>
+            </div>
+            <div
+              class="
+                col-md-6 col-lg-4 col-12
+                d-flex
+                justify-content-start justify-content-md-end
+                align-items-center
+                offset-lg-2
+              "
+            >
+            <div class="row pr-1 pb-1 pb-md-0 align-items-center w-100">
+              <div class="col-10 col-md-6 pr-0">
+                <label class="d-flex align-items-center mb-0 ml-1 ml-md-0">
+                  <input
+                    [(ngModel)]="searchValue"
+                    name="searchValue"
+                    type="search"
+                    class="form-control"
+                    placeholder="Search..."
+                    (keyup.enter)="filterUpdate()"
+                  />
+                </label>
+              </div>
+              <div class="col-10 col-md-6 mt-2 ml-1 ml-md-0 mt-md-0">
+                <fieldset class="form-group mb-0">
+                  <button class="btn btn-primary" (click)="filterUpdate()">Search</button>
+                </fieldset>
+              </div>
+            </div>
+            
+            </div>
+          </div>
+          <!--/ Invoice List Header -->
+  
+          <!-- Invoice List Table -->
+          <ngx-datatable
+          [rows]="rows"
+          [rowHeight]="100"
+          class="bootstrap core-bootstrap"
+          [limit]="selectedOption"
+          [columnMode]="ColumnMode.force"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [scrollbarH]="true"
+        >
+          <ngx-datatable-column name="ID" prop="idfeedback" [width]="50">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.idfeedback }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Date" prop="date" [width]="150">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.date | date: 'yyyy-MM-dd HH:mm:ss' }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Description" prop="description">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div class="description-cell">{{ row.description }}</div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Evaluation" prop="evaluation" [width]="100">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <app-star-rating
+              [maxRating]="5"
+              [currentRating]="row.evaluation"
+              
+            ></app-star-rating>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Role" prop="Role">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row.Role}}
+            </ng-template>
+          </ngx-datatable-column>
+          
+
+<ngx-datatable-column name="Actions" [width]="100" [sortable]="false">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-sm btn-danger" (click)="deleteFeedback(row)">Delete</button>
+      </div>
+     
+    </ng-template>
+  </ngx-datatable-column>
+  </ngx-datatable>
+  
+ <!-- Session Average Table -->
+<ngx-datatable
+
+[rows]="rows"
+[rowHeight]="50"
+class="bootstrap core-bootstrap"
+[limit]="selectedOption"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[scrollbarH]="true"
+>
+<!-- <ngx-datatable-column name="Session ID" prop="sessionid" [width]="150">
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ row.session.id_session }}
+   
+  </ng-template>
+</ngx-datatable-column> -->
+<ngx-datatable-column name="Average Feedback %" prop="moyennesession" [width]="150">
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ row.moyennesession }}
+  </ng-template>
+</ngx-datatable-column>
+</ngx-datatable>
+
+          <!--/ Invoice List Table -->
+        </div>
+      </section>
+      <!--/ Invoice List -->
+    </div>
+    
+  </div>
+
+  

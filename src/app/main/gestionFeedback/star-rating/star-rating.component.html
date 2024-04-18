@@ -1,0 +1,7 @@
+<div class="star-rating">
+    <span *ngFor="let star of stars" (click)="rate(star)"
+          [class.fas]="star <= currentRating" [class.far]="star > currentRating"
+          [ngStyle]="{ 'color': star <= currentRating ? 'gold' : 'gray' }">
+      &#9733;
+    </span>
+  </div>

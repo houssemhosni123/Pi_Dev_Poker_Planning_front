@@ -34,7 +34,7 @@ export class AjouterReclamationComponent implements OnInit {
   }
 
   redirigerVersListeSprints() {
-    this.router.navigate(['Reunion/AfficherReclamation']);
+    this.router.navigate(['Reclamation/AfficherReclamation']);
   }
 
   addReclamation(): void {

@@ -1,0 +1,111 @@
+<section id="Donut-and-scatter-charts">
+    <div class="row">
+      <!-- Donut Chart Starts -->
+      <div class="col-lg-4 col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Sessions By Device</h4>
+          </div>
+          <div class="card-body">
+            <canvas
+              class="doughnut-chart-ex chartjs mx-auto"
+              baseChart
+              [datasets]="doughnutChart.datasets"
+              [options]="doughnutChart.options"
+              [chartType]="doughnutChart.chartType"
+            >
+            </canvas>
+            <div class="d-flex justify-content-between mt-3 mb-1">
+                <div class="d-flex align-items-center">
+                  <i data-feather="monitor" class="font-medium-2 text-primary"></i>
+                  <span class="font-weight-bold ml-75 mr-25">TresBien</span>
+                  <span>- {{ doughnutChart.datasets[0].data[0] }}%</span>
+                </div>
+                <div>
+                  <span>{{ doughnutChart.datasets[0].data[0] }}%</span>
+                  <i data-feather="arrow-up" class="text-success"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mb-1">
+                <div class="d-flex align-items-center">
+                  <i data-feather="tablet" class="font-medium-2 text-warning"></i>
+                  <span class="font-weight-bold ml-75 mr-25">Bien</span>
+                  <span>- {{ doughnutChart.datasets[0].data[1] }}%</span>
+                </div>
+                <div>
+                  <span>{{ doughnutChart.datasets[0].data[1] }}%</span>
+                  <i data-feather="arrow-up" class="text-success"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mb-1">
+                <div class="d-flex align-items-center">
+                  <i data-feather="tablet" class="font-medium-2 text-success"></i>
+                  <span class="font-weight-bold ml-75 mr-25">Mauvais</span>
+                  <span>- {{ doughnutChart.datasets[0].data[2] }}%</span>
+                </div>
+                <div>
+                  <span>{{ doughnutChart.datasets[0].data[2] }}%</span>
+                  <i data-feather="arrow-down" class="text-danger"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                  <i data-feather="tablet" class="font-medium-2 text-success"></i>
+                  <span class="font-weight-bold ml-75 mr-25">TropMauvais</span>
+                  <span>- {{ doughnutChart.datasets[0].data[3] }}%</span>
+                </div>
+                <div>
+                  <span>{{ doughnutChart.datasets[0].data[3] }}%</span>
+                  <i data-feather="arrow-down" class="text-danger"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Donut Chart Starts -->
+
+      <!-- Scatter Chart Starts  -->
+      <!-- <div class="col-lg-8 col-12">
+        <div class="card">
+          <div
+            class="card-header d-flex justify-content-between align-items-baseline align-items-sm-center flex-sm-row flex-column"
+          >
+            <div>
+              <h4 class="card-title mb-25">New Product Data</h4>
+            </div>
+            <div
+              class="btn-group btn-group-toggle mt-md-0 mt-1"
+              ngbRadioGroup
+              name="radioBasic"
+              [(ngModel)]="radioModel"
+            >
+              <label class="btn btn-outline-primary" ngbButtonLabel rippleEffect>
+                <input type="radio" name="radio_options" id="radio_option1" [value]="1" ngbButton />
+                <span>Daily</span>
+              </label>
+              <label class="btn btn-outline-primary" ngbButtonLabel rippleEffect>
+                <input type="radio" name="radio_options" id="radio_option2" ngbButton [value]="2" />
+                <span>Monthly</span>
+              </label>
+              <label class="btn btn-outline-primary" ngbButtonLabel rippleEffect>
+                <input type="radio" name="radio_options" id="radio_option3" ngbButton [value]="3" />
+                <span>Yearly</span>
+              </label>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas
+              class="scatter-chart-ex chartjs"
+              baseChart
+              height="415"
+              [datasets]="scatterChart.datasets"
+              [options]="scatterChart.options"
+              [chartType]="scatterChart.chartType"
+              [plugins]="plugins"
+            ></canvas>
+          </div>
+        </div>
+      </div> -->
+      <!--/ Scatter Chart Ends  -->
+    </div>
+  </section>

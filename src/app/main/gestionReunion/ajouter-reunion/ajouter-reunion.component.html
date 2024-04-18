@@ -1,71 +1,61 @@
-<div class="modal-dialog sidebar-lg">
-  <div class="modal-content p-0">
-
-    <div class="modal-header mb-1">
-      <h5 class="modal-title">Event</h5>
-    </div>
-    <div class="modal-body flex-grow-1 pb-sm-0 pb-3">
-      <form class="event-form needs-validation" (ngSubmit)="(eventForm.form.valid); eventForm.reset()" #eventForm="ngForm">
-        <div class="form-group">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="titre_Reunion" name="titre_Reunion"
-            placeholder="newEvent titre_Reunion" required [(ngModel)]="newEvent.titre_Reunion"
-            [class.error]="eventForm.submitted && formNameRef.invalid" #formNameRef="ngModel" />
-          <span *ngIf="eventForm.submitted && formNameRef.invalid" class="invalid-form">
-            <small class="form-text text-danger" *ngIf="formNameRef.errors.required">This field is required!</small>
-          </span>
-        </div>
-        <div class="form-group">
-          <label for="dateDebutReunion" class="form-label">Date de début de la réunion</label>
-          <ng2-flatpickr [config]="dateTimeOptions" [(ngModel)]="date1" id="dateDebutReunion" name="dateDebutReunion"></ng2-flatpickr>
-        </div>
-        
-        <div class="form-group">
-          <label for="dateFinReunion" class="form-label">Date de fin de la réunion</label>
-          <ng2-flatpickr [config]="dateTimeOptions" [(ngModel)]="date2" id="dateFinReunion" name="dateFinReunion"></ng2-flatpickr>
-        </div>
-        
-
-
-        <div class="form-group">
-          <label for="location" class="form-label">lieu_Reunion</label>
-          <input type="text" class="form-control" id="lieu_Reunion" name="lieu_Reunion" placeholder="Event lieu_Reunion"
-            required [(ngModel)]="newEvent.lieu_Reunion" #location="ngModel" />
-          <span *ngIf="eventForm.submitted && location.invalid" class="invalid-form">
-            <small class="form-text text-danger" *ngIf="location.errors.required">This field is required!</small>
-          </span>
-        </div>
-        <div class="form-group">
-          <label for="priority" class="form-label">Description du Reunion</label>
-          <input type="text" class="form-control" id="priorite_Reunion" name="priorite_Reunion"
-            placeholder="Event priorite_Reunion" required [(ngModel)]="newEvent.priorite_Reunion" #priority="ngModel" />
-          <span *ngIf="eventForm.submitted && priority.invalid" class="invalid-form">
-            <small class="form-text text-danger" *ngIf="priority.errors.required">This field is required!</small>
-          </span>
-        </div>
-        <select id="selectedUsers" name="selectedUsers" [(ngModel)]="selectedUserNames" multiple>
-          <option *ngFor="let user of users" [value]="user">{{ user }}</option>
-        </select>
-        
-        
-
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary add-event-btn mr-1" (click)="addEvent()" rippleEffect>
-            ajouter
-          </button>
-        </div>
-        <div class="text-center">
-          <button class="btn btn-primary add-event-btn mr-1"(click)="redirigerVersListeSprints()">Reunion</button>
-          
-          
-        </div>
-
-        <ng-template #addEventRef>
-          <button type="submit" class="btn btn-primary update-event-btn mr-1" (click)="updateEvent()" rippleEffect>
-            Update
-          </button>
-        </ng-template>
-      </form>
+<div class="row">
+ 
+  <div class="col-md-6" style="height: 3000px;">
+    <div class="card" style="height: 470px;">
+      <div class="card-header">
+        <h5 class="card-title">Ajouter un Reunion</h5>
+      </div>
+      <div class="card-body">
+        <form class="needs-validation" (ngSubmit)="(eventForm.form.valid); eventForm.reset()" #eventForm="ngForm">
+          <div class="form-group">
+            <label for="priorite_Reunion" class="form-label">Titre de Reunion</label>
+            <select class="form-control" id="priorite_Reunion" name="priorite_Reunion" required [(ngModel)]="newEvent.priorite_Reunion" #priority="ngModel">
+              <option [value]="TypePriorite.SPRINT_MEETING_PLAINING">SPRINT_MEETING_PLAINING</option>
+              <option [value]="TypePriorite.DALIY_SCRUM">DALIY_SCRUM</option>
+              <option [value]="TypePriorite.SPRINT_REVIEW">SPRINT_REVIEW</option>
+              <option [value]="TypePriorite.SPRINT_RETROSPECTIVE">SPRINT_RETROSPECTIVE</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="title" class="form-label">Description</label>
+            <input type="text" class="form-control" id="titre_Reunion" name="titre_Reunion"
+              required [(ngModel)]="newEvent.titre_Reunion">
+          </div>
+          <div class="form-group">
+            <label for="location" class="form-label">Lieu</label>
+            <input type="text" class="form-control" id="lieu_Reunion" name="lieu_Reunion" 
+              required [(ngModel)]="newEvent.lieu_Reunion" #location="ngModel" />
+          </div>
+          <div class="form-group">
+            <label for="selectedUsers" class="form-label">invitation</label>
+            <ng-select
+              [items]="users"
+              bindLabel="name"
+              bindValue="name"
+              placeholder="Select a name"
+              [multiple]="true"
+              [(ngModel)]="selectedUserNames"
+              name="selectedUsers"
+              [searchable]="true"
+              [clearable]="true"
+              [closeOnSelect]="false"
+              #selectedUsers="ngModel"
+              required>
+            </ng-select>
+          </div>
+          <div class="text-center horizontal-buttons">
+            <button type="submit" class="btn btn-success add-event-btn mr-1" (click)="addEvent()" rippleEffect>
+              Ajouter
+            </button>
+            <button class="btn btn-success add-event-btn mr-1"(click)="redirigerVersListeSprints()">Reunion</button>
+          </div>
+          <ng-template #addEventRef>
+          </ng-template>
+        </form>
+      </div>
     </div>
   </div>
+  <div class="col-md-6">
+    <img src="assets/images/meet.png" alt="My Image" class="small-image" style="width: 80%;">
+  </div>  
 </div>

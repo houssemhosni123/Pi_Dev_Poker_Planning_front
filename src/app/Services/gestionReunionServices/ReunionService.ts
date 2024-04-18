@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { User } from "app/auth/models";
+import { TypePriorite } from "app/main/gestionReunion/ajouter-reunion/enum";
 import { EventReff } from "app/main/gestionReunion/ajouter-reunion/model";
 import { Observable } from "rxjs";
 
@@ -36,10 +37,13 @@ import { Observable } from "rxjs";
     // Renvoyer une promesse résultant de l'appel de postNewEvent
     //return this.postNewEvent(newEvent);
   
-    addUserToReunion(reunionData: any, userNames: string[]): Observable<any> {
-      const url = `${this.api}/users/reunion?userNames=${userNames.join('&userNames=')}`;
-      return this.http.post<any>(url, reunionData);
+    addUserToReunion(reunionData: any, userNames: string[], prioriteReunion: TypePriorite): Observable<any> {
+      // Use template literals for cleaner string concatenation
+      const url = `${this.api}/users/reunion?userNames=${userNames.join('&userNames=')}&prioriteReunion=${prioriteReunion}`;
+      return this.http.put<any>(url, reunionData);
     }
+    
+  
     
     
   

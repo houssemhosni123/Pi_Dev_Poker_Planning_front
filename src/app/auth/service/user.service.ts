@@ -25,7 +25,9 @@ export class UserService {
    */
 
 
-
+  countTachesByUser(): Observable<any[]> {
+    return this._http.get<any[]>(`${environment.apiUrl1}/User/count-taches`);
+  }
   forgotPassword(email: string): Observable<any> {
     return this._http.post(`${environment.apiUrl1}/User/forgot-password`, { email });
   }

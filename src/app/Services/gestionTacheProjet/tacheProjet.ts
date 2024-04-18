@@ -19,7 +19,9 @@ export class TacheService {
     return this.http.post<any>(`${this.baseUrl}/ajouterTache`, tache);
   }
 
-
+  getCountTasksByUser(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/countTasksByUser`);
+  }
  
   
 

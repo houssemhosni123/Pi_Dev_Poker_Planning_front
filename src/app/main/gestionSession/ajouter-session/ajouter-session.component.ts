@@ -14,6 +14,8 @@ export class AjouterSessionComponent implements OnInit {
 
   sessions:any = [];
   showElement = false;
+  selectedSession: string | undefined;
+
   constructor(private SessionService:sessionservice,private router: Router) { }
 
   ngOnInit(): void {
@@ -32,30 +34,50 @@ export class AjouterSessionComponent implements OnInit {
     );
   }
 
-  deleteSession(idSession:any){
-    this.SessionService.deleteSession(idSession).subscribe((res) => {
-      this.router.navigate(['/Session/get']);
-    })
-  }  
+  deleteSession(idSession: any) {
+    this.SessionService.deleteSession(idSession).subscribe(() => {
+      this.refreshPage2();
+    });
+  }
   confirmDeleteSession(idSession: any): void {
     if (confirm('Are you sure you want to delete this session?')) {
       this.deleteSession(idSession);
+     
+    }
+  
+  }
+  startSession(nomSession: string) {
+    this.router.navigate(['/Session/vote'], { queryParams: { nomSession: nomSession } });
+  }
+
+  showInterfaceUpdate(idSession: any): void {
+   
+    this.SessionService.getSessionbyId(idSession).subscribe((data) => {
+   
+      this.router.navigate(['/Session', idSession, 'update'], { state: { sessionData: data } });
+    });
+  }
+
+  refreshPage2() {
+    this.router.navigateByUrl('/Session/get', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/Session/get']);
+    });
+  }
+  
+  getColorForStatus(statut: string): string {
+    switch (statut) {
+      case 'Terminer':
+        return '#28c76f';
+      case 'EnCours':
+        return '#ff9f43';
+      case 'Annuler':
+        return '#ea5455';
+      default:
+        return 'inherit';
     }
   }
 
-  showInterfaceUpdate(idSession:any): void{
-    this.router.navigate(['/Session', idSession,'update']);
-  }
+  
 
-  getCssClassForStatus(status: string): string {
-    switch (status) {
-      case 'terminé': return 'bg-success'; // Couleur verte pour "terminé"
-      case 'en cours': return 'bg-warning'; // Couleur orange pour "en cours"
-      case 'annulé': return 'bg-danger'; // Couleur rouge pour "annulé"
-      default: return '';
-    }
-  }
-  
-  
   
 }

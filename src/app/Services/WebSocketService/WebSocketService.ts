@@ -9,7 +9,7 @@ export class WebSocketService {
   private socket$: WebSocketSubject<any>;
 
   constructor() {
-    this.socket$ = webSocket('ws://localhost:8081/ws'); // WebSocket server URL
+    this.socket$ = webSocket('ws://localhost:8080/ws'); // WebSocket server URL
   }
 
   public sendMessage(message: string): void {

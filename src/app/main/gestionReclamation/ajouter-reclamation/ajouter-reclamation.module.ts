@@ -7,7 +7,8 @@ import { ContentHeaderModule } from "app/layout/components/content-header/conten
 import { AjouterReclamationComponent } from "./ajouter-reclamation.component";
 
 const routes: Routes = [
-    {path: 'ajouterReclamation',component: AjouterReclamationComponent,data: { animation: 'layout' }}
+    {path: 'ajouterReclamation',component: AjouterReclamationComponent,data: { animation: 'layout' }},
+   
   ];
   
   @NgModule({

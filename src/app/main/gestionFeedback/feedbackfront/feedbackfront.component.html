@@ -1,0 +1,77 @@
+<h1>Feedback</h1>
+
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- users edit start -->
+    <section class="app-user-edit">
+      <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-end">
+              <span class="text-muted">{{ currentDate | date:'mediumDate' }}</span>
+            </div>
+          </div>
+        <div class="card-body">
+          <form #feedForm="ngForm" (ngSubmit)="submit(feedForm)" >
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="description">Evalution :</label>
+                  <app-star-rating class="custom-star-rating" [maxRating]="5" [currentRating]="selectedRating" (ratingClicked)="onRatingClicked($event)"></app-star-rating>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea
+                    type="text"
+                    id="description"
+                    class="form-control"
+                    placeholder="description"
+                    name="description"
+                    [(ngModel)]="description"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div>
+                  <div class="form-group">
+                    <label for="anonyme">Anonyme</label>
+                    <input
+                      type="checkbox"
+                      id="anonyme"
+                      class="form-control"
+                      #anonymeCheckbox
+                      [(ngModel)]="anonymeChecked"
+                      name="anonyme"
+                    />
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+                  rippleEffect
+                >
+                  Save Changes
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  rippleEffect
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </form>
+         
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
