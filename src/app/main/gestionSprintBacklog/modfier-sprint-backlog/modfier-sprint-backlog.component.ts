@@ -71,7 +71,6 @@ export class ModfierSprintBacklogComponent implements OnInit {
         this.sprints = data;
       },
       (error) => {
-        console.error('Erreur lors du chargement des Sprints :', error);
       }
     );
   }
@@ -104,21 +103,7 @@ export class ModfierSprintBacklogComponent implements OnInit {
                     this.sprintBacklogUpdatedSuccessfully = false;  
                     this.router.navigate(['/AfficherSprintBacklog']);
                   }, 500);
-                },
-                (error) => {
-                  console.error('Erreur lors de l\'affectation du Sprint Backlog au nouveau Sprint :', error);
-                }
-              );
-            },
-            (error) => {
-              console.error('Erreur lors de la désaffectation du Sprint Backlog du Sprint actuel :', error);
-            }
-          );
-        },
-        (error) => {
-          console.error('Erreur lors de la mise à jour du Sprint Backlog :', error);
-        }
-      );
-    }
-  }
-}
+                
+    
+  
+}}
