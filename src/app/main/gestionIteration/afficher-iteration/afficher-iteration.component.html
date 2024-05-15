@@ -21,7 +21,7 @@
           <table class="datatables-iteration-list table border-top">
             <thead>
               <tr>
-                <th>ID</th>
+               
                 <th>Résultat</th>
                 <th>Date Debut</th>
                 <th>Date Fin</th>
@@ -30,7 +30,6 @@
             </thead>
             <tbody>
               <tr *ngFor="let iteration of iterations | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
-                <td>{{iteration.idIteration}}</td>
                 <td>{{ iteration.resultat }}</td>
                 <td>{{ iteration.date_IterationDebut | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                 <td>{{ iteration.date_IterationFin | date: 'yyyy-MM-dd HH:mm:ss' }}</td>

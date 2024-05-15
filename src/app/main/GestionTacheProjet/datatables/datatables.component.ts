@@ -371,7 +371,7 @@ export class DatatablesComponent implements OnInit {
     }
   
     // Concatenate user details and base64 image into a single string
-    const data = `${user.nom},${user.prenom}, ${user.email}, ${base64Image}`;
+    const data = `${user.nom},${user.prenom}, ${user.email}, ${base64Image},${user.rolee}`;
   
     return data;
   }

@@ -1,10 +1,30 @@
-<!-- reclamation-chart.component.html -->
-<div style="display: block; width: 700px; height: 350px;">
-        <canvas baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [chartType]="barChartType"
-                [legend]="barChartLegend">
-        </canvas>
-      </div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas baseChart
+                                [datasets]="barChartData"
+                                [labels]="barChartLabels"
+                                [options]="barChartOptions"
+                                [chartType]="barChartType"
+                                [legend]="barChartLegend">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Poker Planning Session</h5>
+                        <p class="card-text">
+                            Poker planning, also called Scrum poker, is a consensus-based, gamified technique for estimating, mostly used to estimate effort or relative size of development goals in software development.
+                        </p>
+                        <img src="assets/images/poker planning.jpg" class="card-img-top" alt="Poker Planning Image">
+                        <a routerLink="/Session/get" class="btn btn-primary">Start Session</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

@@ -54,6 +54,14 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { LayoutModule } from './layout/layout.module';
 import { ReunionDetailComponent } from './reunion-detail/reunion-detail.component';
 import { RejoindreComponent } from './main/gestionSession/rejoindre/rejoindre.component';
+import { AfficherProjetComponent } from './main/gestionProjet/afficher-projet/afficher-projet.component';
+import { AfficherUserstoryComponent } from './main/gestionUserStory/afficher-userstory/afficher-userstory.component';
+import { AjouterProjetComponent } from './main/gestionProjet/ajouter-projet/ajouter-projet.component';
+import { ModfierProjetComponent } from './main/gestionProjet/modfier-projet/modfier-projet.component';
+import { AjouterUserstoryComponent } from './main/gestionUserStory/ajouter-userstory/ajouter-userstory.component';
+import { ModfierUserstoryComponent } from './main/gestionUserStory/modfier-userstory/modfier-userstory.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StatistiquesComponent } from './main/gestionProjet/statistiques/statistiques.component';
 /*import { AfficherProjetComponent } from './main/gestionProjet/afficher-projet/afficher-projet.component';
 import { AjouterProjetComponent } from './main/gestionProjet/ajouter-projet/ajouter-projet.component';
 import { ModfierProjetComponent } from './main/gestionProjet/modfier-projet/modfier-projet.component';
@@ -108,23 +116,23 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   
-  /*{
+  {
     path: 'Projet',
     loadChildren: () => import('./main/gestionProjet/Projet.module').then(m => m.ProjetModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] } // Only ProductOwner role allowed
+    // Only ProductOwner role allowed
   },
   {
     path: 'UserStory',
     loadChildren: () => import('./main/gestionUserStory/UserStory.module').then(m => m.UserStoryModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] } // Only ProductOwner role allowed
-  },*/
+     // Only ProductOwner role allowed
+  },
   {
     path: 'Sprint',
     loadChildren: () => import('./main/gestionSprint/Sprint.module').then(m => m.SprintModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ProductOwner] } // Only ProductOwner role allowed
+    // Only ProductOwner role allowed
   },
   {
     path: 'TacheProjet',
@@ -136,14 +144,14 @@ const appRoutes: Routes = [
     path: 'SprintBacklog',
     loadChildren: () => import('./main/gestionSprintBacklog/SprintBacklog.module').then(m => m.SprintBacklogModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster] } // Only ProductOwner role allowed
+    // Only ProductOwner role allowed
   },
   
   {
     path: 'Session',
     loadChildren: () => import('./main/gestionSession/Session.module').then(m => m.SessionModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.ScrumMaster] } // Only ScrumMaster role allowed
+     // Only ScrumMaster role allowed
   },
 { path: 'Rejoindre', component: RejoindreComponent,
   canActivate: [AuthGuard],
@@ -182,33 +190,32 @@ const appRoutes: Routes = [
   },
   { path: 'AfficherSprint', component: AfficherSprintComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] } },
+   },
 
   { path: 'sprints/:id/update', component: ModfierSprintComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] } },
+  },
 
   { path: 'sprintBacklog/:id/update', component: ModfierSprintBacklogComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] }  },
+  },
 
   { path: 'AfficherSprintBacklog', component: SprintBacklogListComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] }  },
+ },
   { path: 'ModifierSprintBacklog', component: ModfierSprintBacklogComponent ,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] }  },
+    },
   { path: 'AjouterSprintBacklog', component: AjoutSprintBacklogComponent ,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] } },
+   },
   { path: 'AfficherSprintBacklogs/:sprintId', component: AfficherSprintBacklogsComponent,
-  canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] }  },
+   },
 
   { path: 'AjouterTacheTechnique', component: TacheTechniqueAddComponent ,
-  canActivate: [AuthGuard],
-  data: { roles: [Role.ScrumMaster] }  },
-  /*{ path: "projets", component: AfficherProjetComponent },
+  },
+  { path: "projets", component: AfficherProjetComponent },
+
   { path: 'userstorys', component: AfficherUserstoryComponent },
   { path: "create-projet", component: AjouterProjetComponent },
   { path: "edit-projet/:idProjet", component: ModfierProjetComponent },
@@ -218,12 +225,13 @@ const appRoutes: Routes = [
     path: "edit-user-story/:IdUserStory",
     component: ModfierUserstoryComponent,
   },
-  { path: "statistiques", component: StatistiquesComponent },*/
+  { path: "statistiques", component: StatistiquesComponent },
   {
     path: '',
     redirectTo: '/dashboard/ecommerce',
     pathMatch: 'full'
   },
+
   {
     path: '**',
     redirectTo: '/pages/miscellaneous/error' //Error 404 - Page not found
@@ -252,6 +260,7 @@ const appRoutes: Routes = [
         
     ],
     imports: [
+
         BrowserModule,
         BrowserAnimationsModule,
         AjouterSprintModule,
@@ -280,7 +289,9 @@ const appRoutes: Routes = [
         CoreThemeCustomizerModule,
         CardSnippetModule,
         LayoutModule,
-        ContentHeaderModule
+        ContentHeaderModule,
+        FormsModule, // Add FormsModule here
+        ReactiveFormsModule
     ],
     providers: [
       SprintService,

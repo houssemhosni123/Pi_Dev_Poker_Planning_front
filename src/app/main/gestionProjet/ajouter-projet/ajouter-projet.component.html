@@ -1,0 +1,77 @@
+<form class="projet-form" (ngSubmit)="saveProjet()" [formGroup]="projetForm">
+  <div class="form-group">
+    <h5 for="nomProjet">Nom du Projet:</h5>
+    <input type="text" id="nomProjet" formControlName="nom_Projet" />
+  </div>
+
+  <div class="form-group">
+    <h5 for="client">Client:</h5>
+    <input type="text" id="client" formControlName="Client" />
+  </div>
+
+  <div class="form-group">
+    <h5 for="description">Description:</h5>
+    <textarea id="description" formControlName="Description_Projet"></textarea>
+  </div>
+    
+  <div class="form-group">
+    <h5 for="type">Type:</h5>
+    <select id="type" formControlName="type">
+      <option value="ANGULAR">Angular</option>
+      <option value="FIGMA">Figma</option>
+      <option value="REACT">React</option>
+      <option value="BOOTSTRAP">Bootstrap</option>
+      <option value="VUEJS">Vue js</option>
+      <option value="SPRING">Spring</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <h5 for="dateDebut">Date de Début:</h5>
+    <input type="date" id="dateDebut" formControlName="DateDebut_Projet" />
+  </div>
+
+  <div class="form-group">
+    <h5 for="dateFin">Date de Fin:</h5>
+    <input type="date" id="dateFin" formControlName="DateFin_Projet" />
+  </div>
+
+  <hr />
+
+  <h4>User Stories:</h4>
+  <div formArrayName="userStory">
+    <div *ngFor="let userStory of userStoryControls.controls; let i = index" [formGroupName]="i" class="user-story">
+      <div class="form-group">
+        <h5 for="titreUS{{ i }}">Titre:</h5>
+        <input type="text" id="titreUS{{ i }}" formControlName="titreUS" />
+      </div>
+
+      <div class="form-group">
+        <h5 for="descriptionUS{{ i }}">Description:</h5>
+        <textarea id="descriptionUS{{ i }}" formControlName="description_US"></textarea>
+      </div>
+
+      <div class="form-group">
+        <h5 for="statutUS{{ i }}">Statut:</h5>
+        <select id="statutUS{{ i }}" formControlName="statut_US">
+          <option value="Afaire">A faire</option>
+          <option value="Encours">En cours</option>
+          <option value="Terminée">Terminée</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <h5 for="velociteUS{{ i }}">Vélocité:</h5>
+        <input type="number" id="velociteUS{{ i }}" formControlName="velocite_US" />
+      </div>
+    </div>
+  </div>
+
+  <button type="button" (click)="ajouterUserStory()">Ajouter User Story</button>
+  <hr />
+
+  <button type="submit" [disabled]="projetForm.invalid">
+    Enregistrer Projet
+  </button>
+</form>
+

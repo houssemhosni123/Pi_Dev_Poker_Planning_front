@@ -17,7 +17,8 @@ import { StatByUserModule } from "app/stat-by-user/stat-by-user.module";
       AfficherReclamationModule,
         AjouterReclamationModule,
         ModifiReclamationModule,
-        reclamationStatModule ,        StatByUserModule,
+        reclamationStatModule ,      
+          StatByUserModule,
         
 
        

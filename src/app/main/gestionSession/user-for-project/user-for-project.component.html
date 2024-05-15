@@ -15,7 +15,7 @@
         <tr>
           <th></th> <!-- Colonne de sélection -->
           <th>Email</th>
-          <th>Role</th>
+         
           <th>Avatar</th> <!-- Nouvelle colonne pour l'image de l'utilisateur -->
         </tr>
       </thead>
@@ -28,7 +28,7 @@
             </div>
           </td>
           <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
+         
           <td>
             <img [src]="getUserImageUrl(user)" class="rounded-circle mr-2" alt="User Avatar" height="50" width="50" />
           </td>

@@ -197,6 +197,9 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     );
   }
 
+  updateUserSuccess = false; // Flag to indicate if update was successful
+  successMessage = ''; // Success message
+
   updateUser(userForm: FormGroup) {
     // Check if the form is valid
     if (userForm.valid) {
@@ -207,6 +210,9 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       this._userService.updateUser(this.userId, user).subscribe(
         (response) => {
           console.log('User updated successfully:', response);
+          // Update the flag and success message
+          this.updateUserSuccess = true;
+          this.successMessage = 'User updated successfully!';
           
           // Update the user in the localStorage
           localStorage.setItem('currentUser', JSON.stringify(response));
@@ -223,7 +229,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       console.error('Form is invalid. Cannot update user.');
       // Handle invalid form scenario if needed
     }
-}
+  }
 
 
 

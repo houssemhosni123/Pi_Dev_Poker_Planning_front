@@ -78,13 +78,24 @@
                           <input type="text" formControlName="tel" class="form-control" id="account-company" placeholder="Téléphone" />
                         </div>
                       </div>
-                      
+                                        
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary mt-2 mr-1" rippleEffect>Save changes</button>
                         <button type="reset" class="btn btn-outline-secondary mt-2" rippleEffect>Cancel</button>
                       </div>
                     </div>
                   </form>
+                  
+                  <div *ngIf="updateUserSuccess" class="alert alert-success mt-3" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M13.354 4.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-4-4a.5.5 0 1 1 .708-.708L6 11.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </symbol>
+                    </svg>
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    {{ successMessage }}
+                  </div>
+                  
                   
                 </div>
               </div>

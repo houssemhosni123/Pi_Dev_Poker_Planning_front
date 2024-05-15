@@ -15,21 +15,102 @@ export const menu: CoreMenu[] = [
 
     children: [
       {
-        id: 'list',
+        id: 'listuser',
         title: 'List Users',
-        translate: 'MENU.APPS.USER.LIST',
+        translate: 'List Users',
         type: 'item',
         icon: 'user',
         url: 'apps/user/user-list'
       },
       
+      
       {
         id: 'list',
-        title: 'RoleProjets',
-        translate: 'MENU.APPS.USER.LIST',
+        title: 'Ajouter Role Projets',
+        translate: 'Ajouter Role Projets',
         type: 'item',
-        icon: 'user',
+        icon: 'plus-circle',
         url: 'TacheProjet/AjouterTacheProjet'
+      },
+      
+      
+      
+      {
+        id: 'calendar',
+        title: 'Calendar',
+        translate: 'Calendar',
+        type: 'item',
+        icon: 'calendar',
+        url: 'Reunion/AfficherCalendar'
+      },
+      
+      {
+        id: 'Question',
+        title: 'Ajouter Question',
+        translate: 'Ajouter Question',
+        type: 'item',
+        icon: 'plus-circle',
+        url: '/Feedback/addQuestion'
+      },
+      {
+        id: 'email',
+        title: ' List Iteration',
+        translate: 'List Iteration',
+        type: 'item',
+        icon: 'menu',
+        url: 'Iteration/AfficherIteration'
+
+      },
+      {
+        id: 'email',
+        title: ' Crée Session',
+        translate: 'Crée Session',
+        type: 'item',
+        icon: 'plus-circle',
+        url: 'Session/add'
+
+      },
+      {
+        id: 'email',
+        title: ' List  Session',
+        translate: 'List Session',
+        type: 'item',
+        icon: 'menu',
+        url: 'Session/get'
+
+      },
+      {
+        id: 'Reunion',
+        title: 'Reunion',
+        translate: 'Reunion',
+        type: 'item',
+        icon: 'map',
+        url: 'Reunion/AjouterReunion'
+      },
+      {
+        id: 'Reclamation',
+        title: 'Reclamation',
+        translate: 'Reclamation',
+        type: 'item',
+        icon: 'alert-triangle',
+        url: 'Reclamation/AfficherReclamation'
+      },
+      {
+        id: 'Feedback',
+        title: 'List Feedback',
+        translate: 'List Feedback',
+        type: 'item',
+        icon: 'check-square',
+        url: 'Feedback'
+      },
+      {
+        id: 'TacheProjet',
+        title: ' List TacheProjet',
+        translate: 'List TacheProjet',
+        type: 'item',
+        icon: 'menu',
+        url: 'TacheProjet/AfficherTacheProjet'
+
       },
     ]
   },
@@ -44,14 +125,24 @@ export const menu: CoreMenu[] = [
 
     children: [
       {
-        id: 'list',
-        title: 'List Users',
-        translate: 'MENU.APPS.USER.LIST',
+        id: 'Product owner',
+        title: 'Dashbord Product owner',
+        translate: 'Dashbord Product owner',
         type: 'item',
-        icon: 'user',
-        url: 'apps/user/user-list'
+        icon: 'home',
+        url: 'statistiques'
+
       },
       
+      {
+        id: 'Projet',
+        title: ' List Projet',
+        translate: 'List Projet',
+        type: 'item',
+        icon: 'menu',
+        url: 'projets'
+
+      },
       
     ]
   },
@@ -68,50 +159,63 @@ export const menu: CoreMenu[] = [
       {
         id: 'email',
         title: 'Dashbord Scrum Master',
-        translate: 'MENU.APPS.EMAIL',
+        translate: 'Dashbord Scrum Master',
         type: 'item',
-        icon: 'briefcase',
+        icon: 'home',
         url: 'Reclamation/AfficherChartsPie'
+
+      },
+      {
+        id: 'TacheProjet',
+        title: ' List TacheProjet',
+        translate: 'List TacheProjet',
+        type: 'item',
+        icon: 'menu',
+        url: 'TacheProjet/AfficherTacheProjet'
+
+      },
+      {
+        id: 'email',
+        title: ' List  Session',
+        translate: 'List Session',
+        type: 'item',
+        icon: 'menu',
+        url: 'Session/get'
 
       },
       {
         id: 'email',
         title: ' Crée Session',
-        translate: 'MENU.APPS.EMAIL',
+        translate: 'Crée Session',
         type: 'item',
-        icon: 'briefcase',
+        icon: 'plus-circle',
         url: 'Session/add'
 
       },
-      {
-        id: 'chat',
-        title: 'UserStorys',
-        translate: 'MENU.APPS.CHAT',
-        type: 'item',
-        icon: 'book',
-        url: ''
-      },
+     
       {
         id: 'email',
-        title: 'Iteration',
-        translate: 'MENU.APPS.EMAIL',
+        title: ' List Iteration',
+        translate: 'List Iteration',
         type: 'item',
-        icon: 'briefcase',
+        icon: 'menu',
         url: 'Iteration/AfficherIteration'
 
       },
+      
       {
+
         id: 'Reunion',
         title: 'Reunion',
-        translate: 'MENU.APPS.TODO',
+        translate: 'Reunion',
         type: 'item',
-        icon: 'calendar',
+        icon: 'map',
         url: 'Reunion/AjouterReunion'
       },
       {
         id: 'calendar',
         title: 'Calendar',
-        translate: 'MENU.APPS.CALENDAR',
+        translate: 'Calendar',
         type: 'item',
         icon: 'calendar',
         url: 'Reunion/AfficherCalendar'
@@ -119,7 +223,7 @@ export const menu: CoreMenu[] = [
       {
         id: 'Reclamation',
         title: 'Reclamation',
-        translate: 'MENU.APPS.CALENDAR',
+        translate: 'Reclamation',
         type: 'item',
         icon: 'alert-triangle',
         url: 'Reclamation/AfficherReclamation'

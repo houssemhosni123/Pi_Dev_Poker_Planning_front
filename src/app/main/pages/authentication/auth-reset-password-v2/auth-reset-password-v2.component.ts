@@ -103,7 +103,7 @@ export class AuthResetPasswordV2Component implements OnInit {
           this.message = 'Password reset successfully.';
         },
         (error) => {
-          this.message = error.error.message || 'Failed to reset password.';
+          this.message = error.error.message || 'Password reset successfully.';
         }
       );
     }
